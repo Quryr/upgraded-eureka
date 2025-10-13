@@ -275,7 +275,7 @@ html, body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === ОДНА ЛИНИЯ + АКТИВНОЕ НЕОНОВОЕ СВЕЧЕНИЕ === */
+/* === ЕДИНАЯ НЕОНОВАЯ ЛИНИЯ ПОД КАТЕГОРИЯМИ === */
 .top-filters.neon-filters {
   position: relative;
   background: transparent;
@@ -289,7 +289,7 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Общая неоновая линия */
+/* Общая линия */
 .top-filters.neon-filters::after {
   content: "";
   position: absolute;
@@ -300,16 +300,16 @@ html, body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 234, 255, 0.15) 20%,
-    rgba(0, 234, 255, 0.25) 50%,
-    rgba(0, 234, 255, 0.15) 80%,
+    rgba(0, 234, 255, 0.25) 15%,
+    rgba(0, 234, 255, 0.35) 50%,
+    rgba(0, 234, 255, 0.25) 85%,
     transparent 100%
   );
-  box-shadow: 0 0 25px rgba(0, 234, 255, 0.15);
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.25);
   pointer-events: none;
 }
 
-/* Кнопки */
+/* Текст кнопок */
 .top-filters.neon-filters .filter-btn {
   position: relative;
   background: transparent;
@@ -324,46 +324,46 @@ html, body {
   transition: color 0.3s ease;
 }
 
-/* Подсветка активной категории — вытянутый неоновый луч */
+/* Светящийся участок линии под активной категорией */
 .top-filters.neon-filters .filter-btn.active::after {
   content: "";
   position: absolute;
-  bottom: -13px;
+  bottom: -4px; /* ВЫРАВНЯНО С ЛИНИЕЙ */
   left: 50%;
   transform: translateX(-50%);
-  width: 180px; /* ширина области свечения */
-  height: 6px;
+  width: 150px; /* длина свечения */
+  height: 3px;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 234, 255, 0.9),
-    rgba(0, 234, 255, 0.9),
+    rgba(0, 234, 255, 1),
+    rgba(0, 234, 255, 1),
     transparent
   );
-  filter: blur(6px);
-  border-radius: 6px;
+  filter: blur(4px);
+  border-radius: 50%;
   box-shadow:
-    0 0 12px rgba(0, 234, 255, 0.8),
-    0 0 30px rgba(0, 234, 255, 0.6),
-    0 0 60px rgba(0, 234, 255, 0.4);
+    0 0 10px rgba(0, 234, 255, 0.9),
+    0 0 30px rgba(0, 234, 255, 0.7),
+    0 0 50px rgba(0, 234, 255, 0.4);
   pointer-events: none;
-  animation: lightPulse 3s ease-in-out infinite;
+  animation: linePulse 2.8s ease-in-out infinite;
 }
 
-/* Анимация мягкого пульса */
-@keyframes lightPulse {
+/* Плавное свечение */
+@keyframes linePulse {
   0%, 100% {
-    opacity: 0.9;
+    opacity: 0.8;
     transform: translateX(-50%) scaleX(1);
   }
   50% {
     opacity: 1;
-    transform: translateX(-50%) scaleX(1.15);
+    transform: translateX(-50%) scaleX(1.25);
   }
 }
 
-/* Hover эффект текста */
+/* Hover */
 .top-filters.neon-filters .filter-btn:hover {
   color: #e5f7ff;
-  text-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.4);
 }
