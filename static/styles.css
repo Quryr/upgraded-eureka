@@ -202,10 +202,14 @@ html, body {
 /* === КЕЙСЫ === */
 .case-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 35px;
-  justify-items: center;
+  justify-content: center;
+  align-items: start;
+  margin: 0 auto;
+  max-width: 1200px;
 }
+
 
 .case-card {
   background: linear-gradient(165deg, rgba(20, 20, 40, 0.9), rgba(10, 10, 25, 0.95));
