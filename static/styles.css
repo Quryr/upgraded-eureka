@@ -1,13 +1,15 @@
 /* === ОСНОВНОЙ ФОН === */
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   font-family: 'Rajdhani', 'Poppins', sans-serif;
   background: radial-gradient(circle at 25% 20%, #0f0f1d 0%, #101024 50%, #070712 100%);
   color: #fff;
-  overflow-x: hidden;
   opacity: 0;
   transform: scale(0.96);
   animation: siteFadeIn 0.9s ease-out forwards;
+  box-sizing: border-box;
 }
 
 @keyframes siteFadeIn {
@@ -33,6 +35,7 @@ body {
   z-index: 1000;
   backdrop-filter: blur(12px);
   height: 52px;
+  box-sizing: border-box;
 }
 
 /* === ЛОГОТИП === */
@@ -145,47 +148,36 @@ body {
   box-shadow: 0 0 22px rgba(0, 255, 255, 0.7);
 }
 
-/* === ФИЛЬТРЫ === */
-.top-filters {
+/* === БАННЕР === */
+.main-banner {
+  width: 92%;
+  max-width: 1500px;
+  margin: 90px auto 40px auto;
+  border-radius: 20px;
+  overflow: hidden;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 68px 0 22px;
-  background: rgba(30, 30, 55, 0.6);
-  border-bottom: 1px solid rgba(160, 130, 255, 0.15);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  box-sizing: border-box;
+  background: rgba(10, 10, 25, 0.4);
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.3),
+              0 0 60px rgba(0, 150, 255, 0.15);
 }
 
-.filter-btn {
-  background: rgba(45, 45, 85, 0.45);
-  border: 1px solid rgba(160, 140, 255, 0.2);
-  color: #d7d2ff;
-  padding: 10px 26px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  font-size: 13.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  box-shadow: inset 0 0 8px rgba(120, 100, 255, 0.08);
+.banner-image {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 25px rgba(0, 180, 255, 0.5),
+              0 0 45px rgba(0, 120, 255, 0.3);
 }
 
-.filter-btn:hover {
-  color: #fff;
-  border-color: rgba(180, 160, 255, 0.6);
-  box-shadow: 0 0 18px rgba(120, 100, 255, 0.5);
-  background: rgba(70, 50, 140, 0.45);
-}
-
-.filter-btn.active {
-  background: linear-gradient(145deg, #705fff, #957fff);
-  color: #fff;
-  border-color: rgba(200, 180, 255, 0.8);
-  box-shadow: 0 0 25px rgba(120, 100, 255, 0.9),
-              inset 0 0 12px rgba(255, 255, 255, 0.1);
+.banner-image:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 40px rgba(0, 220, 255, 0.8),
+              0 0 80px rgba(0, 160, 255, 0.5);
 }
 
 /* === КОНТЕЙНЕР === */
@@ -193,9 +185,10 @@ body {
   max-width: 1300px;
   margin: 0 auto;
   padding: 40px 40px 140px;
+  box-sizing: border-box;
 }
 
-/* === КАТЕГОРИИ === */
+/* === КАТЕГОРИИ ЗАГОЛОВКИ === */
 .category-title {
   font-size: 28px;
   font-weight: 700;
@@ -282,75 +275,20 @@ body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === Banner Styles (финальная версия) === */
-.top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  z-index: 1000;
-}
-
-/* Чтобы контент не прятался за фиксированной панелью */
-body {
-  padding-top: 60px; /* высота панели + небольшой зазор */
-  margin: 0;
-  overflow-x: hidden; /* убирает горизонтальный скролл справа */
-}
-
-/* Сам баннер */
-.main-banner {
-  width: 92%;
-  max-width: 1500px;
-  margin: 20px auto 40px auto;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  position: relative;
-  background: rgba(10, 10, 25, 0.4);
-  box-shadow: 0 0 25px rgba(0, 200, 255, 0.3),
-              0 0 60px rgba(0, 150, 255, 0.15);
-}
-
-.banner-image {
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  display: block;
-  transition: all 0.4s ease;
-  box-shadow: 0 0 25px rgba(0, 180, 255, 0.5),
-              0 0 45px rgba(0, 120, 255, 0.3);
-}
-
-.banner-image:hover {
-  transform: scale(1.01);
-  box-shadow: 0 0 40px rgba(0, 220, 255, 0.8),
-              0 0 80px rgba(0, 160, 255, 0.5);
-}
-
-/* Правка блока фильтров, чтобы не сдвигался */
-.top-filters {
-  margin-top: 10px;
-  padding-top: 10px;
-  box-sizing: border-box;
-}
-/* === NEON CATEGORY STYLE === */
-.neon-filters {
+/* === NEON CATEGORY STYLE (ФИНАЛЬНО) === */
+.top-filters.neon-filters {
   background: transparent;
-  box-shadow: none;
   border: none;
-  padding: 40px 0 10px 0;
+  box-shadow: none;
+  padding: 45px 0 10px 0;
   display: flex;
   justify-content: center;
-  gap: 60px;
   flex-wrap: wrap;
+  gap: 60px;
+  box-sizing: border-box;
 }
 
-.neon-filters .filter-btn {
+.top-filters.neon-filters .filter-btn {
   background: transparent;
   border: none;
   color: #a5b8ff;
@@ -358,14 +296,14 @@ body {
   font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.7px;
   position: relative;
-  padding: 6px 4px;
+  padding: 8px 4px;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.neon-filters .filter-btn::after {
+.top-filters.neon-filters .filter-btn::after {
   content: "";
   position: absolute;
   bottom: -4px;
@@ -373,16 +311,17 @@ body {
   width: 0%;
   height: 2px;
   background: linear-gradient(90deg, #00aaff, #00f6ff);
-  transition: width 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
   border-radius: 2px;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
 }
 
-.neon-filters .filter-btn:hover {
+.top-filters.neon-filters .filter-btn:hover {
   color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 220, 255, 0.8);
 }
 
-.neon-filters .filter-btn:hover::after,
-.neon-filters .filter-btn.active::after {
+.top-filters.neon-filters .filter-btn:hover::after,
+.top-filters.neon-filters .filter-btn.active::after {
   width: 100%;
 }
