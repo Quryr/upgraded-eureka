@@ -299,17 +299,16 @@ html, body {
   height: 2px;
   background: linear-gradient(
     90deg,
-    transparent 0%,
-    rgba(0, 234, 255, 0.25) 15%,
-    rgba(0, 234, 255, 0.35) 50%,
-    rgba(0, 234, 255, 0.25) 85%,
-    transparent 100%
+    rgba(0, 234, 255, 0.05),
+    rgba(0, 234, 255, 0.15),
+    rgba(0, 234, 255, 0.05)
   );
-  box-shadow: 0 0 25px rgba(0, 234, 255, 0.25);
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.2);
   pointer-events: none;
+  overflow: hidden;
 }
 
-/* Текст кнопок */
+/* Кнопки */
 .top-filters.neon-filters .filter-btn {
   position: relative;
   background: transparent;
@@ -324,45 +323,44 @@ html, body {
   transition: color 0.3s ease;
 }
 
-/* Светящийся участок линии под активной категорией */
+/* Светящийся участок прямо на линии (а не под кнопкой!) */
 .top-filters.neon-filters .filter-btn.active::after {
   content: "";
   position: absolute;
-  bottom: -4px; /* ВЫРАВНЯНО С ЛИНИЕЙ */
+  bottom: -1px; /* совпадает с линией */
   left: 50%;
   transform: translateX(-50%);
-  width: 150px; /* длина свечения */
-  height: 3px;
+  width: 140px;
+  height: 2px;
   background: linear-gradient(
     90deg,
-    transparent,
-    rgba(0, 234, 255, 1),
-    rgba(0, 234, 255, 1),
-    transparent
+    transparent 0%,
+    rgba(0, 240, 255, 0.95) 40%,
+    rgba(0, 240, 255, 0.95) 60%,
+    transparent 100%
   );
-  filter: blur(4px);
-  border-radius: 50%;
   box-shadow:
-    0 0 10px rgba(0, 234, 255, 0.9),
-    0 0 30px rgba(0, 234, 255, 0.7),
-    0 0 50px rgba(0, 234, 255, 0.4);
+    0 0 20px rgba(0, 240, 255, 0.8),
+    0 0 35px rgba(0, 240, 255, 0.6),
+    0 0 60px rgba(0, 240, 255, 0.4);
   pointer-events: none;
-  animation: linePulse 2.8s ease-in-out infinite;
+  border-radius: 2px;
+  animation: lineFlow 3s ease-in-out infinite;
 }
 
-/* Плавное свечение */
-@keyframes linePulse {
+/* Лёгкое мерцание линии */
+@keyframes lineFlow {
   0%, 100% {
-    opacity: 0.8;
+    opacity: 0.9;
     transform: translateX(-50%) scaleX(1);
   }
   50% {
     opacity: 1;
-    transform: translateX(-50%) scaleX(1.25);
+    transform: translateX(-50%) scaleX(1.15);
   }
 }
 
-/* Hover */
+/* Hover эффект текста */
 .top-filters.neon-filters .filter-btn:hover {
   color: #e5f7ff;
   text-shadow: 0 0 8px rgba(0, 234, 255, 0.4);
