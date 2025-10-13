@@ -275,30 +275,30 @@ html, body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === NEON CATEGORY STYLE (ФИНАЛЬНО) === */
+/* === NEON CATEGORY STYLE (как на оригинальном скрине) === */
 .top-filters.neon-filters {
   background: transparent;
   border: none;
   box-shadow: none;
-  padding: 45px 0 10px 0;
+  padding: 38px 0 10px 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 55px;
   box-sizing: border-box;
 }
 
 .top-filters.neon-filters .filter-btn {
   background: transparent;
   border: none;
-  color: #a5b8ff;
+  color: #b8c6ff;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 0.7px;
   position: relative;
-  padding: 8px 4px;
+  padding: 5px 3px;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -306,22 +306,23 @@ html, body {
 .top-filters.neon-filters .filter-btn::after {
   content: "";
   position: absolute;
-  bottom: -4px;
-  left: 0;
+  bottom: -6px;
+  left: 50%;
   width: 0%;
   height: 2px;
-  background: linear-gradient(90deg, #00aaff, #00f6ff);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+  background: linear-gradient(90deg, #00eaff, #00eaff);
+  box-shadow: 0 0 8px rgba(0, 234, 255, 0.7);
   border-radius: 2px;
-  transition: width 0.3s ease, box-shadow 0.3s ease;
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .top-filters.neon-filters .filter-btn:hover {
   color: #ffffff;
-  text-shadow: 0 0 8px rgba(0, 220, 255, 0.8);
+  text-shadow: 0 0 8px rgba(0, 220, 255, 0.6);
 }
 
 .top-filters.neon-filters .filter-btn:hover::after,
 .top-filters.neon-filters .filter-btn.active::after {
-  width: 100%;
+  width: 22px; /* короткая линия, как в оригинале */
+  left: calc(50% - 11px);
 }
