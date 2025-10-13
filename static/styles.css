@@ -275,13 +275,14 @@ html, body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === НЕОНОВАЯ ЛИНИЯ === */
+/* === НЕОНОВАЯ ЛИНИЯ С ВЫРАВНИВАНИЕМ ВНИЗ ОТ ТЕКСТА === */
 .top-filters.neon-filters {
   position: relative;
   background: transparent;
   border: none;
   box-shadow: none;
-  padding: 35px 0 25px 0; /* расстояние от текста до линии */
+  padding: 35px 0 25px 0; /* отступ вниз от текста до линии */
+  --line-offset: 25px; /* единая переменная для линии и свечения */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -293,7 +294,7 @@ html, body {
 .top-filters.neon-filters::after {
   content: "";
   position: absolute;
-  bottom: 25px; /* ← тот же отступ, что и padding-bottom */
+  bottom: var(--line-offset); /* линия идёт вниз от текста */
   left: 0;
   width: 100%;
   height: 1px;
@@ -322,11 +323,11 @@ html, body {
   transition: color 0.3s ease;
 }
 
-/* Подсветка активной кнопки — точно на той же высоте */
+/* Подсветка активной кнопки — точно на линии */
 .top-filters.neon-filters .filter-btn.active::after {
   content: "";
   position: absolute;
-  bottom: 25px; /* ← совпадает с линией */
+  bottom: var(--line-offset); /* ← теперь 1:1 с линией */
   left: 50%;
   transform: translateX(-50%);
   width: 90px;
