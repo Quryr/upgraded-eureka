@@ -275,7 +275,7 @@ html, body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === НЕОНОВАЯ ЛИНИЯ С ПОДСВЕТКОЙ НА САМОЙ ЛИНИИ === */
+/* === НЕОНОВАЯ ЛИНИЯ С ПОДСВЕТКОЙ === */
 .top-filters.neon-filters {
   position: relative;
   background: transparent;
@@ -296,14 +296,14 @@ html, body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background: linear-gradient(
     90deg,
     rgba(0, 234, 255, 0.05),
     rgba(0, 234, 255, 0.2),
     rgba(0, 234, 255, 0.05)
   );
-  box-shadow: 0 0 12px rgba(0, 234, 255, 0.1);
+  box-shadow: 0 0 6px rgba(0, 234, 255, 0.1);
   pointer-events: none;
   overflow: hidden;
 }
@@ -323,15 +323,15 @@ html, body {
   transition: color 0.3s ease;
 }
 
-/* Светящийся участок прямо на линии */
+/* Подсветка активной кнопки — СВЕТ НА ЛИНИИ */
 .top-filters.neon-filters .filter-btn.active::after {
   content: "";
   position: absolute;
-  bottom: 0; /* ровно на линии */
+  bottom: -1px; /* буквально на линии */
   left: 50%;
   transform: translateX(-50%);
-  width: 160px;
-  height: 2px;
+  width: 80px; /* можно варьировать длину света */
+  height: 1px;
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -340,14 +340,14 @@ html, body {
     transparent 100%
   );
   box-shadow:
-    0 0 15px rgba(0, 255, 255, 0.9),
-    0 0 35px rgba(0, 255, 255, 0.6);
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 25px rgba(0, 255, 255, 0.6);
   border-radius: 2px;
   pointer-events: none;
   z-index: 5;
 }
 
-/* Hover */
+/* Hover эффект */
 .top-filters.neon-filters .filter-btn:hover {
   color: #e5f7ff;
   text-shadow: 0 0 8px rgba(0, 234, 255, 0.4);
