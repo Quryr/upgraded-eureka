@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".filter-btn");
 
   const categoryNames = {
-    "luxury-style": "Роскошь и стиль",
-    "mystic-energy": "Мистика и энергия",
-    "memes-fun": "Мемы и веселье",
-    "collectibles": "Коллекционные и уникальные"
+    "luxury-style": "LUXURY & STYLE",
+    "mystic-energy": "MYSTIC & ENERGY",
+    "memes-fun": "MEMES & FUN",
+    "collectibles": "COLLECTIONS & UNIQUE"
   };
 
   function renderAllCategories() {
