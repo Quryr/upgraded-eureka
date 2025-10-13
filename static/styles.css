@@ -199,16 +199,15 @@ html, body {
   text-shadow: 0 0 10px rgba(160, 130, 255, 0.5);
 }
 
-/* === КЕЙСЫ === */
 .case-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 35px;
   justify-content: center;
-  align-items: start;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1300px;
 }
+
 
 
 .case-card {
