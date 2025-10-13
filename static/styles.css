@@ -275,13 +275,13 @@ html, body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === SINGLE GLOBAL NEON LINE UNDER CATEGORIES === */
+/* === GLOBAL NEON LINE UNDER CATEGORY BAR (единая линия с подсветкой активной кнопки) === */
 .top-filters.neon-filters {
   position: relative;
   background: transparent;
   border: none;
   box-shadow: none;
-  padding: 35px 0 25px 0;
+  padding: 35px 0 30px 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -289,23 +289,17 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Тонкая общая линия */
+/* Общая линия */
 .top-filters.neon-filters::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 234, 255, 0.15) 10%,
-    rgba(0, 234, 255, 0.25) 50%,
-    rgba(0, 234, 255, 0.15) 90%,
-    transparent 100%
-  );
-  box-shadow: 0 0 25px rgba(0, 234, 255, 0.35);
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0, 200, 255, 0.08), rgba(0, 200, 255, 0.12), rgba(0, 200, 255, 0.08));
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
+  pointer-events: none;
 }
 
 /* Кнопки категорий */
@@ -323,25 +317,26 @@ html, body {
   transition: color 0.3s ease;
 }
 
-/* Эффект подсветки под активной категорией */
-.top-filters.neon-filters .filter-btn.active::after {
+/* Подсветка активной кнопки — именно на общей линии */
+.top-filters.neon-filters .filter-btn.active::before {
   content: "";
   position: absolute;
-  bottom: -12px;
+  bottom: -10px;
   left: 50%;
-  width: 140px; /* ширина свечения */
-  height: 4px;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(0, 234, 255, 1) 0%, rgba(0, 234, 255, 0.05) 70%);
-  box-shadow: 0 0 30px rgba(0, 234, 255, 0.8), 0 0 60px rgba(0, 200, 255, 0.5);
+  width: 180px;
+  height: 6px;
+  background: radial-gradient(circle at center, rgba(0, 234, 255, 0.8) 0%, rgba(0, 234, 255, 0.05) 80%);
+  filter: blur(8px);
   border-radius: 50%;
-  animation: glowPulse 2s infinite ease-in-out;
+  pointer-events: none;
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Плавное пульсирующее свечение */
-@keyframes glowPulse {
+/* Пульсация свечения */
+@keyframes pulse-glow {
   0%, 100% {
-    opacity: 0.7;
+    opacity: 0.8;
     transform: translateX(-50%) scaleX(1);
   }
   50% {
@@ -350,7 +345,7 @@ html, body {
   }
 }
 
-/* Hover — мягкая подсветка текста */
+/* Hover — лёгкое свечение текста */
 .top-filters.neon-filters .filter-btn:hover {
   color: #e5f7ff;
   text-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
