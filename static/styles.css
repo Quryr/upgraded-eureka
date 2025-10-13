@@ -275,7 +275,7 @@ html, body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === ЕДИНАЯ НЕОНОВАЯ ЛИНИЯ ПОД КАТЕГОРИЯМИ === */
+/* === НЕОНОВАЯ ЛИНИЯ С ПОДСВЕТКОЙ НА САМОЙ ЛИНИИ === */
 .top-filters.neon-filters {
   position: relative;
   background: transparent;
@@ -300,10 +300,10 @@ html, body {
   background: linear-gradient(
     90deg,
     rgba(0, 234, 255, 0.05),
-    rgba(0, 234, 255, 0.15),
+    rgba(0, 234, 255, 0.2),
     rgba(0, 234, 255, 0.05)
   );
-  box-shadow: 0 0 25px rgba(0, 234, 255, 0.2);
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.1);
   pointer-events: none;
   overflow: hidden;
 }
@@ -323,44 +323,31 @@ html, body {
   transition: color 0.3s ease;
 }
 
-/* Светящийся участок прямо на линии (а не под кнопкой!) */
+/* Светящийся участок прямо на линии */
 .top-filters.neon-filters .filter-btn.active::after {
   content: "";
   position: absolute;
-  bottom: -1px; /* совпадает с линией */
+  bottom: 0; /* ровно на линии */
   left: 50%;
   transform: translateX(-50%);
-  width: 140px;
+  width: 160px;
   height: 2px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 240, 255, 0.95) 40%,
-    rgba(0, 240, 255, 0.95) 60%,
+    rgba(0, 255, 255, 1) 45%,
+    rgba(0, 255, 255, 1) 55%,
     transparent 100%
   );
   box-shadow:
-    0 0 20px rgba(0, 240, 255, 0.8),
-    0 0 35px rgba(0, 240, 255, 0.6),
-    0 0 60px rgba(0, 240, 255, 0.4);
-  pointer-events: none;
+    0 0 15px rgba(0, 255, 255, 0.9),
+    0 0 35px rgba(0, 255, 255, 0.6);
   border-radius: 2px;
-  animation: lineFlow 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
 }
 
-/* Лёгкое мерцание линии */
-@keyframes lineFlow {
-  0%, 100% {
-    opacity: 0.9;
-    transform: translateX(-50%) scaleX(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) scaleX(1.15);
-  }
-}
-
-/* Hover эффект текста */
+/* Hover */
 .top-filters.neon-filters .filter-btn:hover {
   color: #e5f7ff;
   text-shadow: 0 0 8px rgba(0, 234, 255, 0.4);
