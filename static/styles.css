@@ -338,3 +338,51 @@ body {
   padding-top: 10px;
   box-sizing: border-box;
 }
+/* === NEON CATEGORY STYLE === */
+.neon-filters {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 40px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.neon-filters .filter-btn {
+  background: transparent;
+  border: none;
+  color: #a5b8ff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  position: relative;
+  padding: 6px 4px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.neon-filters .filter-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #00aaff, #00f6ff);
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+  border-radius: 2px;
+}
+
+.neon-filters .filter-btn:hover {
+  color: #ffffff;
+}
+
+.neon-filters .filter-btn:hover::after,
+.neon-filters .filter-btn.active::after {
+  width: 100%;
+}
