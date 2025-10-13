@@ -275,59 +275,83 @@ html, body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === CATEGORY BAR EXACTLY LIKE ORIGINAL REFERENCE === */
+/* === SINGLE GLOBAL NEON LINE UNDER CATEGORIES === */
 .top-filters.neon-filters {
+  position: relative;
   background: transparent;
   border: none;
   box-shadow: none;
-  padding: 35px 0 5px 0;
+  padding: 35px 0 25px 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 65px;
+  gap: 70px;
   box-sizing: border-box;
 }
 
+/* Тонкая общая линия */
+.top-filters.neon-filters::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 234, 255, 0.15) 10%,
+    rgba(0, 234, 255, 0.25) 50%,
+    rgba(0, 234, 255, 0.15) 90%,
+    transparent 100%
+  );
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.35);
+}
+
+/* Кнопки категорий */
 .top-filters.neon-filters .filter-btn {
   position: relative;
   background: transparent;
   border: none;
-  color: #9fb6ff;
+  color: #bcd5ff;
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 17px;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.9px;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.top-filters.neon-filters .filter-btn::before {
+/* Эффект подсветки под активной категорией */
+.top-filters.neon-filters .filter-btn.active::after {
   content: "";
   position: absolute;
-  bottom: -8px;
+  bottom: -12px;
   left: 50%;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00eaff, transparent);
+  width: 140px; /* ширина свечения */
+  height: 4px;
   transform: translateX(-50%);
-  opacity: 0;
-  transition: width 0.4s ease, opacity 0.4s ease;
-  box-shadow: 0 0 15px rgba(0, 234, 255, 0.6);
+  background: radial-gradient(circle, rgba(0, 234, 255, 1) 0%, rgba(0, 234, 255, 0.05) 70%);
+  box-shadow: 0 0 30px rgba(0, 234, 255, 0.8), 0 0 60px rgba(0, 200, 255, 0.5);
+  border-radius: 50%;
+  animation: glowPulse 2s infinite ease-in-out;
 }
 
-.top-filters.neon-filters .filter-btn:hover::before,
-.top-filters.neon-filters .filter-btn.active::before {
-  width: 60px; /* длина линии как в оригинале */
-  opacity: 1;
+/* Плавное пульсирующее свечение */
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1.2);
+  }
 }
 
+/* Hover — мягкая подсветка текста */
 .top-filters.neon-filters .filter-btn:hover {
-  color: #d5e4ff;
-  text-shadow: 0 0 8px rgba(0, 234, 255, 0.4);
-}
-
-.top-filters.neon-filters .filter-btn.active {
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
+  color: #e5f7ff;
+  text-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
 }
