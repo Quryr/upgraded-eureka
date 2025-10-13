@@ -1,0 +1,306 @@
+/* === ОСНОВНОЙ ФОН === */
+body {
+  margin: 0;
+  font-family: 'Rajdhani', 'Poppins', sans-serif;
+  background: radial-gradient(circle at 25% 20%, #0f0f1d 0%, #101024 50%, #070712 100%);
+  color: #fff;
+  overflow-x: hidden;
+  opacity: 0;
+  transform: scale(0.96);
+  animation: siteFadeIn 0.9s ease-out forwards;
+}
+
+@keyframes siteFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* === ВЕРХНЯЯ НАВИГАЦИЯ === */
+.top-nav {
+  width: 100%;
+  background: rgba(10, 10, 25, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 34px;
+  border-bottom: 1px solid rgba(120, 100, 255, 0.25);
+  box-shadow: 0 2px 22px rgba(40, 30, 100, 0.35);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  height: 52px;
+}
+
+/* === ЛОГОТИП === */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 170px;
+  height: auto;
+  filter: drop-shadow(0 0 20px #00aaff)
+          drop-shadow(0 0 40px rgba(0, 180, 255, 0.7));
+  object-fit: contain;
+  margin-left: 8px;
+}
+
+.nav-left span,
+.logo-text {
+  display: none !important;
+}
+
+/* === НАВИГАЦИОННЫЕ КНОПКИ === */
+.nav-center {
+  display: flex;
+  gap: 45px;
+}
+
+.nav-center a {
+  text-decoration: none;
+  color: #cfd7ff;
+  font-weight: 700;
+  font-size: 15.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-center a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6a8cff, #00eaff);
+  transition: width 0.3s ease;
+}
+
+.nav-center a:hover {
+  color: #00eaff;
+}
+
+.nav-center a:hover::after,
+.nav-center a.active::after {
+  width: 100%;
+}
+
+/* === ПРАВАЯ ЧАСТЬ (БАЛАНС + АВАТАР) === */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-right: 30px;
+}
+
+.balance {
+  background: rgba(35, 35, 65, 0.8);
+  padding: 8px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(120, 100, 255, 0.3);
+  box-shadow: inset 0 0 12px rgba(80, 70, 255, 0.3),
+              0 0 12px rgba(0, 200, 255, 0.3);
+}
+
+.star-icon-nav {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+#star-balance {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 16px;
+  text-shadow: 0 0 7px #00eaff;
+}
+
+/* === АВАТАР === */
+.profile-icon img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(50, 50, 80, 0.4);
+  border: 1px solid rgba(100, 100, 200, 0.4);
+  box-shadow: 0 0 15px rgba(0, 230, 255, 0.5);
+  padding: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-right: 25px;
+}
+
+.profile-icon img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.7);
+}
+
+/* === ФИЛЬТРЫ === */
+.top-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 68px 0 22px;
+  background: rgba(30, 30, 55, 0.6);
+  border-bottom: 1px solid rgba(160, 130, 255, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+}
+
+.filter-btn {
+  background: rgba(45, 45, 85, 0.45);
+  border: 1px solid rgba(160, 140, 255, 0.2);
+  color: #d7d2ff;
+  padding: 10px 26px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: inset 0 0 8px rgba(120, 100, 255, 0.08);
+}
+
+.filter-btn:hover {
+  color: #fff;
+  border-color: rgba(180, 160, 255, 0.6);
+  box-shadow: 0 0 18px rgba(120, 100, 255, 0.5);
+  background: rgba(70, 50, 140, 0.45);
+}
+
+.filter-btn.active {
+  background: linear-gradient(145deg, #705fff, #957fff);
+  color: #fff;
+  border-color: rgba(200, 180, 255, 0.8);
+  box-shadow: 0 0 25px rgba(120, 100, 255, 0.9),
+              inset 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+/* === КОНТЕЙНЕР === */
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 40px 140px;
+}
+
+/* === КАТЕГОРИИ === */
+.category-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #cfc7ff;
+  margin: 60px 0 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(160, 130, 255, 0.5);
+}
+
+/* === КЕЙСЫ === */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 35px;
+  justify-items: center;
+}
+
+.case-card {
+  background: linear-gradient(165deg, rgba(20, 20, 40, 0.9), rgba(10, 10, 25, 0.95));
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+  transition: all 0.35s ease;
+  border: 1px solid rgba(130, 120, 255, 0.18);
+  box-shadow: 0 0 20px rgba(80, 70, 180, 0.12);
+  position: relative;
+  overflow: hidden;
+  width: 220px;
+}
+
+.case-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(160, 140, 255, 0.5);
+  box-shadow: 0 0 28px rgba(120, 100, 255, 0.45);
+  background: linear-gradient(170deg, rgba(30, 30, 60, 0.9), rgba(12, 12, 30, 0.98));
+}
+
+.case-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.case-card:hover img {
+  transform: scale(1.07);
+  filter: drop-shadow(0 0 12px rgba(150, 130, 255, 0.4));
+}
+
+.case-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.7px;
+  text-shadow: 0 0 8px rgba(150, 130, 255, 0.7);
+  margin-top: 6px;
+}
+
+.case-subtitle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.star-icon {
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateY(2px) translateX(-1px);
+  transition: transform 0.2s ease;
+}
+
+.case-card:hover .star-icon {
+  transform: translateY(2px) translateX(-1px) scale(1.05);
+}
+
+/* === ДОБАВЛЕНО: БАННЕР (96% ширины, неоновый эффект) === */
+.main-banner {
+  width: 96%;
+  margin: 80px auto 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-image {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 180, 255, 0.6),
+              0 0 60px rgba(0, 120, 255, 0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.banner-image:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 40px rgba(0, 200, 255, 0.8),
+              0 0 80px rgba(0, 150, 255, 0.6);
+}

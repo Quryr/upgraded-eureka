@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gifts Battle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <!-- === ВЕРХНЯЯ НАВИГАЦИЯ === -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <img src="/static/assets/logo.png" alt="Logo" class="logo">
+      <span class="logo-text">GIFTS BATTLE</span>
+    </div>
+
+    <nav class="nav-center">
+      <a href="#" class="nav-link active">CASES</a>
+      <a href="#">UPGRADE</a>
+      <a href="#">CONTESTS</a>
+      <a href="#">FRIENDS</a>
+      <a href="#">PROFILE</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="balance">
+        <img src="/static/assets/icons/star.png" alt="⭐" class="star-icon-nav">
+        <span id="star-balance">10 000</span>
+      </div>
+      <div class="profile-icon">
+        <img src="/static/assets/icons/profile.png" alt="Profile">
+      </div>
+    </div>
+  </header>
+
+  <!-- === ДОБАВЛЕННЫЙ БАННЕР === -->
+  <section class="main-banner">
+    <img src="/static/assets/banner.png" alt="Main Banner" class="banner-image">
+  </section>
+
+  <!-- === ОСНОВНОЙ КОНТЕНТ === -->
+  <div class="top-filters">
+    <button class="filter-btn active" data-filter="all">Все</button>
+    <button class="filter-btn" data-filter="luxury-style">Роскошь и стиль</button>
+    <button class="filter-btn" data-filter="mystic-energy">Мистика и энергия</button>
+    <button class="filter-btn" data-filter="memes-fun">Мемы и веселье</button>
+    <button class="filter-btn" data-filter="collectibles">Коллекционные и уникальные</button>
+  </div>
+
+  <div class="container" id="cases-container"></div>
+
+  <script src="/static/data.js"></script>
+  <script src="/static/script.js"></script>
+</body>
+</html>
