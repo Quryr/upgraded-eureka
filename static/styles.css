@@ -282,35 +282,59 @@ body {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
 
-/* === Banner Styles (исправленная версия) === */
+/* === Banner Styles (финальная версия) === */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  z-index: 1000;
+}
+
+/* Чтобы контент не прятался за фиксированной панелью */
+body {
+  padding-top: 60px; /* высота панели + небольшой зазор */
+  margin: 0;
+  overflow-x: hidden; /* убирает горизонтальный скролл справа */
+}
+
+/* Сам баннер */
 .main-banner {
-  width: 94%;
-  max-width: 1600px;
-  margin: 100px auto 25px auto; /* добавлен верхний отступ чтобы баннер не прилипал к панели */
+  width: 92%;
+  max-width: 1500px;
+  margin: 20px auto 40px auto;
+  border-radius: 20px;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  overflow: hidden;
+  position: relative;
+  background: rgba(10, 10, 25, 0.4);
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.3),
+              0 0 60px rgba(0, 150, 255, 0.15);
 }
 
 .banner-image {
   width: 100%;
   height: auto;
-  border-radius: 18px;
-  box-shadow: 0 0 25px rgba(0, 200, 255, 0.4),
-              0 0 50px rgba(0, 150, 255, 0.2);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 20px;
+  display: block;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 25px rgba(0, 180, 255, 0.5),
+              0 0 45px rgba(0, 120, 255, 0.3);
 }
 
 .banner-image:hover {
-  transform: scale(1.008);
-  box-shadow: 0 0 35px rgba(0, 200, 255, 0.7),
-              0 0 65px rgba(0, 150, 255, 0.5);
+  transform: scale(1.01);
+  box-shadow: 0 0 40px rgba(0, 220, 255, 0.8),
+              0 0 80px rgba(0, 160, 255, 0.5);
 }
 
-/* Исправляем контейнер под фильтры чтобы не уезжал вниз */
+/* Правка блока фильтров, чтобы не сдвигался */
 .top-filters {
-  margin-top: 0;
-  padding-top: 15px;
+  margin-top: 10px;
+  padding-top: 10px;
+  box-sizing: border-box;
 }
