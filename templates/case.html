@@ -197,14 +197,5 @@
   </div>
 
 <!-- === СКРИПТЫ === -->
-<script>
-  // Подключаем data.js динамически — гарантированно работает на Render
-  const script = document.createElement('script');
-  script.src = '/static/data.js?v=' + Date.now(); // кэш сбиваем
-  script.onload = () => {
-    const caseScript = document.createElement('script');
-    caseScript.src = '/static/case.js?v=' + Date.now();
-    document.body.appendChild(caseScript);
-  };
-  document.body.appendChild(script);
-</script>
+<script src="/static/cases_data.js" defer></script>
+<script src="/static/case.js" defer></script>
