@@ -112,7 +112,7 @@ body {
   line-height: 1;
   width: auto !important;
   padding: 0 !important;
-  margin: 10px auto 10px !important; /* <--- вот тут auto выравнивает по центру */
+  margin: 4px auto 6px !important; /* <--- вот тут auto выравнивает по центру */
   background: none !important;
   box-shadow: none !important;
   border: none !important;
