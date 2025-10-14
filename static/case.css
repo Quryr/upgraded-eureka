@@ -117,7 +117,7 @@ body {
   height: 32px;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
-  transform: translateY(10px) translateX(-1px) !important; /* 👈 принудительно ниже */
+  transform: translateY(11px) translateX(-1px) !important; /* 👈 принудительно ниже */
   transition: transform 0.2s ease;
   background: none !important;
   box-shadow: none !important;
