@@ -120,3 +120,16 @@ body {
   transform: translateY(0.05em);
 }
 /* === End of fix === */
+.case-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.case-price .star-icon-nav {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  transform: translateY(1px);
+}
