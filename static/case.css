@@ -105,8 +105,9 @@ body {
   justify-content: center;
   align-items: center;
   gap: 3px;
-  margin: 5px 0 5px;
-  font-size: 22px;
+  margin-top: 8px !important;  /* меньше отступ сверху */
+  margin-bottom: 8px !important; /* чуть меньше отступ снизу */
+  font-size: 28px;
   font-weight: 900;
   color: #ffffff;
   line-height: 1;
