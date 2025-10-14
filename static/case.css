@@ -102,7 +102,7 @@ body {
 /* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
 #case-price,
 .case-price {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 3px;
@@ -113,7 +113,6 @@ body {
   width: auto !important;
   padding: 0 !important;
   margin: 10px auto 10px !important; /* <--- вот тут auto выравнивает по центру */
-  width: 100%;
   background: none !important;
   box-shadow: none !important;
   border: none !important;
