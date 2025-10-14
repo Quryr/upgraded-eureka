@@ -1,29 +1,21 @@
-from flask import Flask, send_from_directory
-import os
+from flask import Flask, render_template
 
-# Создаём Flask-приложение
 app = Flask(__name__, static_folder='static', template_folder='.')
-
-# === МАРШРУТЫ САЙТА ===
 
 # Главная страница
 @app.route('/')
-def index():
-    return send_from_directory('.', 'index.html')
+def home():
+    return render_template('index.html')
 
-# Страница открытия кейса
-@app.route('/case')
+# Страница кейса
+@app.route('/case.html')
 def case_page():
-    return send_from_directory('.', 'case.html')
+    return render_template('case.html')
 
-# Раздача статических файлов (css, js, картинки)
-@app.route('/static/<path:path>')
-def serve_static(path):
-    return send_from_directory('static', path)
+# Чтобы Flask отдавал все статические файлы (CSS, JS, изображения)
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return app.send_static_file(filename)
 
-# === ЗАПУСК СЕРВЕРА ===
 if __name__ == '__main__':
-    # Render передаёт свой порт через переменную окружения PORT
-    port = int(os.environ.get('PORT', 10000))
-    # Хост обязательно 0.0.0.0, иначе Render не увидит сервер
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(debug=True)
