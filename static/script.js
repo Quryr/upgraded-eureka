@@ -24,15 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
       grid.classList.add("case-grid");
 
       items.forEach(item => {
-        const card = document.createElement("div");
-        card.classList.add("case-card");
+        const caseId = item.name.toLowerCase().replace(/\s+/g, "_");
+
+        const card = document.createElement("a");
+        card.href = `case.html?id=${caseId}`;
+        card.classList.add("case-link");
+
         card.innerHTML = `
-          <img src="${item.img}" alt="${item.name}" />
-          <div class="case-title">${item.name}</div>
-          <div class="case-subtitle">
-            ${item.price 
-              ? `<span>${item.price}</span> <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">`
-              : "БЕСПЛАТНО"}
+          <div class="case-card">
+            <img src="${item.img}" alt="${item.name}" />
+            <div class="case-title">${item.name}</div>
+            <div class="case-subtitle">
+              ${item.price 
+                ? `<span>${item.price}</span> <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">`
+                : "БЕСПЛАТНО"}
+            </div>
           </div>
         `;
         grid.appendChild(card);
@@ -55,15 +61,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const cases = casesData[filter] || [];
 
     cases.forEach(item => {
-      const card = document.createElement("div");
-      card.classList.add("case-card");
+      const caseId = item.name.toLowerCase().replace(/\s+/g, "_");
+
+      const card = document.createElement("a");
+      card.href = `case.html?id=${caseId}`;
+      card.classList.add("case-link");
+
       card.innerHTML = `
-        <img src="${item.img}" alt="${item.name}" />
-        <div class="case-title">${item.name}</div>
-        <div class="case-subtitle">
-          ${item.price 
-            ? `<span>${item.price}</span> <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">`
-            : "БЕСПЛАТНО"}
+        <div class="case-card">
+          <img src="${item.img}" alt="${item.name}" />
+          <div class="case-title">${item.name}</div>
+          <div class="case-subtitle">
+            ${item.price 
+              ? `<span>${item.price}</span> <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">`
+              : "БЕСПЛАТНО"}
+          </div>
         </div>
       `;
       grid.appendChild(card);
