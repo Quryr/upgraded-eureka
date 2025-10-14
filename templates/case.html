@@ -184,12 +184,30 @@
         <span>—</span> <img src="/static/assets/icons/star.png" alt="⭐" />
       </div>
 
-      <div class="case-buttons">
-        <button class="case-btn">Open Case</button>
-        <button class="case-btn">Open 5x</button>
-        <button class="case-btn">Demo Mode</button>
-      </div>
+   <div class="case-buttons">
+  <button class="case-btn open-one">Open Case</button>
+  <button class="case-btn open-five">Open 5x</button>
+
+  <div class="demo-mode-container">
+    <label class="demo-toggle">
+      <input type="checkbox" id="demo-toggle" />
+      <span class="slider"></span>
+      Demo Mode
+    </label>
+  </div>
+
+  <div class="case-multi">
+    <p class="multi-text">Сколько кейсов открыть?</p>
+    <div class="multi-buttons">
+      <button class="multi-btn active" data-count="1">1</button>
+      <button class="multi-btn" data-count="2">2</button>
+      <button class="multi-btn" data-count="3">3</button>
+      <button class="multi-btn" data-count="4">4</button>
+      <button class="multi-btn" data-count="5">5</button>
     </div>
+  </div>
+</div>
+
 
     <div class="items-grid" id="items-grid">
       <div style="grid-column: 1/-1; opacity: 0.7;">No items found in this case</div>
