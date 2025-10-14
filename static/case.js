@@ -1,45 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
-  const caseId = params.get("id");
+  let caseId = params.get("id");
 
   const caseImage = document.getElementById("case-image");
   const caseTitle = document.getElementById("case-title");
   const casePrice = document.getElementById("case-price");
   const itemsGrid = document.getElementById("items-grid");
 
+  // Проверяем, загружены ли данные кейсов
   if (!window.casesData) {
     caseTitle.textContent = "DATA NOT LOADED";
     return;
   }
 
+  // Если caseId есть — нормализуем (в нижний регистр, подчёркивания вместо пробелов)
+  if (caseId) {
+    caseId = caseId.toLowerCase().replace(/\s+/g, "_");
+  }
+
   let selectedCase = null;
 
-  // Сначала пробуем найти по id
+  // --- Поиск по id или по имени ---
   for (const [category, cases] of Object.entries(casesData)) {
-    const found = cases.find(c => c.id === caseId);
+    const found = cases.find(c => {
+      // если есть поле id, проверяем его
+      if (c.id && c.id.toLowerCase() === caseId) return true;
+      // проверяем совпадение по имени
+      return c.name.toLowerCase().replace(/\s+/g, "_") === caseId;
+    });
     if (found) {
       selectedCase = found;
       break;
     }
   }
 
-  // Если не нашли по id — пробуем по названию
-  if (!selectedCase) {
-    for (const [category, cases] of Object.entries(casesData)) {
-      const found = cases.find(c => c.name.toLowerCase().replace(/\s+/g, "_") === caseId);
-      if (found) {
-        selectedCase = found;
-        break;
-      }
-    }
-  }
-
+  // --- Если кейс не найден ---
   if (!selectedCase) {
     caseTitle.textContent = "CASE NOT FOUND";
     return;
   }
 
-  // Отрисовка кейса
+  // --- Отрисовка кейса ---
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
   casePrice.innerHTML = `
@@ -47,8 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="/static/assets/icons/star.png" alt="⭐">
   `;
 
-  // Если есть предметы внутри
+  // --- Отрисовка предметов внутри кейса ---
   if (selectedCase.contains && selectedCase.contains.length > 0) {
+    itemsGrid.innerHTML = ""; // очищаем перед вставкой
     selectedCase.contains.forEach(item => {
       const card = document.createElement("div");
       card.classList.add("item-card");
