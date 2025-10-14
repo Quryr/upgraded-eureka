@@ -112,13 +112,15 @@ body {
   line-height: 1;
 }
 .star-icon {
-  width: 32px;
-  height: 32px;
+  width: 24px; /* как на главной */
+  height: 24px;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   transform: translateY(2px) translateX(-1px);
   transition: transform 0.2s ease;
+  aspect-ratio: unset !important; /* 🔥 вот ключ! убираем коллизию */
 }
+
 
 
 .case-card:hover .star-icon {
