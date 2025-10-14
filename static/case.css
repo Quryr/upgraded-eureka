@@ -101,30 +101,40 @@ body {
 
 /* Цена кейса + звезда */
 /* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
+/* === Цена и звезда — стиль как на главной странице === */
 .case-subtitle {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 4px !important;
-  width: auto !important;
-  text-align: center !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 28px 0 25px 0; /* поднимает блок вверх между названием и кнопкой */
+  font-size: 26px; /* немного крупнее, как на главной */
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+  letter-spacing: 0.5px;
 }
 
+/* === Звезда в цене === */
 .case-subtitle .star-icon {
-  width: 24px !important;
-  height: 24px !important;
-  flex-shrink: 0 !important;
-  max-width: none !important; /* 🧨 ключевой фикс: отключает растяжение */
-  max-height: none !important;
-  object-fit: contain !important;
-  aspect-ratio: unset !important;
-  background: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  transform: translateY(2px) translateX(-1px);
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateY(1px) translateX(-1px); /* 🔹 легкое выравнивание как на index.html */
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  max-width: none;
+  max-height: none;
+  aspect-ratio: unset;
+  background: none;
+  box-shadow: none;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
+
 
 
 
