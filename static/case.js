@@ -57,4 +57,23 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     itemsGrid.innerHTML = `<div style="grid-column: 1/-1; opacity: 0.7;">No items found in this case</div>`;
   }
+  // 🔘 Обработка выбора количества кейсов
+const buttons = document.querySelectorAll(".multi-btn");
+let selectedCount = 1; // по умолчанию выбрано 1
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    // Снять активный класс со всех
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    // Добавить активный к текущей
+    button.classList.add("active");
+
+    // Запомнить выбранное количество
+    selectedCount = parseInt(button.dataset.count);
+
+    console.log(`✅ Выбрано количество кейсов: ${selectedCount}`);
+  });
+});
+
 });
