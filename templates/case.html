@@ -32,10 +32,10 @@
     }
 
     .case-header img {
-      width: 260px;
+      width: 320px; /* увеличено изображение кейса */
       border-radius: 12px;
       margin-bottom: 25px;
-      box-shadow: 0 0 35px rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
     }
 
     .case-title {
@@ -53,60 +53,50 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       margin-bottom: 35px;
     }
 
     .case-price img {
-      width: 22px;
-      height: 22px;
-      transform: translateY(3px);
-      filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.6));
+      width: 20px;
+      height: 20px;
+      transform: translateY(2px);
+      filter: none; /* убрано свечение */
     }
 
-    /* === КНОПКИ === */
-    .case-controls {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .case-buttons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
-
-    .case-btn {
+    /* --- Основная кнопка --- */
+    .case-btn-main {
       background: linear-gradient(90deg, #00d0ff, #008cff);
       border: none;
       color: #fff;
       font-weight: 700;
       letter-spacing: 0.8px;
-      padding: 14px 34px;
+      padding: 16px 80px;
       border-radius: 12px;
       text-transform: uppercase;
       cursor: pointer;
       font-family: 'Rajdhani', sans-serif;
       transition: all 0.25s ease;
       box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+      margin-bottom: 30px;
     }
 
-    .case-btn:hover {
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
-      transform: scale(1.04);
+    .case-btn-main:hover {
+      box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+      transform: scale(1.05);
     }
 
-    /* === DEMO MODE === */
+    /* --- Демо режим --- */
     .demo-toggle {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       cursor: pointer;
       font-size: 16px;
       color: #9fd8ff;
       font-weight: 600;
+      margin-bottom: 30px;
     }
 
     .demo-toggle input {
@@ -140,9 +130,9 @@
       background: #00ffba;
     }
 
-    /* === КНОПКИ КОЛИЧЕСТВА === */
+    /* --- Кнопки количества --- */
     .case-multi {
-      margin-top: 25px;
+      margin-top: 10px;
     }
 
     .multi-text {
@@ -189,7 +179,7 @@
       100% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); }
     }
 
-    /* === СЕТКА ПРЕДМЕТОВ === */
+    /* --- Сетка предметов --- */
     .items-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -273,29 +263,28 @@
       <img id="case-image" src="" alt="Case Image" />
       <div class="case-title" id="case-title">CASE NAME</div>
       <div class="case-price" id="case-price">
-        <span>—</span> <img src="/static/assets/icons/star.png" alt="⭐" />
+        <span>550</span> <img src="/static/assets/icons/star.png" alt="⭐" />
       </div>
 
-      <div class="case-controls">
-        <div class="case-buttons">
-          <button class="case-btn open-one">Open Case</button>
-          <button class="case-btn open-five">Open 5x</button>
-          <label class="demo-toggle">
-            <input type="checkbox" id="demo-toggle" />
-            <span class="slider"></span>
-            Demo Mode
-          </label>
-        </div>
+      <!-- Основная кнопка -->
+      <button class="case-btn-main">OPEN CASE</button>
 
-        <div class="case-multi">
-          <p class="multi-text">Выберите количество кейсов</p>
-          <div class="multi-buttons">
-            <button class="multi-btn active" data-count="1">1</button>
-            <button class="multi-btn" data-count="2">2</button>
-            <button class="multi-btn" data-count="3">3</button>
-            <button class="multi-btn" data-count="4">4</button>
-            <button class="multi-btn" data-count="5">5</button>
-          </div>
+      <!-- Демо режим -->
+      <label class="demo-toggle">
+        <input type="checkbox" id="demo-toggle" />
+        <span class="slider"></span>
+        Demo Mode
+      </label>
+
+      <!-- Количество кейсов -->
+      <div class="case-multi">
+        <p class="multi-text">Выберите количество кейсов</p>
+        <div class="multi-buttons">
+          <button class="multi-btn active" data-count="1">1</button>
+          <button class="multi-btn" data-count="2">2</button>
+          <button class="multi-btn" data-count="3">3</button>
+          <button class="multi-btn" data-count="4">4</button>
+          <button class="multi-btn" data-count="5">5</button>
         </div>
       </div>
     </div>
