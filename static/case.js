@@ -7,13 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const casePrice = document.getElementById("case-price");
   const itemsGrid = document.getElementById("items-grid");
 
-  if (!caseId || !window.casesData) {
-    caseTitle.textContent = "CASE NOT FOUND";
+  if (!window.casesData) {
+    caseTitle.textContent = "DATA NOT LOADED";
     return;
   }
 
-  // Ищем кейс по ID во всех категориях
   let selectedCase = null;
+
+  // Сначала пробуем найти по id
   for (const [category, cases] of Object.entries(casesData)) {
     const found = cases.find(c => c.id === caseId);
     if (found) {
@@ -22,20 +23,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Если не нашли по id — пробуем по названию
+  if (!selectedCase) {
+    for (const [category, cases] of Object.entries(casesData)) {
+      const found = cases.find(c => c.name.toLowerCase().replace(/\s+/g, "_") === caseId);
+      if (found) {
+        selectedCase = found;
+        break;
+      }
+    }
+  }
+
   if (!selectedCase) {
     caseTitle.textContent = "CASE NOT FOUND";
     return;
   }
 
-  // Обновляем данные на странице
+  // Отрисовка кейса
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
   casePrice.innerHTML = `
-    <span>${selectedCase.price || "FREE"}</span> 
+    <span>${selectedCase.price || "FREE"}</span>
     <img src="/static/assets/icons/star.png" alt="⭐">
   `;
 
-  // Если у кейса есть содержимое — выводим
+  // Если есть предметы внутри
   if (selectedCase.contains && selectedCase.contains.length > 0) {
     selectedCase.contains.forEach(item => {
       const card = document.createElement("div");
