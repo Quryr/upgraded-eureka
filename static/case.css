@@ -102,3 +102,21 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
 }
+/* === Fix currency icon alignment === */
+.case-price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.currency-icon {
+  height: 1em;
+  width: auto;
+  object-fit: contain;
+  transform: translateY(0.05em);
+}
+/* === End of fix === */
