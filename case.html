@@ -3,103 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gifts Battle — Case</title>
+  <title>Case Details — Gifts Battle</title>
   <link rel="stylesheet" href="case.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- === TOP NAVBAR === -->
+  <!-- === TOP NAV === -->
   <div class="top-nav">
     <div class="nav-left">
-      <img src="img/logo.png" alt="Gifts Battle" class="logo">
+      <img src="static/assets/logo.png" alt="Logo" class="logo">
     </div>
     <div class="nav-center">
-      <a href="index.html" class="active">Cases</a>
+      <a href="index.html">Cases</a>
       <a href="#">Upgrade</a>
       <a href="#">Contests</a>
       <a href="#">Friends</a>
-      <a href="#">Profile</a>
     </div>
     <div class="nav-right">
       <div class="balance">
-        <img src="img/star.png" class="star-icon-nav" alt="">
+        <img src="static/assets/star.png" class="star-icon-nav" alt="">
         <span id="star-balance">10 000</span>
       </div>
       <div class="profile-icon">
-        <img src="img/avatar.jpg" alt="">
+        <img src="static/assets/avatar.png" alt="">
       </div>
     </div>
   </div>
 
-  <!-- === CASE CONTENT === -->
-  <div class="case-container">
-    <div class="case-header">
-      <h1 class="case-name">OLIGARCH</h1>
-      <div class="case-banner">
-        <img src="img/cases/oligarch.png" alt="Oligarch Case">
-      </div>
-      <p class="case-price">⭐ 1481 <span class="case-note">(You need 1447 more)</span></p>
-    </div>
-
-    <div class="case-controls">
-      <div class="toggle">
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider"></span>
-        </label>
-        <span>Demo Mode</span>
-      </div>
-
-      <div class="open-count">
-        <p>How many cases to open?</p>
-        <div class="buttons">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-        </div>
-      </div>
-
-      <button class="open-btn">OPEN CASE</button>
-    </div>
-
-    <h2 class="section-title">CASE CONTENTS</h2>
-
-    <div class="case-items">
-      <div class="item-card">
-        <img src="img/items/astral.png" alt="">
-        <p class="item-name">Astral Shard Dark Soul</p>
-        <p class="item-price">⭐ 60000 / 💎 300</p>
-      </div>
-
-      <div class="item-card">
-        <img src="img/items/bag.png" alt="">
-        <p class="item-name">Loot Bag Night City</p>
-        <p class="item-price">⭐ 38800 / 💎 194</p>
-      </div>
-
-      <div class="item-card">
-        <img src="img/items/cat.png" alt="">
-        <p class="item-name">Scared Cat Salem</p>
-        <p class="item-price">⭐ 34600 / 💎 173</p>
-      </div>
-
-      <div class="item-card">
-        <img src="img/items/watch.png" alt="">
-        <p class="item-name">Swiss Watch Blue Daytona</p>
-        <p class="item-price">⭐ 27600 / 💎 138</p>
-      </div>
-
-      <div class="item-card">
-        <img src="img/items/oscar.png" alt="">
-        <p class="item-name">Mini Oscar Scream</p>
-        <p class="item-price">⭐ 24000 / 💎 120</p>
-      </div>
+  <!-- === CASE SECTION === -->
+  <div class="case-page">
+    <div class="case-info">
+      <h1 id="case-name"></h1>
+      <img id="case-img" alt="Case Image">
+      <p class="case-price">
+        ⭐ <span id="case-price"></span>
+      </p>
+      <button class="open-case-btn">OPEN CASE</button>
     </div>
   </div>
 
+  <script src="data.js"></script>
+  <script src="case.js"></script>
 </body>
 </html>
