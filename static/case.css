@@ -1,83 +1,104 @@
 body {
-  background: #0d0d0d;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
   margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  background: radial-gradient(circle at 25% 20%, #06081a 0%, #050618 50%, #030514 100%);
+  color: #fff;
   overflow-x: hidden;
 }
 
-.case-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 40px 20px;
-}
-
-.case-header {
+/* Навбар */
+.top-nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(10, 10, 25, 0.95);
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1000px;
   align-items: center;
-  margin-bottom: 40px;
+  padding: 6px 30px;
+  border-bottom: 1px solid rgba(120, 100, 255, 0.25);
+  box-shadow: 0 2px 25px rgba(0, 180, 255, 0.15);
+  z-index: 100;
+  backdrop-filter: blur(12px);
 }
-
-.case-header h1 {
-  font-size: 2rem;
-  color: #ffbf00;
-  text-shadow: 0 0 15px #ffbf0080;
-}
-
-.back-btn {
-  background: none;
-  border: none;
-  color: #ffbf00;
-  font-size: 1rem;
-  cursor: pointer;
-  text-shadow: 0 0 10px #ffbf0070;
+.logo { width: 170px; filter: drop-shadow(0 0 20px #00aaff); }
+.nav-center a {
+  color: #cfd7ff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  margin: 0 20px;
   transition: 0.3s;
 }
-.back-btn:hover {
-  color: #fff;
-}
-
-.case-image-box {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-.case-image-box img {
-  width: 300px;
-  border-radius: 12px;
-  box-shadow: 0 0 25px #ffbf0060;
-}
-
-.case-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.open-btn {
-  background: linear-gradient(90deg, #ffbf00, #ffaa00);
-  color: #000;
-  font-weight: 600;
-  border: none;
+.nav-center a:hover { color: #00eaff; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.balance {
+  background: rgba(35, 35, 65, 0.8);
+  padding: 8px 16px;
   border-radius: 10px;
-  padding: 12px 25px;
-  cursor: pointer;
-  box-shadow: 0 0 20px #ffbf0080;
-  transition: 0.25s;
-}
-.open-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 35px #ffbf00aa;
+  border: 1px solid rgba(120, 100, 255, 0.3);
+  box-shadow: inset 0 0 12px rgba(80, 70, 255, 0.3), 0 0 12px rgba(0, 200, 255, 0.3);
 }
 
-.demo label {
-  color: #ffbf00;
-  font-size: 0.9rem;
+/* Контейнер кейса */
+.case-page {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+}
+
+.case-info {
+  text-align: center;
+  background: rgba(20, 20, 40, 0.7);
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+  border: 1px solid rgba(100, 100, 255, 0.2);
+  transition: all 0.4s ease;
+}
+
+.case-info:hover {
+  box-shadow: 0 0 60px rgba(0, 255, 255, 0.35);
+}
+
+#case-name {
+  font-size: 36px;
+  text-transform: uppercase;
+  color: #cfe9ff;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  margin-bottom: 20px;
+}
+
+#case-img {
+  width: 300px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.25);
+  transition: transform 0.3s ease;
+}
+#case-img:hover { transform: scale(1.05); }
+
+.case-price {
+  font-size: 22px;
+  color: #9ee6ff;
+  margin: 20px 0;
+}
+
+.open-case-btn {
+  background: linear-gradient(145deg, #007bff, #00f6ff);
+  border: none;
+  padding: 14px 40px;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.3);
+}
+.open-case-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
 }
