@@ -4,16 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Case | Gifts Battle</title>
-
-  <!-- Шрифты -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet" />
-
-  <!-- Основные стили -->
   <link rel="stylesheet" href="/static/styles.css" />
+
   <style>
-    /* ===== ДОПОЛНИТЕЛЬНЫЙ СТИЛЬ ДЛЯ case.html ===== */
+    /* === СТИЛИ ДЛЯ СТРАНИЦЫ КЕЙСА === */
+
     body {
-      background: radial-gradient(circle at 25% 20%, #0f0f1d 0%, #101024 50%, #070712 100%);
+      background: radial-gradient(circle at 25% 20%, #0a0a1a 0%, #09091a 40%, #050513 100%);
       color: #fff;
       margin: 0;
       font-family: 'Rajdhani', sans-serif;
@@ -22,72 +20,100 @@
 
     .case-container {
       max-width: 1100px;
-      margin: 140px auto 100px auto;
+      margin: 140px auto 100px;
       padding: 20px;
       text-align: center;
     }
 
     .case-header {
-      background: rgba(20, 20, 40, 0.8);
-      border-radius: 16px;
+      background: rgba(10, 15, 30, 0.85);
+      border-radius: 20px;
       padding: 40px 20px;
-      box-shadow: 0 0 25px rgba(0, 200, 255, 0.25);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+      border: 1px solid rgba(0, 255, 255, 0.15);
     }
 
     .case-header img {
-      width: 230px;
+      width: 220px;
       border-radius: 12px;
       margin-bottom: 20px;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
     }
 
     .case-title {
       font-size: 36px;
       font-weight: 800;
-      color: #ffffff;
+      color: #e7f9ff;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      text-shadow: 0 0 12px rgba(100, 200, 255, 0.7);
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+      margin-bottom: 8px;
     }
 
     .case-price {
       font-size: 20px;
-      font-weight: 700;
       color: #9fd8ff;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      margin-bottom: 25px;
     }
 
     .case-price img {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       transform: translateY(3px);
     }
 
+    /* === КНОПКИ ОТКРЫТИЯ === */
+    .case-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .case-btn {
+      background: linear-gradient(90deg, #00d0ff, #008cff);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      padding: 14px 34px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+    }
+
+    .case-btn:hover {
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+      transform: scale(1.04);
+    }
+
+    /* === СЕТКА ПРЕДМЕТОВ === */
     .items-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 30px;
-      margin-top: 60px;
+      margin-top: 50px;
     }
 
     .item-card {
-      background: rgba(25, 25, 50, 0.85);
+      background: rgba(20, 25, 45, 0.9);
       border-radius: 14px;
       padding: 16px;
       text-align: center;
       transition: all 0.3s ease;
-      border: 1px solid rgba(120, 100, 255, 0.2);
-      box-shadow: 0 0 12px rgba(100, 100, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.15);
     }
 
     .item-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(120, 100, 255, 0.6);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+      border-color: rgba(0, 255, 255, 0.6);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
     }
 
     .item-card img {
@@ -113,19 +139,22 @@
     }
 
     .item-price img {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       transform: translateY(2px);
     }
 
   </style>
 </head>
+
 <body>
   <!-- === ВЕРХНЯЯ НАВИГАЦИЯ === -->
   <header class="top-nav">
     <div class="nav-left">
       <img src="/static/assets/logo.png" alt="Logo" class="logo" />
+      <span class="logo-text">GIFTS BATTLE</span>
     </div>
+
     <nav class="nav-center">
       <a href="/" class="nav-link active">CASES</a>
       <a href="#">UPGRADE</a>
@@ -133,6 +162,7 @@
       <a href="#">FRIENDS</a>
       <a href="#">PROFILE</a>
     </nav>
+
     <div class="nav-right">
       <div class="balance">
         <img src="/static/assets/icons/star.png" alt="⭐" class="star-icon-nav" />
@@ -152,11 +182,15 @@
       <div class="case-price" id="case-price">
         <span>—</span> <img src="/static/assets/icons/star.png" alt="⭐" />
       </div>
+
+      <div class="case-buttons">
+        <button class="case-btn">Open Case</button>
+        <button class="case-btn">Open 5x</button>
+        <button class="case-btn">Demo Mode</button>
+      </div>
     </div>
 
-    <div class="items-grid" id="items-grid">
-      <!-- Подгружаются из case.js -->
-    </div>
+    <div class="items-grid" id="items-grid"></div>
   </div>
 
   <script src="/static/data.js"></script>
