@@ -9,6 +9,7 @@
 
   <style>
     /* === СТИЛИ СТРАНИЦЫ КЕЙСА === */
+
     body {
       background: radial-gradient(circle at 25% 20%, #0a0a1a 0%, #09091a 40%, #050513 100%);
       color: #fff;
@@ -33,7 +34,7 @@
     }
 
     .case-header img {
-      width: 260px; /* немного меньше, чем раньше */
+      width: 260px;
       border-radius: 12px;
       margin-bottom: 25px;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
@@ -49,23 +50,22 @@
     }
 
     /* === ЦЕНА КАК НА ГЛАВНОЙ === */
-    .case-price {
+    .case-subtitle {
       display: inline-flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      gap: 3px;
+      margin-top: 10px;
       font-size: 22px;
-      font-weight: 700;
-      color: #bde6ff;
-      gap: 6px;
-      margin-bottom: 30px;
+      font-weight: 900;
+      color: #ffffff;
       line-height: 1;
     }
 
-    .case-price img {
-      width: 22px;
-      height: 22px;
-      margin-left: 3px;
-      filter: none;
+    .star-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
       image-rendering: -webkit-optimize-contrast;
       transform: translateY(2px);
     }
@@ -85,6 +85,7 @@
       font-family: 'Rajdhani', sans-serif;
       transition: all 0.25s ease;
       box-shadow: 0 0 20px rgba(0, 200, 255, 0.45);
+      margin-top: 25px;
       margin-bottom: 35px;
     }
 
@@ -262,8 +263,9 @@
     <div class="case-header">
       <img id="case-image" src="" alt="Case Image" />
       <div class="case-title" id="case-title">CASE NAME</div>
-      <div class="case-price" id="case-price">
-        <span>550</span><img src="/static/assets/icons/star.png" alt="⭐" />
+      <div class="case-subtitle">
+        <span id="case-price">550</span>
+        <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐" />
       </div>
 
       <button class="case-btn-main">OPEN CASE</button>
