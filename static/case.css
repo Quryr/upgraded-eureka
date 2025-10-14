@@ -146,3 +146,15 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
 }
+.case-header > img {
+  /* Только основное изображение кейса */
+  width: 280px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+}
+
+/* Все остальные картинки внутри (включая звезду) — без свечения */
+.case-header img.star-icon {
+  box-shadow: none;
+}
