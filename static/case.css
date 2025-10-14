@@ -101,22 +101,27 @@ body {
 
 /* Цена кейса + звезда */
 .case-subtitle {
-  display: flex;
-  align-items: center;
+  display: inline-flex;
   justify-content: center;
-  font-weight: 700;
+  align-items: center;
+  gap: 3px;
+  margin-top: 10px;
   font-size: 22px;
-  color: #9ee6ff;
-  margin: 20px 0;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
 }
 
-.case-subtitle img {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
-  vertical-align: middle;
-  transform: translateY(2px);
+.star-icon {
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateY(2px) translateX(-1px);
+  transition: transform 0.2s ease;
 }
+
 
 
 
