@@ -100,6 +100,12 @@ body {
 }
 
 /* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
+.case-subtitle {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  transform: none !important;
+}
+
 #case-price,
 .case-price {
   display: flex;
