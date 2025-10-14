@@ -384,3 +384,11 @@ html, body {
       blur(0.3px);
   }
 }
+.case-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.case-link:hover {
+  text-decoration: none;
+}
