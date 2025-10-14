@@ -100,26 +100,32 @@ body {
 }
 
 /* Цена кейса + звезда */
+/* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
 .case-subtitle {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3px;
-  margin-top: 10px;
-  font-size: 22px;
-  font-weight: 900;
-  color: #ffffff;
-  line-height: 1;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  width: auto !important;
+  text-align: center !important;
 }
-.star-icon {
-  width: 24px; /* как на главной */
-  height: 24px;
-  object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
+
+.case-subtitle .star-icon {
+  width: 24px !important;
+  height: 24px !important;
+  flex-shrink: 0 !important;
+  max-width: none !important; /* 🧨 ключевой фикс: отключает растяжение */
+  max-height: none !important;
+  object-fit: contain !important;
+  aspect-ratio: unset !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
   transform: translateY(2px) translateX(-1px);
-  transition: transform 0.2s ease;
-  aspect-ratio: unset !important; /* 🔥 вот ключ! убираем коллизию */
 }
+
 
 
 
