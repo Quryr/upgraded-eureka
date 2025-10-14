@@ -166,3 +166,9 @@ body {
 .case-header img.star-icon {
   box-shadow: none;
 }
+.case-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* центрирует всё внутри по горизонтали */
+  text-align: center;
+}
