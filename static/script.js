@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const caseId = item.name.toLowerCase().replace(/\s+/g, "_");
 
         const card = document.createElement("a");
-        card.href = `case.html?id=${caseId}`;
+        card.href = `/case.html?id=${caseId}`;
         card.classList.add("case-link");
 
         card.innerHTML = `
