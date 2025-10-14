@@ -40,8 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 💰 Отрисовываем цену — 1 в 1 как в script.js
 casePrice.innerHTML = `
-  <span>${selectedCase.price}</span>
-  <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+  <div class="case-subtitle">
+    <span>${selectedCase.price}</span>
+    <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+  </div>
 `;
+
 
 });
