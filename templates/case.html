@@ -6,6 +6,7 @@
   <title>Case | Gifts Battle</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="stylesheet" href="/static/case.css" />
 
   <style>
     body {
@@ -18,7 +19,7 @@
 
     .case-container {
       max-width: 1100px;
-      margin: 120px auto 80px; /* немного уменьшил отступ сверху */
+      margin: 120px auto 80px;
       padding: 20px;
       text-align: center;
     }
@@ -32,7 +33,7 @@
     }
 
     .case-header img {
-      width: 280px; /* уменьшил окно кейса */
+      width: 280px;
       border-radius: 12px;
       margin-bottom: 25px;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
@@ -47,23 +48,24 @@
       margin-bottom: 10px;
     }
 
+    /* === Цена кейса === */
     .case-price {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
+      font-weight: 700;
       font-size: 24px;
       color: #cfeaff;
-      font-weight: 700;
       margin-bottom: 35px;
       letter-spacing: 0.5px;
     }
 
-    .case-price img {
-      width: 24px;
-      height: 24px;
-      margin-left: 6px;
-      transform: translateY(2px);
-      filter: none; /* убрано свечение */
+    .case-price .star-icon-nav {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      transform: translateY(1px);
     }
 
     /* --- Кнопка Open Case --- */
@@ -265,24 +267,20 @@
     <div class="case-header">
       <img id="case-image" src="" alt="Case Image" />
       <div class="case-title" id="case-title">CASE NAME</div>
-  <div class="case-price">
-    <img src="{{ url_for('static', filename='assets/icons/star.png') }}" alt="⭐" class="star-icon-nav">
-    <span class="price-value">700</span>
-  </div>
 
+      <div class="case-price">
+        <img src="{{ url_for('static', filename='assets/icons/star.png') }}" alt="⭐" class="star-icon-nav">
+        <span class="price-value">700</span>
+      </div>
 
-
-      <!-- Основная кнопка -->
       <button class="case-btn-main">OPEN CASE</button>
 
-      <!-- Демо режим -->
       <label class="demo-toggle">
         <input type="checkbox" id="demo-toggle" />
         <span class="slider"></span>
         Demo Mode
       </label>
 
-      <!-- Количество кейсов -->
       <div class="case-multi">
         <p class="multi-text">Выберите количество кейсов</p>
         <div class="multi-buttons">
