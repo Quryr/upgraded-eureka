@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="/static/styles.css" />
 
   <style>
-    /* === СТИЛИ СТРАНИЦЫ КЕЙСА === */
-
     body {
       background: radial-gradient(circle at 25% 20%, #0a0a1a 0%, #09091a 40%, #050513 100%);
       color: #fff;
@@ -20,7 +18,7 @@
 
     .case-container {
       max-width: 1100px;
-      margin: 120px auto 80px;
+      margin: 120px auto 80px; /* немного уменьшил отступ сверху */
       padding: 20px;
       text-align: center;
     }
@@ -34,7 +32,7 @@
     }
 
     .case-header img {
-      width: 260px;
+      width: 280px; /* уменьшил окно кейса */
       border-radius: 12px;
       margin-bottom: 25px;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
@@ -49,46 +47,40 @@
       margin-bottom: 10px;
     }
 
-    /* === ЦЕНА КАК НА ГЛАВНОЙ === */
-.case-subtitle {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  font-size: 22px;
-  font-weight: 900;
-  color: #ffffff;
-  line-height: 1;
-}
+    .case-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #cfeaff;
+      font-weight: 700;
+      margin-bottom: 35px;
+      letter-spacing: 0.5px;
+    }
 
-.star-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  transform: translateY(3px);
-  image-rendering: -webkit-optimize-contrast;
-  filter: none;
-}
+    .case-price img {
+      width: 24px;
+      height: 24px;
+      margin-left: 6px;
+      transform: translateY(2px);
+      filter: none; /* убрано свечение */
+    }
 
-
-
-    /* === КНОПКА ОТКРЫТИЯ === */
+    /* --- Кнопка Open Case --- */
     .case-btn-main {
       background: linear-gradient(90deg, #00d0ff, #008cff);
       border: none;
       color: #fff;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 17px;
       letter-spacing: 0.8px;
-      padding: 16px 90px;
+      padding: 16px 100px;
       border-radius: 12px;
       text-transform: uppercase;
       cursor: pointer;
       font-family: 'Rajdhani', sans-serif;
       transition: all 0.25s ease;
       box-shadow: 0 0 20px rgba(0, 200, 255, 0.45);
-      margin-top: 25px;
       margin-bottom: 35px;
     }
 
@@ -97,7 +89,7 @@
       transform: scale(1.05);
     }
 
-    /* === DEMO MODE === */
+    /* --- Demo Mode --- */
     .demo-toggle {
       display: flex;
       align-items: center;
@@ -141,7 +133,7 @@
       background: #00ffba;
     }
 
-    /* === КНОПКИ КОЛИЧЕСТВА === */
+    /* --- Кнопки количества --- */
     .case-multi {
       margin-top: 10px;
     }
@@ -181,9 +173,16 @@
     .multi-btn.active {
       background: linear-gradient(90deg, #00d0ff, #007eff);
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
+      animation: neonPulse 1.5s infinite ease-in-out;
     }
 
-    /* === СОДЕРЖИМОЕ === */
+    @keyframes neonPulse {
+      0% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 35px rgba(0, 255, 255, 0.8); }
+      100% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); }
+    }
+
+    /* --- Сетка предметов --- */
     .items-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -266,19 +265,21 @@
     <div class="case-header">
       <img id="case-image" src="" alt="Case Image" />
       <div class="case-title" id="case-title">CASE NAME</div>
-      <div class="case-subtitle">
-        <span id="case-price">550</span>
-        <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐" />
+      <div class="case-price" id="case-price">
+        <span>700</span><img src="/static/assets/icons/star.png" alt="⭐" />
       </div>
 
+      <!-- Основная кнопка -->
       <button class="case-btn-main">OPEN CASE</button>
 
+      <!-- Демо режим -->
       <label class="demo-toggle">
         <input type="checkbox" id="demo-toggle" />
         <span class="slider"></span>
         Demo Mode
       </label>
 
+      <!-- Количество кейсов -->
       <div class="case-multi">
         <p class="multi-text">Выберите количество кейсов</p>
         <div class="multi-buttons">
