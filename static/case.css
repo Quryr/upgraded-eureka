@@ -122,23 +122,6 @@ body {
   transition: transform 0.2s ease;
 }
 
-.case-subtitle .star-icon {
-  filter: none !important;
-  box-shadow: none !important;
-  background: none !important;
-}
-
-#case-price {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-
-
-
-
 .case-card:hover .star-icon {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
