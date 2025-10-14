@@ -7,14 +7,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const casePrice = document.getElementById("case-price");
   const itemsGrid = document.getElementById("items-grid");
 
-  if (!window.allCases) {
-    console.error("❌ allCases не найден. Проверь cases_data.js");
+  if (!window.allCases && !window.casesData) {
+    console.error("❌ Данные кейсов не найдены. Проверь cases_data.js");
     caseTitle.textContent = "DATA NOT LOADED";
     return;
   }
 
-  // 🔍 Ищем кейс по ID
-  const selectedCase = allCases.find(c => c.id === caseId);
+  // Находим кейс в общей структуре (поиск и в allCases, и в casesData)
+  let selectedCase = null;
+
+  if (window.allCases) {
+    selectedCase = allCases.find(c => c.id === caseId);
+  } else {
+    for (const category of Object.values(casesData)) {
+      const found = category.find(c => c.id === caseId);
+      if (found) {
+        selectedCase = found;
+        break;
+      }
+    }
+  }
 
   if (!selectedCase) {
     console.warn(`⚠️ Кейс с ID "${caseId}" не найден.`);
@@ -26,17 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
 
-  // 💰 Отрисовываем цену точно как на главной странице
-  if (selectedCase.price) {
-    casePrice.innerHTML = `
-      <div class="case-subtitle">
-        <span>${selectedCase.price}</span>
-        <img src="/static/assets/icons/star.png" alt="⭐" class="star-icon">
-      </div>
-    `;
-  } else {
-    casePrice.innerHTML = `
-      <div class="case-subtitle">БЕСПЛАТНО</div>
-    `;
-  }
+  // 💰 Отрисовываем цену — 1 в 1 как в script.js
+  casePrice.innerHTML = `
+    <div class="case-subtitle">
+      ${selectedCase.price
+        ? `<span>${selectedCase.price}</span> <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">`
+        : "БЕСПЛАТНО"}
+    </div>
+  `;
 });
