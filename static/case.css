@@ -105,6 +105,8 @@ body {
   justify-content: center;
   align-items: center;
   gap: 3px;
+  background: none !important;
+  box-shadow: none !important;
   margin-top: 10px;
   font-size: 22px;
   font-weight: 900;
