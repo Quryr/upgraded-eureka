@@ -105,24 +105,21 @@ body {
   justify-content: center;
   align-items: center;
   gap: 3px;
-  background: none !important;
-  box-shadow: none !important;
   margin-top: 10px;
   font-size: 22px;
   font-weight: 900;
   color: #ffffff;
   line-height: 1;
 }
-
 .star-icon {
   width: 32px;
   height: 32px;
-  aspect-ratio: 1/1;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   transform: translateY(2px) translateX(-1px);
   transition: transform 0.2s ease;
 }
+
 
 .case-card:hover .star-icon {
   transform: translateY(2px) translateX(-1px) scale(1.05);
