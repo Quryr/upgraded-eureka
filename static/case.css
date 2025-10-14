@@ -100,7 +100,6 @@ body {
 }
 
 /* Цена кейса + звезда */
-/* Центровка цены под названием */
 .case-subtitle {
   display: inline-flex;
   justify-content: center;
@@ -111,19 +110,8 @@ body {
   font-weight: 900;
   color: #ffffff;
   line-height: 1;
-  text-align: center;
 }
 
-/* Обертка, чтобы сам блок не прижимался влево */
-#case-price {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 8px;
-}
-
-/* Звезда — как на главной */
 .star-icon {
   width: 32px;
   height: 32px;
@@ -131,7 +119,22 @@ body {
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   transform: translateY(2px) translateX(-1px);
+  transition: transform 0.2s ease;
 }
+
+.case-subtitle .star-icon {
+  filter: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+#case-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 
 
 
