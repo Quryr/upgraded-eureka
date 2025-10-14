@@ -31,3 +31,4 @@ const casesData = {
     { id: "emerald_blaze", name: "Emerald Blaze", img: "/static/assets/cases/emerald_blaze.png", price: 1400 }
   ]
 };
+window.casesData = casesData;
