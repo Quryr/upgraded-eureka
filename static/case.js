@@ -39,11 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
   caseTitle.textContent = selectedCase.name;
 
   // 💰 Отрисовываем цену — 1 в 1 как в script.js
-  casePrice.innerHTML = `
-    <div class="case-subtitle">
-      ${selectedCase.price
-        ? `<span>${selectedCase.price}</span> <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">`
-        : "БЕСПЛАТНО"}
-    </div>
-  `;
+casePrice.innerHTML = `
+  <span>${selectedCase.price}</span>
+  <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+`;
+
 });
