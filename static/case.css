@@ -100,39 +100,32 @@ body {
 }
 
 /* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
-/* === Цена и звезда — идеально как на главной === */
 .case-subtitle {
   display: inline-flex;
-  align-items: center;       /* центрирует ровно по середине */
   justify-content: center;
-  gap: 6px;                  /* расстояние между цифрой и звездой */
-  margin-top: 14px;          /* чуть ближе к названию */
-  margin-bottom: 22px;       /* немного отодвинуто от кнопки */
-  font-size: 28px;           /* чуть крупнее для выразительности */
+  align-items: center;
+  gap: 3px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  font-size: 26px; /* чуть больше, чем на главной, но пропорционально */
   font-weight: 900;
   color: #ffffff;
-  text-align: center;
   line-height: 1;
-  text-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
 }
 
-/* === Звезда вровень с числом, без перекоса === */
-.case-subtitle .star-icon {
-  width: 30px;
-  height: 30px;
+.star-icon {
+  width: 34px;
+  height: 34px;
+  aspect-ratio: 1/1;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
-  transform: translateY(2px); /* 🔥 выравнивает звезду ровно по центру текста */
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
+  transform: translateY(2px) translateX(-1px);
+  transition: transform 0.2s ease;
 }
 
-
-
+.case-card:hover .star-icon {
+  transform: translateY(2px) translateX(-1px) scale(1.05);
+}
 
 
 .case-card:hover .star-icon {
