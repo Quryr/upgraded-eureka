@@ -100,9 +100,6 @@ body {
 }
 
 /* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
-.case-header {
-  pointer-events: none;
-}
 
 .case-subtitle {
   margin-top: 0 !important;
@@ -175,4 +172,8 @@ body {
 /* Все остальные картинки внутри (включая звезду) — без свечения */
 .case-header img.star-icon {
   box-shadow: none;
+}
+.case-image,
+.case-subtitle {
+  pointer-events: none;
 }
