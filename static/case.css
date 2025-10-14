@@ -99,42 +99,38 @@ body {
   transform: scale(1.05);
 }
 
-/* Цена кейса + звезда */
 /* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
-/* === Цена и звезда: как на главной странице === */
+/* === Цена и звезда — выравнивание 1 в 1 как на главной === */
 .case-subtitle {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;  /* 🔹 ключевой момент — ровняет по линии текста */
   justify-content: center;
   gap: 5px;
-  margin-top: 18px;     /* расстояние от названия */
-  margin-bottom: 18px;  /* равный отступ до кнопки */
-  font-size: 27px;      /* немного больше, как на главной */
+  margin-top: 16px;       /* чуть ближе к названию */
+  margin-bottom: 20px;    /* чуть дальше от кнопки */
+  font-size: 27px;
   font-weight: 900;
   color: #ffffff;
-  text-align: center;
   line-height: 1;
   text-shadow: 0 0 10px rgba(0, 234, 255, 0.45);
 }
 
-/* === Звезда: ровно по центру относительно текста === */
+/* === Звезда, идеально на уровне текста === */
 .case-subtitle .star-icon {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
-  transform: translateY(2px); /* чуть опускаем, как в главной */
+  transform: translateY(1px); /* поднимает на пиксель, чтобы центр совпадал с текстом */
   flex-shrink: 0;
   max-width: none;
   max-height: none;
-  aspect-ratio: unset;
   background: none;
   border: none;
   box-shadow: none;
-  margin: 0;
-  padding: 0;
   vertical-align: middle;
 }
+
 
 
 
