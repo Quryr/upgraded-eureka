@@ -7,26 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const casePrice = document.getElementById("case-price");
   const itemsGrid = document.getElementById("items-grid");
 
-  if (!window.allCases && !window.casesData) {
-    console.error("❌ Данные кейсов не найдены. Проверь cases_data.js");
+  if (!window.allCases) {
+    console.error("❌ allCases не найден. Проверь cases_data.js");
     caseTitle.textContent = "DATA NOT LOADED";
     return;
   }
 
-  // Находим кейс в общей структуре (поиск и в allCases, и в casesData)
-  let selectedCase = null;
-
-  if (window.allCases) {
-    selectedCase = allCases.find(c => c.id === caseId);
-  } else {
-    for (const category of Object.values(casesData)) {
-      const found = category.find(c => c.id === caseId);
-      if (found) {
-        selectedCase = found;
-        break;
-      }
-    }
-  }
+  // 🔍 Находим кейс по ID
+  const selectedCase = allCases.find(c => c.id === caseId);
 
   if (!selectedCase) {
     console.warn(`⚠️ Кейс с ID "${caseId}" не найден.`);
@@ -34,16 +22,39 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 🖼️ Отрисовываем кейс
+  // 🖼️ Отрисовываем данные кейса
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
 
-  // 💰 Отрисовываем цену — 1 в 1 как в script.js
-casePrice.innerHTML = `
-  <span>${selectedCase.price}</span>
-  <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
-`;
+  // 💰 Отрисовка цены как на главной странице
+  if (selectedCase.price) {
+    casePrice.innerHTML = `
+      <div class="case-subtitle">
+        <span>${selectedCase.price}</span>
+        <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+      </div>
+    `;
+  } else {
+    casePrice.innerHTML = `<div class="case-subtitle">БЕСПЛАТНО</div>`;
+  }
 
-
-
+  // 💡 Заполняем сетку предметов (если есть)
+  if (selectedCase.items && selectedCase.items.length > 0) {
+    itemsGrid.innerHTML = "";
+    selectedCase.items.forEach(item => {
+      const itemCard = document.createElement("div");
+      itemCard.classList.add("item-card");
+      itemCard.innerHTML = `
+        <img src="${item.img}" alt="${item.name}">
+        <div class="item-name">${item.name}</div>
+        <div class="item-price">
+          ${item.price}
+          <img src="/static/assets/icons/star.png" alt="⭐">
+        </div>
+      `;
+      itemsGrid.appendChild(itemCard);
+    });
+  } else {
+    itemsGrid.innerHTML = `<div style="grid-column: 1/-1; opacity: 0.7;">No items found in this case</div>`;
+  }
 });
