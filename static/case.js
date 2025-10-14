@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Получаем ID кейса из адресной строки
   const params = new URLSearchParams(window.location.search);
   const caseId = params.get("id");
 
@@ -7,13 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const casePrice = document.getElementById("case-price");
   const itemsGrid = document.getElementById("items-grid");
 
+  // Проверяем, что data.js загрузился
   if (!window.casesData) {
-    console.error("❌ Не найден объект casesData. Проверь подключение data.js");
+    console.error("❌ casesData не найден. Проверь подключение data.js");
     caseTitle.textContent = "DATA NOT LOADED";
     return;
   }
 
-  // 🔍 Ищем кейс по ID во всех категориях
+  // Ищем нужный кейс во всех категориях
   let selectedCase = null;
   for (const [category, cases] of Object.entries(window.casesData)) {
     const found = cases.find(c => c.id === caseId);
@@ -23,13 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Если кейс не найден — ошибка
   if (!selectedCase) {
     console.warn(`⚠️ Кейс с ID "${caseId}" не найден.`);
     caseTitle.textContent = "CASE NOT FOUND";
     return;
   }
 
-  // 🖼️ Отрисовываем данные кейса
+  // Отрисовка кейса
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
   casePrice.innerHTML = `
@@ -37,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="/static/assets/icons/star.png" alt="⭐">
   `;
 
-  // 🎁 Если у кейса есть предметы (позже можно добавить)
+  // Если будут предметы — выводим их
   if (selectedCase.contains && selectedCase.contains.length > 0) {
     itemsGrid.innerHTML = "";
     selectedCase.contains.forEach(item => {
