@@ -392,3 +392,92 @@ html, body {
 .case-link:hover {
   text-decoration: none;
 }
+.case-price img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  vertical-align: middle;
+  transform: translateY(2px);
+}
+
+/* Демо-переключатель */
+.demo-mode-container {
+  margin-top: 15px;
+}
+
+.demo-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #9fd8ff;
+}
+
+.demo-toggle input {
+  display: none;
+}
+
+.slider {
+  width: 40px;
+  height: 20px;
+  background: #101a2b;
+  border-radius: 20px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.slider::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #00d0ff;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+.demo-toggle input:checked + .slider::after {
+  left: 22px;
+  background: #00ffba;
+}
+
+/* Мульти-кнопки */
+.case-multi {
+  margin-top: 25px;
+}
+
+.multi-text {
+  font-size: 16px;
+  color: #a7d8ff;
+  margin-bottom: 10px;
+}
+
+.multi-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.multi-btn {
+  background: rgba(0, 160, 255, 0.15);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 8px 18px;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.multi-btn:hover {
+  background: rgba(0, 255, 255, 0.3);
+}
+
+.multi-btn.active {
+  background: linear-gradient(90deg, #00d0ff, #007eff);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
