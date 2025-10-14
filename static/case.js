@@ -25,33 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🖼️ Отрисовываем кейс
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
-  casePrice.innerHTML = `
-    <span>${selectedCase.price}</span>
-    <img src="/static/assets/icons/star.png" alt="⭐">
-  `;
-});
-document.addEventListener("DOMContentLoaded", () => {
-  // Выбор количества
-  const buttons = document.querySelectorAll(".multi-btn");
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-    });
-  });
 
-  // Открытие кейсов
-  const openOne = document.querySelector(".open-one");
-  const openFive = document.querySelector(".open-five");
-
-  openOne.addEventListener("click", () => {
-    const demo = document.getElementById("demo-toggle").checked;
-    const count = document.querySelector(".multi-btn.active").dataset.count;
-    alert(`Открываю ${count} кейсов ${demo ? "(демо режим)" : ""}`);
-  });
-
-  openFive.addEventListener("click", () => {
-    const demo = document.getElementById("demo-toggle").checked;
-    alert(`Открываю 5 кейсов ${demo ? "(демо режим)" : ""}`);
-  });
+  // 💰 Отрисовываем цену точно как на главной странице
+  if (selectedCase.price) {
+    casePrice.innerHTML = `
+      <div class="case-subtitle">
+        <span>${selectedCase.price}</span>
+        <img src="/static/assets/icons/star.png" alt="⭐" class="star-icon">
+      </div>
+    `;
+  } else {
+    casePrice.innerHTML = `
+      <div class="case-subtitle">БЕСПЛАТНО</div>
+    `;
+  }
 });
