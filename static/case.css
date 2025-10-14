@@ -104,26 +104,24 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px; /* чуть меньше отступ */
   font-size: 22px;
   font-weight: 900;
   color: #ffffff;
   line-height: 1;
-  background: none !important;
-  box-shadow: none !important;
 }
-
 
 .star-icon {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
+  transform: translateY(2px);
   filter: none !important;
-  box-shadow: none !important;
   background: none !important;
-  transform: translateY(1px);
+  box-shadow: none !important;
 }
+
 
 
 .case-card:hover .star-icon {
