@@ -173,7 +173,15 @@ body {
 .case-header img.star-icon {
   box-shadow: none;
 }
+/КНОПКИ/
 .case-image,
 .case-subtitle {
-  pointer-events: none;
+  pointer-events: none !important;
+}
+
+.case-multi,
+.case-multi * {
+  pointer-events: auto !important;
+  z-index: 10;
+  position: relative;
 }
