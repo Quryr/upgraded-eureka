@@ -100,22 +100,29 @@ body {
 }
 
 /* === ФИКС ЗВЕЗДЫ В ЦЕНЕ === */
-.case-subtitle {
+#case-price,
+.case-price {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 3px;
-  margin-top: 8px !important;  /* меньше отступ сверху */
-  margin-bottom: 8px !important; /* чуть меньше отступ снизу */
   font-size: 28px;
   font-weight: 900;
   color: #ffffff;
   line-height: 1;
+  width: auto !important;
+  padding: 0 !important;
+  margin-top: 8px !important;  /* меньше отступ сверху */
+  margin-bottom: 8px !important; /* чуть меньше отступ снизу */
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
+
 .case-subtitle .star-icon {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   transform: translateY(12px) translateX(-1px) !important; /* 👈 принудительно ниже */
