@@ -115,14 +115,14 @@ body {
 .case-subtitle .star-icon {
   width: 32px;
   height: 32px;
-  aspect-ratio: 1/1;
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
-  transform: translateY(4px) translateX(-1px); /* 👈 было 2px, стало 4px — опускает чуть ниже */
+  transform: translateY(6px) translateX(-1px) !important; /* 👈 принудительно ниже */
   transition: transform 0.2s ease;
   background: none !important;
   box-shadow: none !important;
 }
+
 
 
 .case-card:hover .star-icon {
