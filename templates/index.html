@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gifts Battle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <!-- === ВЕРХНЯЯ НАВИГАЦИЯ === -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <img src="/static/assets/logo.png" alt="Logo" class="logo">
+      <span class="logo-text">GIFTS BATTLE</span>
+    </div>
+
+    <nav class="nav-center">
+      <a href="#" class="nav-link active">CASES</a>
+      <a href="#">UPGRADE</a>
+      <a href="#">CONTESTS</a>
+      <a href="#">FRIENDS</a>
+      <a href="#">PROFILE</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="balance">
+        <img src="/static/assets/icons/star.png" alt="⭐" class="star-icon-nav">
+        <span id="star-balance">10 000</span>
+      </div>
+      <div class="profile-icon">
+        <img src="/static/assets/icons/profile.png" alt="Profile">
+      </div>
+    </div>
+  </header>
+
+  <!-- === БАННЕР === -->
+  <section class="main-banner">
+    <img src="/static/assets/banner.png" alt="Main Banner" class="banner-image">
+  </section>
+
+<!-- === КАТЕГОРИИ === -->
+<div class="top-filters neon-filters">
+  <button class="filter-btn active" data-filter="all">ALL</button>
+  <button class="filter-btn" data-filter="luxury-style">LUXURY & STYLE</button>
+  <button class="filter-btn" data-filter="mystic-energy">MYSTIC & ENERGY</button>
+  <button class="filter-btn" data-filter="memes-fun">MEMES & FUN</button>
+  <button class="filter-btn" data-filter="collectibles">COLLECTIONS & UNIQUE</button>
+</div>
+
+
+  <!-- === КОНТЕНТ (кейсы подгружаются через JS) === -->
+  <main class="container" id="cases-container"></main>
+
+  <!-- === СКРИПТЫ === -->
+  <script src="{{ url_for('static', filename='data.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>
