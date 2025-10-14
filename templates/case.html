@@ -17,76 +17,79 @@
     }
 
     .case-container {
-      max-width: 1300px;
-      margin: 140px auto 100px;
+      max-width: 1100px;
+      margin: 120px auto 80px; /* немного уменьшил отступ сверху */
       padding: 20px;
       text-align: center;
     }
 
     .case-header {
       background: rgba(10, 15, 30, 0.85);
-      border-radius: 24px;
-      padding: 60px 20px;
-      box-shadow: 0 0 50px rgba(0, 255, 255, 0.15);
-      border: 1px solid rgba(0, 255, 255, 0.15);
+      border-radius: 22px;
+      padding: 45px 20px;
+      box-shadow: 0 0 45px rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.12);
     }
 
     .case-header img {
-      width: 320px; /* увеличено изображение кейса */
+      width: 280px; /* уменьшил окно кейса */
       border-radius: 12px;
       margin-bottom: 25px;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
     }
 
     .case-title {
-      font-size: 42px;
+      font-size: 38px;
       font-weight: 800;
       color: #e7f9ff;
       text-transform: uppercase;
-      text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
       margin-bottom: 10px;
     }
 
     .case-price {
-      font-size: 22px;
-      color: #9fd8ff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      font-size: 24px;
+      color: #cfeaff;
+      font-weight: 700;
       margin-bottom: 35px;
+      letter-spacing: 0.5px;
     }
 
     .case-price img {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
+      margin-left: 6px;
       transform: translateY(2px);
       filter: none; /* убрано свечение */
     }
 
-    /* --- Основная кнопка --- */
+    /* --- Кнопка Open Case --- */
     .case-btn-main {
       background: linear-gradient(90deg, #00d0ff, #008cff);
       border: none;
       color: #fff;
       font-weight: 700;
+      font-size: 17px;
       letter-spacing: 0.8px;
-      padding: 16px 80px;
+      padding: 16px 100px;
       border-radius: 12px;
       text-transform: uppercase;
       cursor: pointer;
       font-family: 'Rajdhani', sans-serif;
       transition: all 0.25s ease;
-      box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
-      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.45);
+      margin-bottom: 35px;
     }
 
     .case-btn-main:hover {
-      box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.7);
       transform: scale(1.05);
     }
 
-    /* --- Демо режим --- */
+    /* --- Demo Mode --- */
     .demo-toggle {
       display: flex;
       align-items: center;
@@ -96,7 +99,7 @@
       font-size: 16px;
       color: #9fd8ff;
       font-weight: 600;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .demo-toggle input {
@@ -110,7 +113,7 @@
       border-radius: 20px;
       position: relative;
       transition: 0.3s;
-      box-shadow: 0 0 8px rgba(0, 255, 255, 0.3) inset;
+      box-shadow: 0 0 6px rgba(0, 255, 255, 0.2) inset;
     }
 
     .slider::after {
@@ -140,7 +143,7 @@
       color: #bde9ff;
       margin-bottom: 12px;
       font-weight: 600;
-      text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.25);
     }
 
     .multi-buttons {
@@ -169,7 +172,7 @@
 
     .multi-btn.active {
       background: linear-gradient(90deg, #00d0ff, #007eff);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
       animation: neonPulse 1.5s infinite ease-in-out;
     }
 
@@ -263,7 +266,7 @@
       <img id="case-image" src="" alt="Case Image" />
       <div class="case-title" id="case-title">CASE NAME</div>
       <div class="case-price" id="case-price">
-        <span>550</span> <img src="/static/assets/icons/star.png" alt="⭐" />
+        <span>700</span><img src="/static/assets/icons/star.png" alt="⭐" />
       </div>
 
       <!-- Основная кнопка -->
