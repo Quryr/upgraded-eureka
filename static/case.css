@@ -122,7 +122,6 @@ body {
   transition: transform 0.2s ease;
 }
 
-
 .case-card:hover .star-icon {
   transform: translateY(2px) translateX(-1px) scale(1.05);
 }
