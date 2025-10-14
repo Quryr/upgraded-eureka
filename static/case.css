@@ -101,22 +101,23 @@ body {
 
 /* Цена кейса + звезда */
 .case-price {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   font-weight: 700;
   font-size: 22px;
   color: #9ee6ff;
   margin: 20px 0;
 }
 
-.case-price .star-icon-nav {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  transform: translateY(1px);
+.case-price img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  vertical-align: middle;
+  transform: translateY(2px);
 }
+
 
 /* Кнопка "Open Case" */
 .open-case-btn {
