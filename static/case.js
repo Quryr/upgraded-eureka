@@ -77,3 +77,9 @@ buttons.forEach(button => {
 });
 
 });
+// 🔧 Автоматическая генерация карточек из папки cases_inner
+const caseName = selectedCase?.name;
+const caseInfo = caseMap[caseName];
+if (caseInfo) {
+  renderCaseItems("items-grid", caseInfo.path, caseInfo.count);
+}
