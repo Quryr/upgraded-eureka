@@ -19,7 +19,7 @@ function renderCaseItems(containerId, casePath, itemCount, caseName) {
 
   for (let i = 1; i <= itemCount; i++) {
     const imagePath = `${casePath}${i}.png`;
-    const size = itemSizes[i] || 120; // если не задано — 120px
+    const size = itemSizes[i] || 160; // если не задано — 120px
 
     const card = document.createElement("div");
     card.className = "item-card";
