@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🎯 Генерация карточек предметов
   const caseName = selectedCase?.name;
   const caseInfo = caseMap[caseName];
+  // Поддержка разных регистров
+const normalizedName = caseName.trim().toLowerCase();
+const caseKey = Object.keys(caseMap).find(key => key.toLowerCase() === normalizedName);
+const caseInfo = caseMap[caseKey];
+
   if (caseInfo) {
     renderCaseItems("items-grid", caseInfo.path, caseInfo.count);
   } else {
