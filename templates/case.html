@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/styles.css" />
   <link rel="stylesheet" href="/static/case.css" />
+  <link rel="stylesheet" href="/static/items.css" />
 
   <style>
     body {
@@ -297,11 +298,18 @@
     </div>
   </div>
 
-  <script src="/static/cases_data.js" defer></script>
+  <!-- === Подключаем данные кейсов === -->
+  <script src="/static/cases_data.js"></script>
 
-  <link rel="stylesheet" href="/static/items.css">
+  <!-- === Подключаем цены предметов (ВАЖНО: перед render_case_items.js) === -->
   <script src="/static/case_item_prices.js"></script>
+
+  <!-- === Скрипт отрисовки предметов === -->
   <script src="/static/render_case_items.js"></script>
+
+  <!-- === Основная логика страницы кейса === -->
+  <script src="/static/case.js"></script>
+
 
   <!-- 🎯 Размеры предметов для каждого кейса -->
 <!-- 🎯 Размеры предметов для каждого кейса -->
