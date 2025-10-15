@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Отрисовываем данные кейса
+  // 🧱 Отрисовываем данные кейса
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
 
@@ -36,21 +36,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 🎯 Генерация карточек предметов
-  const caseName = selectedCase?.name;
-  const caseInfo = caseMap[caseName];
-  // Поддержка разных регистров
-const normalizedName = caseName.trim().toLowerCase();
-const caseKey = Object.keys(caseMap).find(key => key.toLowerCase() === normalizedName);
-const caseInfo = caseMap[caseKey];
+  const caseName = selectedCase.name.trim().toLowerCase();
+  const caseKey = Object.keys(caseMap).find(key => key.toLowerCase() === caseName);
+  const caseInfo = caseMap[caseKey];
 
   if (caseInfo) {
-    renderCaseItems("items-grid", caseInfo.path, caseInfo.count);
+    renderCaseItems("items-grid", caseInfo.path, caseInfo.count, caseKey);
   } else {
-    console.warn(`⚠️ Нет данных для кейса "${caseName}" в caseMap`);
+    console.warn(`⚠️ Нет данных для кейса "${selectedCase.name}" в caseMap`);
     itemsGrid.innerHTML = `<p style="color:#aaa;">Items not found for this case</p>`;
   }
 
-  // 🔘 Логика кнопок количества кейсов
+  // 🔘 Кнопки количества кейсов
   const buttons = document.querySelectorAll(".multi-btn");
   let selectedCount = 1;
 
@@ -64,7 +61,7 @@ const caseInfo = caseMap[caseKey];
   });
 
   // 🎁 Кнопка открытия кейса (демо-режим)
-  const openCaseBtn = document.getElementById("open-case-btn");
+  const openCaseBtn = document.querySelector(".case-btn-main");
   if (openCaseBtn) {
     openCaseBtn.addEventListener("click", () => {
       alert(`Открыто ${selectedCount} кейсов "${selectedCase.name}"!`);
