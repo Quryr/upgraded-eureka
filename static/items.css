@@ -18,8 +18,8 @@
 }
 
 .item-img img {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
   object-fit: contain;
   margin-bottom: 10px;
   border-radius: 10px;
