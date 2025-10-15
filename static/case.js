@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const caseInfo = caseMap[caseName];
 
 
-  if (caseInfo) {
-    renderCaseItems("items-grid", caseInfo.path, caseInfo.count, caseKey);
-  } else {
+if (caseInfo) {
+  renderCaseItems("items-grid", caseInfo.path, caseInfo.count, caseName);
+} else {
     console.warn(`⚠️ Нет данных для кейса "${selectedCase.name}" в caseMap`);
     itemsGrid.innerHTML = `<p style="color:#aaa;">Items not found for this case</p>`;
   }
