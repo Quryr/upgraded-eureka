@@ -1,0 +1,49 @@
+.item-card {
+  background: rgba(10, 15, 30, 0.9);
+  border: 1px solid rgba(0, 200, 255, 0.15);
+  border-radius: 18px;
+  padding: 14px;
+  margin: 10px;
+  text-align: center;
+  color: #d8e9ff;
+  width: 140px;
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.25);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.item-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.45);
+}
+
+.item-img img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.item-price {
+  font-size: 13px;
+  color: #33c9ff;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.currency-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 3px rgba(0, 200, 255, 0.5));
+}
