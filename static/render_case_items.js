@@ -11,24 +11,25 @@ function renderCaseItems(containerId, casePath, itemCount) {
   container.innerHTML = "";
 
   // Генерация карточек по количеству предметов
-  for (let i = 1; i <= itemCount; i++) {
-    const imagePath = `${casePath}${i}.png`;
+for (let i = 1; i <= itemCount; i++) {
+  const imagePath = `${casePath}${i}.png`;
 
-    const card = document.createElement("div");
-    card.className = "item-card";
-    card.innerHTML = `
-      <div class="item-img">
-        <img src="${imagePath}" alt="Item ${i}">
-      </div>
-      <div class="item-info">
-        <p class="item-name">Item ${i}</p>
-        <p class="item-price">
-          <img src="/static/assets/icons/star.png" class="currency-icon" alt="star">
-          <span class="price-value">—</span>
-        </p>
-      </div>
-    `;
+  // Проверяем, есть ли кастомный размер для этого предмета
+  const customSize = itemSizes?.[i] || 100; // если не задан, 100px по умолчанию
 
-    container.appendChild(card);
-  }
+  const card = document.createElement("div");
+  card.className = "item-card";
+  card.innerHTML = `
+    <div class="item-img">
+      <img src="${imagePath}" alt="Item ${i}" style="width:${customSize}px; height:${customSize}px;">
+    </div>
+    <div class="item-info">
+      <p class="item-name">Item ${i}</p>
+      <p class="item-price">
+        <img src="/static/assets/icons/star.png" class="currency-icon" alt="star">
+        <span class="price-value">—</span>
+      </p>
+    </div>
+  `;
+  container.appendChild(card);
 }
