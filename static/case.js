@@ -8,25 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const itemsGrid = document.getElementById("items-grid");
 
   if (!window.allCases) {
-    console.error("❌ allCases не найден. Проверь cases_data.js");
+    console.error("❌ allCases не найден. Проверь файл cases_data.js");
     caseTitle.textContent = "DATA NOT LOADED";
     return;
   }
 
-  // 🔍 Находим кейс по ID
   const selectedCase = allCases.find(c => c.id === caseId);
-
   if (!selectedCase) {
     console.warn(`⚠️ Кейс с ID "${caseId}" не найден.`);
     caseTitle.textContent = "CASE NOT FOUND";
     return;
   }
 
-  // 🖼️ Отрисовываем данные кейса
+  // Отрисовываем данные кейса
   caseImage.src = selectedCase.img;
   caseTitle.textContent = selectedCase.name;
 
-  // 💰 Отрисовка цены как на главной странице
   if (selectedCase.price) {
     casePrice.innerHTML = `
       <div class="case-subtitle">
@@ -38,48 +35,34 @@ document.addEventListener("DOMContentLoaded", () => {
     casePrice.innerHTML = `<div class="case-subtitle">БЕСПЛАТНО</div>`;
   }
 
-  // 💡 Заполняем сетку предметов (если есть)
-  if (selectedCase.items && selectedCase.items.length > 0) {
-    itemsGrid.innerHTML = "";
-    selectedCase.items.forEach(item => {
-      const itemCard = document.createElement("div");
-      itemCard.classList.add("item-card");
-      itemCard.innerHTML = `
-        <img src="${item.img}" alt="${item.name}">
-        <div class="item-name">${item.name}</div>
-        <div class="item-price">
-          ${item.price}
-          <img src="/static/assets/icons/star.png" alt="⭐">
-        </div>
-      `;
-      itemsGrid.appendChild(itemCard);
-    });
+  // 🎯 Генерация карточек предметов
+  const caseName = selectedCase?.name;
+  const caseInfo = caseMap[caseName];
+  if (caseInfo) {
+    renderCaseItems("items-grid", caseInfo.path, caseInfo.count);
   } else {
-    itemsGrid.innerHTML = `<div style="grid-column: 1/-1; opacity: 0.7;">No items found in this case</div>`;
+    console.warn(`⚠️ Нет данных для кейса "${caseName}" в caseMap`);
+    itemsGrid.innerHTML = `<p style="color:#aaa;">Items not found for this case</p>`;
   }
-  // 🔘 Обработка выбора количества кейсов
-const buttons = document.querySelectorAll(".multi-btn");
-let selectedCount = 1; // по умолчанию выбрано 1
 
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    // Снять активный класс со всех
-    buttons.forEach(btn => btn.classList.remove("active"));
+  // 🔘 Логика кнопок количества кейсов
+  const buttons = document.querySelectorAll(".multi-btn");
+  let selectedCount = 1;
 
-    // Добавить активный к текущей
-    button.classList.add("active");
-
-    // Запомнить выбранное количество
-    selectedCount = parseInt(button.dataset.count);
-
-    console.log(`✅ Выбрано количество кейсов: ${selectedCount}`);
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      buttons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+      selectedCount = parseInt(button.dataset.count);
+      console.log(`✅ Выбрано количество кейсов: ${selectedCount}`);
+    });
   });
-});
 
+  // 🎁 Кнопка открытия кейса (демо-режим)
+  const openCaseBtn = document.getElementById("open-case-btn");
+  if (openCaseBtn) {
+    openCaseBtn.addEventListener("click", () => {
+      alert(`Открыто ${selectedCount} кейсов "${selectedCase.name}"!`);
+    });
+  }
 });
-// 🔧 Автоматическая генерация карточек из папки cases_inner
-const caseName = selectedCase?.name;
-const caseInfo = caseMap[caseName];
-if (caseInfo) {
-  renderCaseItems("items-grid", caseInfo.path, caseInfo.count);
-}
