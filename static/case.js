@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 🎯 Генерация карточек предметов
-  const caseName = selectedCase.name.trim().toLowerCase();
-  const caseKey = Object.keys(caseMap).find(key => key.toLowerCase() === caseName);
-  const caseInfo = caseMap[caseKey];
+  const caseName = selectedCase.name.trim();
+  const caseInfo = caseMap[caseName];
+
 
   if (caseInfo) {
     renderCaseItems("items-grid", caseInfo.path, caseInfo.count, caseKey);
