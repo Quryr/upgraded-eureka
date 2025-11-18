@@ -291,24 +291,29 @@
       </div>
     </div> <!-- /case-header -->
 
-    <!-- 🎰 ROULETTE (hidden) -->
-    <div id="roulette-wrapper" style="display:none; margin-top:40px;">
-      <div class="roulette-frame">
+  <!-- 🎰 CS:GO STYLE ROULETTE -->
+  <div id="roulette-wrapper" style="display:none; margin-top:40px; text-align:center;">
+  
+    <div class="roulette-frame">
         <div class="roulette-arrow"></div>
+        <div class="roulette-arrow-bottom"></div>
+  
         <div class="roulette-strip" id="roulette-strip"></div>
-      </div>
-
-      <div id="reward-block" style="display:none; text-align:center; margin-top:40px;">
-        <img id="reward-img" src="" style="width:160px; margin-bottom:20px;">
+    </div>
+  
+    <div id="reward-block" style="display:none; margin-top:40px;">
+        <img id="reward-img" src="" style="width:160px;">
         <h2 id="reward-name"></h2>
-        <p id="reward-price" style="font-size:22px; opacity:0.8;"></p>
-
+        <div id="reward-price" style="font-size:22px; margin-top:5px;"></div>
+  
         <div style="margin-top:20px;">
-          <button id="btn-keep" class="reward-btn keep">KEEP</button>
-          <button id="btn-sell" class="reward-btn sell">SELL</button>
+            <button id="btn-keep" class="reward-btn keep">KEEP</button>
+            <button id="btn-sell" class="reward-btn sell">SELL</button>
         </div>
-      </div>
-    </div> <!-- /roulette-wrapper -->
+    </div>
+  
+  </div>
+
 
     <!-- 🎁 ITEMS GRID -->
     <div class="items-grid" id="items-grid">
