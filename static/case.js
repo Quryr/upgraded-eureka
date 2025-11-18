@@ -56,15 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- Запуск рулетки ---
+        // --- Запуск рулетки ---
     if (openCaseBtn) {
         openCaseBtn.addEventListener("click", () => {
-            startCaseSpin(
-                selectedCase,     // объект кейса
-                selectedCount,    // количество кейсов
-                caseInfo,         // {path:"...", count:"..."}
-                caseName          // строка: "Crystal Candy"
-            );
+            startCaseSpin({
+                caseName: caseName,
+                caseInfo: caseInfo,
+                count: selectedCount
+            });
         });
     }
 });
