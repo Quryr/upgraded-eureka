@@ -292,27 +292,36 @@
     </div> <!-- /case-header -->
 
   <!-- 🎰 CS:GO STYLE ROULETTE -->
-  <div id="roulette-wrapper" style="display:none; margin-top:40px; text-align:center;">
-  
+  <div id="roulette-wrapper" style="display:none; margin-top:40px;">
+    
+    <!-- ОБВОДКА -->
     <div class="roulette-frame">
-        <div class="roulette-arrow"></div>
-        <div class="roulette-arrow-bottom"></div>
   
+        <!-- ВЕРХНЯЯ СТРЕЛКА -->
+        <div class="roulette-arrow arrow-top"></div>
+  
+        <!-- ЛЕНТА -->
         <div class="roulette-strip" id="roulette-strip"></div>
+  
+        <!-- НИЖНЯЯ СТРЕЛКА -->
+        <div class="roulette-arrow arrow-bottom"></div>
+  
     </div>
   
-    <div id="reward-block" style="display:none; margin-top:40px;">
-        <img id="reward-img" src="" style="width:160px;">
-        <h2 id="reward-name"></h2>
-        <div id="reward-price" style="font-size:22px; margin-top:5px;"></div>
+    <!-- Блок выигрыша -->
+    <div id="reward-block" style="display:none; text-align:center; margin-top:40px;">
+      <img id="reward-img" src="" style="width:160px; margin-bottom:20px;">
+      <h2 id="reward-name"></h2>
+      <p id="reward-price" style="font-size:22px; opacity:0.8;"></p>
   
-        <div style="margin-top:20px;">
-            <button id="btn-keep" class="reward-btn keep">KEEP</button>
-            <button id="btn-sell" class="reward-btn sell">SELL</button>
-        </div>
+      <div style="margin-top:20px;">
+        <button id="btn-keep" class="reward-btn keep">KEEP</button>
+        <button id="btn-sell" class="reward-btn sell">SELL</button>
+      </div>
     </div>
   
   </div>
+
 
 
     <!-- 🎁 ITEMS GRID -->
