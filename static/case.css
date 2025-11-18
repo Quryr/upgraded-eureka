@@ -254,3 +254,75 @@ body {
 .reward-btn:hover {
   transform: scale(1.08);
 }
+
+/* ================================
+        🟦 CS2 ROULETTE STYLE
+================================ */
+
+.roulette-frame {
+    width: 100%;
+    height: 240px;
+    background: rgba(15,20,35,0.85);
+    border: 2px solid rgba(0,255,255,0.25);
+    border-radius: 18px;
+    box-shadow: 0 0 35px rgba(0,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.roulette-arrow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg,#00e4ff,#0077ff);
+    box-shadow: 0 0 20px #00bfff;
+    z-index: 20;
+}
+
+.roulette-strip {
+    display: flex;
+    gap: 0;
+    padding: 0 500px;
+    transition: none;
+}
+
+.strip-item {
+    width: 180px;
+    text-align: center;
+    padding-top: 15px;
+    opacity: 0.95;
+}
+
+.strip-item img {
+    width: 120px;
+    filter: drop-shadow(0 0 8px rgba(0,255,255,0.35));
+}
+
+.strip-name {
+    font-size: 15px;
+    margin-top: 6px;
+    opacity: 0.8;
+}
+
+/* reward block */
+.reward-btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 10px;
+    font-weight: 700;
+}
+
+.reward-btn.keep {
+    background: #0094ff;
+}
+
+.reward-btn.sell {
+    background: #ff0059;
+}
