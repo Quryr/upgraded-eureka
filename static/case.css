@@ -326,3 +326,58 @@ body {
 .reward-btn.sell {
     background: #ff0059;
 }
+/* --- Рулетка --- */
+.roulette-frame {
+    width: 900px;
+    margin: 0 auto;
+    height: 170px;
+    position: relative;
+    border-radius: 18px;
+    border: 2px solid rgba(0,255,255,0.2);
+    background: rgba(0,20,30,0.6);
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0,255,255,0.2);
+}
+
+.roulette-strip {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 200px;
+    transition: transform 4s;
+}
+
+.roulette-cell {
+    width: 160px;
+    text-align: center;
+    color: #fff;
+    opacity: 0.9;
+}
+
+.roulette-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.roulette-name {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Тонкие стрелки */
+.roulette-arrow,
+.roulette-arrow-bottom {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 35px;
+    background: #00eaff;
+    box-shadow: 0 0 15px #00eaff;
+    z-index: 10;
+    border-radius: 2px;
+}
+
+.roulette-arrow { top: 0; }
+.roulette-arrow-bottom { bottom: 0; }
