@@ -1,24 +1,29 @@
-// =========================================
-// 🎡 CS:GO STYLE CASE OPENING ROULETTE
-// =========================================
+// =====================================================
+// 🎡 CS2 / CSGO STYLE CASE OPENING (ПОЛНОСТЬЮ ФИКС)
+// =====================================================
 
-window.startCaseSpin = function({ caseName, caseInfo, count }) {
+window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName) {
 
-    const container = document.querySelector(".case-header");
+    console.log("▶️ START SPIN:", caseName);
+
+    const header = document.querySelector(".case-header");
     const grid = document.getElementById("items-grid");
-    const roulette = document.getElementById("roulette-wrapper");
+    const wrapper = document.getElementById("roulette-wrapper");
     const strip = document.getElementById("roulette-strip");
-    const rewardBlock = document.getElementById("reward-block");
+    const reward = document.getElementById("reward-block");
 
-    // скрываем всё кроме рулетки
-    container.style.display = "none";
-    grid.style.display = "none";
-    rewardBlock.style.display = "none";
+    // скрываем только кейс сверху
+    header.style.display = "none";
 
-    roulette.style.display = "block";
+    // оставляем предметы СНИЗУ (как ты просил)
+    grid.style.opacity = "0.25";
 
-    strip.innerHTML = ""; // очищаем рулетку
+    // показываем рулетку
+    wrapper.style.display = "block";
+    strip.innerHTML = "";
+    reward.style.display = "none";
 
+    // ---- данные предметов ----
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
 
@@ -32,77 +37,66 @@ window.startCaseSpin = function({ caseName, caseInfo, count }) {
         });
     }
 
-    // ---------------------------------------
-    // Дублируем предметы для длинной ленты
-    // ---------------------------------------
+    // ---- удлиняем ленту x60 ----
     const reel = [];
-    for (let i = 0; i < 40; i++) {
-        reel.push(...items);
-    }
+    for (let i = 0; i < 60; i++) reel.push(...items);
 
-    // ---------------------------------------
-    // РЕНДЕРИМ ЛЕНТУ
-    // ---------------------------------------
-    reel.forEach(item => {
-        const cell = document.createElement("div");
-        cell.className = "roulette-cell";
-
-        cell.innerHTML = `
-            <img src="${item.img}" class="roulette-img">
-            <div class="roulette-name">${item.name}</div>
+    // ---- отрисовываем ----
+    reel.forEach(it => {
+        const d = document.createElement("div");
+        d.className = "roulette-cell";
+        d.innerHTML = `
+            <img src="${it.img}" class="roulette-img">
+            <div class="roulette-name">${it.name}</div>
         `;
-
-        strip.appendChild(cell);
+        strip.appendChild(d);
     });
 
-    // ---------------------------------------
-    // Выбираем победителя
-    // ---------------------------------------
+    // ---- выбираем победителя ----
     const winner = items[Math.floor(Math.random() * items.length)];
 
-    // ищем ВХОЖДЕНИЕ winner.id в reel
-    const winnerIndex = reel.findIndex(it => it.id === winner.id);
+    // ближайшее совпадение
+    const index = reel.findIndex(r => r.id === winner.id);
 
-    // ширина одного блока
-    const cellWidth = 160;
+    const CELL = 140;       // ширина блока
+    const CENTER = 420;     // подгон под центральную рамку
 
-    // позиция сдвига к центру
-    const stopX = winnerIndex * cellWidth - 400; // центр рамки
+    const stopX = index * CELL - CENTER;
 
-    // Анимация
-    strip.style.transition = "transform 4.2s cubic-bezier(.08,.6,0,1)";
+    // ---- анимация ----
+    strip.style.transition = "transform 5.3s cubic-bezier(.08,.6,0,1)";
     strip.style.transform = `translateX(-${stopX}px)`;
 
-    // После остановки — вывод результата
     setTimeout(() => {
         showReward(winner);
-    }, 4400);
+    }, 5600);
 };
 
 
-// =========================================
-// 🎉 ВЫВОД ВЫПАВШЕГО ПРЕДМЕТА
-// =========================================
+
+// =====================================================
+// 🎁 Показ выпадения
+// =====================================================
 
 function showReward(item) {
 
-    const rewardBlock = document.getElementById("reward-block");
+    const reward = document.getElementById("reward-block");
 
     document.getElementById("reward-img").src = item.img;
     document.getElementById("reward-name").textContent = item.name;
-    document.getElementById("reward-price").innerHTML = `⭐ ${item.price}`;
+    document.getElementById("reward-price").textContent = `⭐ ${item.price}`;
 
-    rewardBlock.style.display = "block";
+    reward.style.display = "block";
 
     document.getElementById("btn-keep").onclick = () => {
-        rewardBlock.style.display = "none";
-        alert("Предмет оставлен (пока без инвентаря)");
+        reward.style.display = "none";
+        alert("Оставлено");
         location.reload();
     };
 
     document.getElementById("btn-sell").onclick = () => {
-        rewardBlock.style.display = "none";
-        alert("Предмет продан");
+        reward.style.display = "none";
+        alert("Продано");
         location.reload();
     };
 }
