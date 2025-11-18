@@ -92,24 +92,23 @@ body {
   margin-bottom: 2px;
 }
 
-/* === ORIGINAL STAR PRICE STYLE (RESTORED) === */
-.case-price {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 24px;
-  font-weight: 700;
-  color: #cfeaff;
+#case-price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 35px;
 }
 
-.case-price .star-icon-nav {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  transform: translateY(1px);
-  image-rendering: -webkit-optimize-contrast;
+#case-price img {
+    width: 20px;
+    height: 20px;
+    transform: translateY(2px);
 }
+
+
 
 /* === OPEN CASE BUTTON === */
 .case-btn-main {
