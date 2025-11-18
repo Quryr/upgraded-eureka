@@ -31,11 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     caseImage.src = selectedCase.img;
     caseTitle.textContent = selectedCase.name;
 
-    if (selectedCase.price) {
-        document.getElementById("case-price-value").textContent = selectedCase.price;
-    } else {
-        document.getElementById("case-price-value").textContent = "0";
-    }
+    document.getElementById("case-price-value").textContent = selectedCase.price;
+
 
 
     // ----------------------------------
