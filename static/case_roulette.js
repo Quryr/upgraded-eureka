@@ -1,119 +1,110 @@
-// 🎡 Запуск рулетки
-window.startCaseSpin = function(selectedCase, selectedCount, caseInfo, caseName) {
+// ==========================================
+//     CS2 / KEYDROP STYLE CASE ROULETTE
+// ==========================================
 
-    console.log("▶️ Рулетка запущена:", caseName);
+window.startCaseSpin = function({ caseName, caseInfo, count }) {
 
-    const grid = document.getElementById("items-grid");
-    if (!grid) {
-        console.error("❌ items-grid не найден");
-        return;
-    }
+    console.log("▶️ START SPIN:", caseName);
 
-    grid.style.display = "none";
+    const strip = document.getElementById("roulette-strip");
+    const rewardBlock = document.getElementById("reward-block");
+    const wrapper = document.getElementById("roulette-wrapper");
 
-    let wheel = document.getElementById("case-roulette");
-    if (!wheel) {
-        wheel = document.createElement("div");
-        wheel.id = "case-roulette";
-        wheel.style.width = "100%";
-        wheel.style.overflow = "hidden";
-        wheel.style.marginTop = "40px";
-        wheel.style.whiteSpace = "nowrap";
-        wheel.style.position = "relative";
-        document.querySelector(".case-container").appendChild(wheel);
-    }
+    strip.innerHTML = "";
+    rewardBlock.style.display = "none";
 
-    wheel.innerHTML = "";
-
-    const names = window.caseItemNames?.[caseName];
-    const prices = window.caseItemPrices?.[caseName];
-
-    if (!names || !prices) {
-        console.error("❌ Нет данных о предметах для кейса:", caseName);
-        return;
-    }
+    // ----------------------------
+    // Загружаем предметы кейса
+    // ----------------------------
+    const names = window.caseItemNames[caseName];
+    const prices = window.caseItemPrices[caseName];
 
     const items = [];
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= caseInfo.count; i++) {
         items.push({
             id: i,
-            name: names[i] || ("Item " + i),
+            name: names[i] || `Item ${i}`,
             price: prices[i] || 0,
             img: `${caseInfo.path}${i}.png`
         });
     }
 
-    const longTape = [];
-    for (let k = 0; k < 30; k++) {
-        longTape.push(...items);
-    }
+    // ----------------------------
+    // Генерируем длинную ленту
+    // ----------------------------
+    const tape = [];
+    for (let i = 0; i < 35; i++) tape.push(...items);
 
-    longTape.forEach(it => {
+    tape.forEach(it => {
         const d = document.createElement("div");
-        d.className = "roulette-item";
-        d.style.display = "inline-block";
-        d.style.width = "140px";
-        d.style.textAlign = "center";
-        d.style.margin = "0 10px";
-
+        d.className = "strip-item";
         d.innerHTML = `
-            <img src="${it.img}" style="width:100px;">
-            <div style="color:#fff;">${it.name}</div>
+            <img src="${it.img}">
+            <div class="strip-name">${it.name}</div>
         `;
-        wheel.appendChild(d);
+        strip.appendChild(d);
     });
 
+    // ----------------------------
+    // Выбираем победителя
+    // ----------------------------
     const winner = items[Math.floor(Math.random() * items.length)];
-    console.log("🏆 Победитель:", winner);
+    console.log("🏆 WINNER:", winner);
 
-    const winnerIndex = longTape.findIndex(it => it.id === winner.id);
-    const stopPosition = winnerIndex * 160;
+    const indexInTape = tape.findIndex(it => it.id === winner.id);
 
-    wheel.style.transition = "transform 4s cubic-bezier(.1,.7,0,1)";
-    wheel.style.transform = `translateX(-${stopPosition}px)`;
+    const itemWidth = 180;
+    const centerOffset = (wrapper.clientWidth / 2) - (itemWidth / 2);
+
+    const stopPosition = indexInTape * itemWidth - centerOffset;
+
+    // ----------------------------
+    // Запуск анимации CS2-style
+    // ----------------------------
+    strip.style.transition = "transform 4.5s cubic-bezier(.08,.6,0,1)";
+    strip.style.transform = `translateX(-${stopPosition}px)`;
 
     setTimeout(() => {
-        showWinResult(winner);
-    }, 4200);
+        showReward(winner);
+    }, 4700);
 };
 
 
-// 🎉 Показываем выигрыш
-function showWinResult(winner) {
+// ==========================================
+//     Показываем выигрыш (красивое увеличение)
+// ==========================================
 
-    let result = document.getElementById("case-win-result");
-    if (!result) {
-        result = document.createElement("div");
-        result.id = "case-win-result";
-        result.style.marginTop = "40px";
-        result.style.textAlign = "center";
-        result.style.color = "#fff";
-        result.style.fontSize = "32px";
+function showReward(item) {
 
-        document.querySelector(".case-container").appendChild(result);
-    }
+    const rewardBlock = document.getElementById("reward-block");
+    const rewardImg = document.getElementById("reward-img");
+    const rewardName = document.getElementById("reward-name");
+    const rewardPrice = document.getElementById("reward-price");
 
-    result.innerHTML = `
-        <div style="transform: scale(0.5); transition: 0.4s;" id="win-scale">
-            <img src="${winner.img}" style="width:160px;">
-            <div>${winner.name}</div>
-            <div style="font-size:20px; color:#0f0;">⭐ ${winner.price}</div>
-        </div>
-        <button id="btn-keep" style="margin:20px;">Оставить</button>
-        <button id="btn-sell">Продать</button>
-    `;
+    rewardImg.src = item.img;
+    rewardName.textContent = item.name;
+    rewardPrice.textContent = `⭐ ${item.price}`;
+
+    rewardBlock.style.display = "block";
+    rewardBlock.style.opacity = "0";
+    rewardBlock.style.transform = "scale(0.6)";
 
     setTimeout(() => {
-        document.getElementById("win-scale").style.transform = "scale(1)";
-    }, 20);
+        rewardBlock.style.transition = "0.4s";
+        rewardBlock.style.opacity = "1";
+        rewardBlock.style.transform = "scale(1)";
+    }, 40);
 
+    // ----------------------------
+    // Кнопки
+    // ----------------------------
     document.getElementById("btn-keep").onclick = () => {
-        result.innerHTML = "";
-        alert("Ты оставил предмет!");
+        rewardBlock.style.display = "none";
+        alert("✔ Предмет сохранён (пока что просто скрываем)");
     };
 
     document.getElementById("btn-sell").onclick = () => {
-        result.innerHTML = "";
-        alert("Ты продал предмет!");
+        rewardBlock.style.display = "none";
+        alert("💰 Продано!");
     };
 }
