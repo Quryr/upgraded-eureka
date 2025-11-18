@@ -1,4 +1,8 @@
-window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName) {
+/* ========================================================================= */
+/* FINAL CASE ROULETTE – SMOOTH, CENTERED, CORRECT */
+/* ========================================================================= */
+
+window.startCaseSpin = async function (selectedCase, selectedCount, caseInfo, caseName) {
 
     const header = document.querySelector(".case-header");
     const grid = document.getElementById("items-grid");
@@ -6,15 +10,23 @@ window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
+    /* ------------------------- */
+    /* UI PREP */
+    /* ------------------------- */
+
     header.style.display = "none";
     grid.style.opacity = "0.25";
 
     wrapper.style.display = "block";
-    strip.innerHTML = "";
     reward.style.display = "none";
+    strip.innerHTML = "";
 
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
+
+    /* ------------------------- */
+    /* BUILD ITEMS */
+    /* ------------------------- */
 
     const items = [];
     for (let i = 1; i <= caseInfo.count; i++) {
@@ -26,9 +38,27 @@ window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName
         });
     }
 
+    /* ------------------------- */
+    /* PRELOAD IMAGES (important fix) */
+    /* ------------------------- */
+
+    await Promise.all(items.map(it => {
+        return new Promise(res => {
+            const img = new Image();
+            img.onload = res;
+            img.onerror = res;
+            img.src = it.img;
+        });
+    }));
+
+    /* ------------------------- */
+    /* BUILD REEL (60 items) */
+    /* ------------------------- */
+
     const reel = [];
     for (let i = 0; i < 60; i++) reel.push(...items);
 
+    /* Build DOM */
     reel.forEach(it => {
         const d = document.createElement("div");
         d.className = "roulette-cell";
@@ -39,21 +69,60 @@ window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName
         strip.appendChild(d);
     });
 
+    /* ------------------------- */
+    /* TRUE WINNER */
+    /* ------------------------- */
+
     const winner = items[Math.floor(Math.random() * items.length)];
+
+    /* Find FIRST matching element in reel */
     const index = reel.findIndex(r => r.id === winner.id);
 
-    const CELL = 140;
-    const CENTER = 450;
+    /* ------------------------- */
+    /* ANIMATION CALC */
+    /* ------------------------- */
 
-    const stopX = index * CELL - CENTER;
+    const CELL = 150;     // Must match CSS .roulette-cell width
+    const FRAME_WIDTH = 900; // Must match CSS .roulette-frame width
+    const CENTER_OFFSET = (FRAME_WIDTH / 2) - (CELL / 2);
 
-    strip.style.transition = "transform 6s cubic-bezier(.08,.6,0,1)";
-    strip.style.transform = `translateX(-${stopX}px)`;
+    /*
+        Example:
+        If index = 120 → scroll = index * CELL - CENTER_OFFSET
+    */
+
+    const stopX = index * CELL - CENTER_OFFSET;
+
+    /* ------------------------- */
+    /* FORCE LAYOUT BEFORE ANIMATING */
+    /* ------------------------- */
+
+    strip.style.transform = "translateX(0px)";
+    strip.style.transition = "none";
+    strip.offsetHeight; // force reflow
+
+    /* ------------------------- */
+    /* SPIN ANIMATION */
+    /* ------------------------- */
+
+    setTimeout(() => {
+        strip.style.transition = "transform 6.2s cubic-bezier(.08,.6,0,1)";
+        strip.style.transform = `translateX(-${stopX}px)`;
+    }, 50);
+
+    /* ------------------------- */
+    /* ON SPIN END → SHOW REWARD */
+    /* ------------------------- */
 
     setTimeout(() => {
         showReward(winner);
-    }, 6200);
+    }, 6300);
 };
+
+
+/* ========================================================================= */
+/* SHOW REWARD */
+/* ========================================================================= */
 
 function showReward(item) {
 
@@ -75,3 +144,7 @@ function showReward(item) {
         location.reload();
     };
 }
+
+/* ========================================================================= */
+/* END */
+/* ========================================================================= */
