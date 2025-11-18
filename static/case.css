@@ -381,3 +381,52 @@ body {
 
 .roulette-arrow { top: 0; }
 .roulette-arrow-bottom { bottom: 0; }
+
+#roulette-wrapper {
+    display: none;
+    margin-top: 40px;
+}
+
+.roulette-frame {
+    width: 900px;
+    margin: auto;
+    padding: 20px 0;
+    border-radius: 16px;
+    background: rgba(0, 10, 20, 0.7);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.roulette-strip {
+    display: flex;
+    gap: 0px;
+    white-space: nowrap;
+}
+
+.roulette-cell {
+    width: 140px;
+    text-align: center;
+}
+
+.roulette-img {
+    width: 90px;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.roulette-name {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* стрелки сверху + снизу */
+.roulette-arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(to bottom, #3cf, #0ff);
+    box-shadow: 0 0 15px #0ff;
+}
