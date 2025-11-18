@@ -31,9 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
     caseImage.src = selectedCase.img;
     caseTitle.textContent = selectedCase.name;
 
-    document.getElementById("case-price-value").textContent = selectedCase.price;
-
-
+    if (selectedCase.price) {
+        casePrice.innerHTML = `
+            <div class="case-subtitle">
+                <span>${selectedCase.price}</span>
+                <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+            </div>
+        `;
+    } else {
+        casePrice.innerHTML = `<div class="case-subtitle">БЕСПЛАТНО</div>`;
+    }
 
     // ----------------------------------
     // 🧱 ОТРИСОВКА ПРЕДМЕТОВ
