@@ -1,25 +1,24 @@
-// ======================================================
-//   CS2 ROULETTE — FULL WORKING EDITION (your HTML ready)
-// ======================================================
+// =========================================
+// 🎡 CS:GO STYLE CASE OPENING ROULETTE
+// =========================================
 
 window.startCaseSpin = function({ caseName, caseInfo, count }) {
 
-    console.log("🎰 START:", caseName);
-
-    const header = document.querySelector(".case-header");
+    const container = document.querySelector(".case-header");
+    const grid = document.getElementById("items-grid");
     const roulette = document.getElementById("roulette-wrapper");
     const strip = document.getElementById("roulette-strip");
-    const reward = document.getElementById("reward-block");
+    const rewardBlock = document.getElementById("reward-block");
 
-    // скрываем ТОЛЬКО кейс
-    header.style.display = "none";
+    // скрываем всё кроме рулетки
+    container.style.display = "none";
+    grid.style.display = "none";
+    rewardBlock.style.display = "none";
 
-    // показываем рулетку
     roulette.style.display = "block";
-    strip.innerHTML = "";
-    reward.style.display = "none";
 
-    // ==== Загружаем предметы ====
+    strip.innerHTML = ""; // очищаем рулетку
+
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
 
@@ -27,78 +26,83 @@ window.startCaseSpin = function({ caseName, caseInfo, count }) {
     for (let i = 1; i <= caseInfo.count; i++) {
         items.push({
             id: i,
-            name: names[i] || `Item ${i}`,
-            price: prices[i] || 0,
+            name: names[i],
+            price: prices[i],
             img: `${caseInfo.path}${i}.png`
         });
     }
 
-    // ==== Генерируем длинную ленту ====
-    const TAPE_REPEAT = 50;
-    const tape = [];
-    for (let i = 0; i < TAPE_REPEAT; i++) tape.push(...items);
+    // ---------------------------------------
+    // Дублируем предметы для длинной ленты
+    // ---------------------------------------
+    const reel = [];
+    for (let i = 0; i < 40; i++) {
+        reel.push(...items);
+    }
 
-    tape.forEach(it => {
-        const div = document.createElement("div");
-        div.className = "strip-item";
-        div.innerHTML = `
-            <img src="${it.img}">
-            <div class="strip-name">${it.name}</div>
+    // ---------------------------------------
+    // РЕНДЕРИМ ЛЕНТУ
+    // ---------------------------------------
+    reel.forEach(item => {
+        const cell = document.createElement("div");
+        cell.className = "roulette-cell";
+
+        cell.innerHTML = `
+            <img src="${item.img}" class="roulette-img">
+            <div class="roulette-name">${item.name}</div>
         `;
-        strip.appendChild(div);
+
+        strip.appendChild(cell);
     });
 
-    // ==== Победитель ====
+    // ---------------------------------------
+    // Выбираем победителя
+    // ---------------------------------------
     const winner = items[Math.floor(Math.random() * items.length)];
-    console.log("🏆 WIN:", winner);
 
-    const index = tape.findIndex(it => it.id === winner.id);
+    // ищем ВХОЖДЕНИЕ winner.id в reel
+    const winnerIndex = reel.findIndex(it => it.id === winner.id);
 
-    const ITEM_WIDTH = 180;
-    const frame = document.querySelector(".roulette-frame").offsetWidth;
-    const center = frame / 2 - ITEM_WIDTH / 2;
+    // ширина одного блока
+    const cellWidth = 160;
 
-    const stopX = index * ITEM_WIDTH - center;
+    // позиция сдвига к центру
+    const stopX = winnerIndex * cellWidth - 400; // центр рамки
 
-    // ==== Запуск анимации в стиле CS2 ====
-    strip.style.transition = "transform 5.0s cubic-bezier(.06,.76,.17,1)";
+    // Анимация
+    strip.style.transition = "transform 4.2s cubic-bezier(.08,.6,0,1)";
     strip.style.transform = `translateX(-${stopX}px)`;
 
-    // ==== После остановки ====
-    setTimeout(() => showReward(winner), 5200);
+    // После остановки — вывод результата
+    setTimeout(() => {
+        showReward(winner);
+    }, 4400);
 };
 
 
-// ======================================================
-//   ПОКАЗ ВЫИГРЫША (увеличение + кнопки CS2)
-// ======================================================
+// =========================================
+// 🎉 ВЫВОД ВЫПАВШЕГО ПРЕДМЕТА
+// =========================================
 
 function showReward(item) {
-    const reward = document.getElementById("reward-block");
 
-    reward.style.display = "block";
-    reward.style.opacity = "0";
-    reward.style.transform = "scale(0.5)";
+    const rewardBlock = document.getElementById("reward-block");
 
     document.getElementById("reward-img").src = item.img;
     document.getElementById("reward-name").textContent = item.name;
-    document.getElementById("reward-price").textContent = `⭐ ${item.price}`;
+    document.getElementById("reward-price").innerHTML = `⭐ ${item.price}`;
 
-    // красивое увеличение
-    setTimeout(() => {
-        reward.style.transition = "0.35s cubic-bezier(.2,1.4,.3,1)";
-        reward.style.opacity = "1";
-        reward.style.transform = "scale(1)";
-    }, 20);
+    rewardBlock.style.display = "block";
 
-    // кнопки
     document.getElementById("btn-keep").onclick = () => {
-        reward.style.display = "none";
-        alert("Предмет оставлен.");
+        rewardBlock.style.display = "none";
+        alert("Предмет оставлен (пока без инвентаря)");
+        location.reload();
     };
 
     document.getElementById("btn-sell").onclick = () => {
-        reward.style.display = "none";
-        alert("Продано!");
+        rewardBlock.style.display = "none";
+        alert("Предмет продан");
+        location.reload();
     };
 }
