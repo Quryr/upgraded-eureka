@@ -60,11 +60,14 @@ if (caseInfo) {
     });
   });
 
-  // 🎁 Кнопка открытия кейса (демо-режим)
-  const openCaseBtn = document.querySelector(".case-btn-main");
-  if (openCaseBtn) {
-    openCaseBtn.addEventListener("click", () => {
-      alert(`Открыто ${selectedCount} кейсов "${selectedCase.name}"!`);
-    });
-  }
-});
+// 🎰 Кнопка запуска рулетки
+const openCaseBtn = document.querySelector(".case-btn-main");
+if (openCaseBtn) {
+  openCaseBtn.addEventListener("click", () => {
+    startCaseSpin(
+      selectedCase.name,        // название кейса
+      caseInfo.path,            // путь к картинкам
+      caseInfo.count            // количество предметов
+    );
+  });
+}
