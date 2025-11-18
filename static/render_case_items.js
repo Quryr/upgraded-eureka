@@ -13,15 +13,15 @@ function renderCaseItems(containerId, casePath, itemCount, caseName) {
     items.push({
       index: i,
       size: itemSizes[i] || 160,
-      price: itemPrices[i] ?? null, // может быть пустым
+      price: itemPrices[i] ?? null,
       imagePath: `${casePath}${i}.png`
     });
   }
 
-  // 🔢 Сортировка по возрастанию цены, если цены указаны
+  // 🔢 Сортировка по возрастанию цены
   items.sort((a, b) => {
     if (a.price == null && b.price == null) return 0;
-    if (a.price == null) return 1; // без цены — в конец
+    if (a.price == null) return 1;
     if (b.price == null) return -1;
     return a.price - b.price;
   });
@@ -30,16 +30,24 @@ function renderCaseItems(containerId, casePath, itemCount, caseName) {
   for (const item of items) {
     const card = document.createElement("div");
     card.className = "item-card";
-    card.innerHTML = `
-  <div class="item-img">
-    <img src="${item.imagePath}" alt="Item ${item.index}" style="width:${item.size}px;height:${item.size}px;">
-  </div>
-  <div class="item-info">
-    <p class="item-name">${window.caseItemNames?.[caseName]?.[item.index] || ("Item " + item.index)}</p>
-    <p class="item-price">
-      <img src="/static/assets/icons/star.png" class="currency-icon" alt="⭐">
-      <span class="price-value">${item.price ?? "—"}</span>
-    </p>
-  </div>
-`;
 
+    const itemName =
+      window.caseItemNames?.[caseName]?.[item.index] ||
+      ("Item " + item.index);
+
+    card.innerHTML = `
+      <div class="item-img">
+        <img src="${item.imagePath}" alt="${itemName}" style="width:${item.size}px;height:${item.size}px;">
+      </div>
+      <div class="item-info">
+        <p class="item-name">${itemName}</p>
+        <p class="item-price">
+          <img src="/static/assets/icons/star.png" class="currency-icon" alt="⭐">
+          <span class="price-value">${item.price ?? "—"}</span>
+        </p>
+      </div>
+    `;
+
+    container.appendChild(card);
+  }
+}
