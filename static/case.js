@@ -39,10 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const caseName = selectedCase.name.trim();
   const caseInfo = caseMap[caseName];
 
-
-if (caseInfo) {
-  renderCaseItems("items-grid", caseInfo.path, caseInfo.count, caseName);
-} else {
+  if (caseInfo) {
+    renderCaseItems("items-grid", caseInfo.path, caseInfo.count, caseName);
+  } else {
     console.warn(`⚠️ Нет данных для кейса "${selectedCase.name}" в caseMap`);
     itemsGrid.innerHTML = `<p style="color:#aaa;">Items not found for this case</p>`;
   }
@@ -56,18 +55,19 @@ if (caseInfo) {
       buttons.forEach(btn => btn.classList.remove("active"));
       button.classList.add("active");
       selectedCount = parseInt(button.dataset.count);
-      console.log(`✅ Выбрано количество кейсов: ${selectedCount}`);
     });
   });
 
-// 🎰 Кнопка запуска рулетки
-const openCaseBtn = document.querySelector(".case-btn-main");
-if (openCaseBtn) {
-  openCaseBtn.addEventListener("click", () => {
-    startCaseSpin(
-      selectedCase.name,        // название кейса
-      caseInfo.path,            // путь к картинкам
-      caseInfo.count            // количество предметов
-    );
-  });
-}
+  // 🎰 Кнопка запуска рулетки
+  const openCaseBtn = document.querySelector(".case-btn-main");
+  if (openCaseBtn) {
+    openCaseBtn.addEventListener("click", () => {
+      startCaseSpin(
+        selectedCase.name,   // название кейса
+        caseInfo.path,       // путь
+        caseInfo.count       // кол-во предметов
+      );
+    });
+  }
+
+});
