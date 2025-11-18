@@ -1,9 +1,96 @@
 // =====================================================
-// 🎡 CS:GO STYLE CASE OPENING — FINISHED VERSION
+// 📦 ОТРИСОВКА СТРАНИЦЫ + ЗАПУСК РУЛЕТКИ
 // =====================================================
 
-window.startCaseSpin = function({ caseName, caseInfo, count }) {
-    console.log("▶️ Запуск рулетки:", caseName);
+document.addEventListener("DOMContentLoaded", () => {
+
+    const params = new URLSearchParams(window.location.search);
+    const caseId = params.get("id");
+
+    const caseImage = document.getElementById("case-image");
+    const caseTitle = document.getElementById("case-title");
+    const casePrice = document.getElementById("case-price");
+    const itemsGrid = document.getElementById("items-grid");
+    const openCaseBtn = document.querySelector(".case-btn-main");
+
+    if (!window.allCases) {
+        caseTitle.textContent = "DATA NOT LOADED";
+        return;
+    }
+
+    const selectedCase = allCases.find(c => c.id === caseId);
+    if (!selectedCase) {
+        caseTitle.textContent = "CASE NOT FOUND";
+        return;
+    }
+
+    // ----------------------------------
+    // 🖼️ ОТРИСОВКА КАРТОЧКИ КЕЙСА
+    // ----------------------------------
+
+    caseImage.src = selectedCase.img;
+    caseTitle.textContent = selectedCase.name;
+
+    if (selectedCase.price) {
+        casePrice.innerHTML = `
+            <div class="case-subtitle">
+                <span>${selectedCase.price}</span>
+                <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+            </div>
+        `;
+    } else {
+        casePrice.innerHTML = `<div class="case-subtitle">БЕСПЛАТНО</div>`;
+    }
+
+    // ----------------------------------
+    // 🧱 ОТРИСОВКА ПРЕДМЕТОВ
+    // ----------------------------------
+
+    const caseName = selectedCase.name.trim();
+    const caseInfo = caseMap[caseName];
+
+    if (caseInfo) {
+        renderCaseItems("items-grid", caseInfo.path, caseInfo.count, caseName);
+    } else {
+        itemsGrid.innerHTML = `<p style="color:#aaa;">Items not found for this case</p>`;
+    }
+
+    // ----------------------------------
+    // 🔢 КОЛИЧЕСТВО КЕЙСОВ
+    // ----------------------------------
+
+    const buttons = document.querySelectorAll(".multi-btn");
+    let selectedCount = 1;
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            buttons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+            selectedCount = parseInt(button.dataset.count);
+        });
+    });
+
+    // ----------------------------------
+    // 🎡 ЗАПУСК РУЛЕТКИ
+    // ----------------------------------
+
+    if (openCaseBtn) {
+        openCaseBtn.addEventListener("click", () => {
+            startCaseSpin({
+                caseName: caseName,
+                caseInfo: caseInfo,
+                count: selectedCount
+            });
+        });
+    }
+});
+
+
+// =====================================================
+// 🎡 РУЛЕТКА — ПОЛНОСТЬЮ РАБОЧАЯ
+// =====================================================
+
+window.startCaseSpin = function({ caseName, caseInfo }) {
 
     const header = document.querySelector(".case-header");
     const grid = document.getElementById("items-grid");
@@ -11,22 +98,20 @@ window.startCaseSpin = function({ caseName, caseInfo, count }) {
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
-    // скрываем всё
-    header.style.display = "none";
-    grid.style.display = "none";
-    reward.style.display = "none";
+    // ⭕ ПОКАЗЫВАЕМ ВСЮ СТРАНИЦУ до клика
+    header.style.display = "block";
+    grid.style.display = "grid";
 
-    // показываем рулетку
+    // ⭕ ПОДГОТАВЛИВАЕМ РУЛЕТКУ
     roulette.style.display = "block";
-
+    reward.style.display = "none";
     strip.innerHTML = "";
 
-    // данные
+    // Данные
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
 
     const items = [];
-
     for (let i = 1; i <= caseInfo.count; i++) {
         items.push({
             id: i,
@@ -36,50 +121,44 @@ window.startCaseSpin = function({ caseName, caseInfo, count }) {
         });
     }
 
-    // делаем длинную ленту (как в CS2 — длинная и плавная)
+    // Длинная лента
     const reel = [];
-    for (let i = 0; i < 120; i++) {  // огромная лента
-        reel.push(...items);
-    }
+    for (let i = 0; i < 90; i++) reel.push(...items);
 
-    // рендерим
+    // Рендер
     reel.forEach(item => {
         const div = document.createElement("div");
         div.className = "roulette-cell";
-
         div.innerHTML = `
             <img src="${item.img}" class="roulette-img">
             <div class="roulette-name">${item.name}</div>
         `;
-
         strip.appendChild(div);
     });
 
-    // выбираем победителя
+    // Случайный победитель
     const winner = items[Math.floor(Math.random() * items.length)];
 
-    const winnerIndex = reel.findIndex(r => r.id === winner.id);
+    const index = reel.findIndex(x => x.id === winner.id);
+    const cellWidth = 140;
+    const center = 600;
 
-    const cellWidth = 150;
-    const centerOffset = 600; // центр для твоего макета
+    const stopX = index * cellWidth - center;
 
-    const stopX = winnerIndex * cellWidth - centerOffset;
-
-    // плавная длинная анимация
-    strip.style.transition = "transform 6.2s cubic-bezier(.08,.6,0,1)";
+    strip.style.transition = "transform 5.5s cubic-bezier(.08,.6,0,1)";
     strip.style.transform = `translateX(-${stopX}px)`;
 
-    setTimeout(() => {
-        showReward(winner);
-    }, 6300);
+    // Показ результата
+    setTimeout(() => showReward(winner), 5600);
 };
 
 
 // =====================================================
-// 🎁 ПОКАЗ ВЫПАДЕНИЯ
+// 🎁 ПОКАЗ ВЫПАВШЕГО ПРЕДМЕТА
 // =====================================================
 
 function showReward(item) {
+
     const reward = document.getElementById("reward-block");
 
     document.getElementById("reward-img").src = item.img;
@@ -89,7 +168,7 @@ function showReward(item) {
     reward.style.display = "block";
 
     document.getElementById("btn-keep").onclick = () => {
-        alert("Предмет оставлен!");
+        alert("Вы оставили предмет!");
         location.reload();
     };
 
