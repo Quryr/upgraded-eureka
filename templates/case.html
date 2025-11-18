@@ -264,14 +264,12 @@
     </div>
   </header>
 
-  <div class="case-container">
+<div class="case-container">
+
     <div class="case-header">
       <img id="case-image" src="" alt="Case Image" />
       <div class="case-title" id="case-title">CASE NAME</div>
-
-<div id="case-price"></div>
-
-
+      <div id="case-price"></div>
 
       <button class="case-btn-main">OPEN CASE</button>
 
@@ -291,33 +289,34 @@
           <button class="multi-btn" data-count="5">5</button>
         </div>
       </div>
-    </div>
-</div> <!-- конец case-header -->
+    </div> <!-- /case-header -->
 
-<!-- 🎰 ROULETTE (hidden by default) -->
-<div id="roulette-wrapper" style="display:none; margin-top:40px;">
-  <div class="roulette-frame">
-    <div class="roulette-arrow"></div>
-    <div class="roulette-strip" id="roulette-strip"></div>
-  </div>
+    <!-- 🎰 ROULETTE (hidden) -->
+    <div id="roulette-wrapper" style="display:none; margin-top:40px;">
+      <div class="roulette-frame">
+        <div class="roulette-arrow"></div>
+        <div class="roulette-strip" id="roulette-strip"></div>
+      </div>
 
-  <div id="reward-block" style="display:none; text-align:center; margin-top:40px;">
-    <img id="reward-img" src="" style="width:160px; margin-bottom:20px;">
-    <h2 id="reward-name"></h2>
-    <p id="reward-price" style="font-size:22px; opacity:0.8;"></p>
+      <div id="reward-block" style="display:none; text-align:center; margin-top:40px;">
+        <img id="reward-img" src="" style="width:160px; margin-bottom:20px;">
+        <h2 id="reward-name"></h2>
+        <p id="reward-price" style="font-size:22px; opacity:0.8;"></p>
 
-    <div style="margin-top:20px;">
-      <button id="btn-keep" class="reward-btn keep">KEEP</button>
-      <button id="btn-sell" class="reward-btn sell">SELL</button>
-    </div>
-  </div>
-</div>
+        <div style="margin-top:20px;">
+          <button id="btn-keep" class="reward-btn keep">KEEP</button>
+          <button id="btn-sell" class="reward-btn sell">SELL</button>
+        </div>
+      </div>
+    </div> <!-- /roulette-wrapper -->
 
-<div class="items-grid" id="items-grid">
-
+    <!-- 🎁 ITEMS GRID -->
+    <div class="items-grid" id="items-grid">
       <div style="grid-column: 1/-1; opacity: 0.7;">No items found in this case</div>
     </div>
-  </div>
+
+</div> <!-- /case-container -->
+
 
   <!-- === Подключаем данные кейсов === -->
   <script src="/static/cases_data.js"></script>
