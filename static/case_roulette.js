@@ -1,33 +1,28 @@
-/* ========================================================================= */
-/* FINAL CASE ROULETTE – SMOOTH, CENTERED, CORRECT */
-/* ========================================================================= */
+window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName) {
 
-window.startCaseSpin = async function (selectedCase, selectedCount, caseInfo, caseName) {
-
-    const header = document.querySelector(".case-header");
-    const grid = document.getElementById("items-grid");
+    // элементы
+    const container = document.querySelector(".case-container");
     const wrapper = document.getElementById("roulette-wrapper");
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
-    /* ------------------------- */
-    /* UI PREP */
-    /* ------------------------- */
+    // прячем кейс
+    container.style.display = "none";
 
-    header.style.display = "none";
-    grid.style.opacity = "0.25";
-
+    // показываем рулетку
     wrapper.style.display = "block";
-    reward.style.display = "none";
-    strip.innerHTML = "";
 
+    // очищаем старый контент
+    strip.style.transition = "none";
+    strip.style.transform = "translateX(0)";
+    strip.innerHTML = "";
+    reward.style.display = "none";
+
+    // получаем имена/цены
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
 
-    /* ------------------------- */
-    /* BUILD ITEMS */
-    /* ------------------------- */
-
+    // создаём список предметов кейса
     const items = [];
     for (let i = 1; i <= caseInfo.count; i++) {
         items.push({
@@ -38,27 +33,14 @@ window.startCaseSpin = async function (selectedCase, selectedCount, caseInfo, ca
         });
     }
 
-    /* ------------------------- */
-    /* PRELOAD IMAGES (important fix) */
-    /* ------------------------- */
-
-    await Promise.all(items.map(it => {
-        return new Promise(res => {
-            const img = new Image();
-            img.onload = res;
-            img.onerror = res;
-            img.src = it.img;
-        });
-    }));
-
-    /* ------------------------- */
-    /* BUILD REEL (60 items) */
-    /* ------------------------- */
-
+    // создаём длинную ленту (много повторов)
     const reel = [];
     for (let i = 0; i < 60; i++) reel.push(...items);
 
-    /* Build DOM */
+    // РАЗМЕР ячейки строго синхронизирован с CSS
+    const CELL = 150; // ширина .roulette-cell
+
+    // отрисовываем ленту
     reel.forEach(it => {
         const d = document.createElement("div");
         d.className = "roulette-cell";
@@ -69,60 +51,34 @@ window.startCaseSpin = async function (selectedCase, selectedCount, caseInfo, ca
         strip.appendChild(d);
     });
 
-    /* ------------------------- */
-    /* TRUE WINNER */
-    /* ------------------------- */
-
+    // выбираем победителя
     const winner = items[Math.floor(Math.random() * items.length)];
 
-    /* Find FIRST matching element in reel */
+    // находим индекс первого совпадения
     const index = reel.findIndex(r => r.id === winner.id);
 
-    /* ------------------------- */
-    /* ANIMATION CALC */
-    /* ------------------------- */
+    // вычисление центра рулетки
+    const frame = document.querySelector(".roulette-frame");
+    const frameWidth = frame.offsetWidth;
 
-    const CELL = 150;     // Must match CSS .roulette-cell width
-    const FRAME_WIDTH = 900; // Must match CSS .roulette-frame width
-    const CENTER_OFFSET = (FRAME_WIDTH / 2) - (CELL / 2);
+    // центр = середина экрана минус половина ячейки
+    const CENTER = frameWidth / 2 - CELL / 2;
 
-    /*
-        Example:
-        If index = 120 → scroll = index * CELL - CENTER_OFFSET
-    */
+    // конечная позиция
+    const stopX = index * CELL - CENTER;
 
-    const stopX = index * CELL - CENTER_OFFSET;
-
-    /* ------------------------- */
-    /* FORCE LAYOUT BEFORE ANIMATING */
-    /* ------------------------- */
-
-    strip.style.transform = "translateX(0px)";
-    strip.style.transition = "none";
-    strip.offsetHeight; // force reflow
-
-    /* ------------------------- */
-    /* SPIN ANIMATION */
-    /* ------------------------- */
-
+    // запускаем анимацию
     setTimeout(() => {
-        strip.style.transition = "transform 6.2s cubic-bezier(.08,.6,0,1)";
+        strip.style.transition = "transform 6s cubic-bezier(.08,.6,0,1)";
         strip.style.transform = `translateX(-${stopX}px)`;
     }, 50);
 
-    /* ------------------------- */
-    /* ON SPIN END → SHOW REWARD */
-    /* ------------------------- */
-
+    // показываем награду
     setTimeout(() => {
         showReward(winner);
-    }, 6300);
+    }, 6200);
 };
 
-
-/* ========================================================================= */
-/* SHOW REWARD */
-/* ========================================================================= */
 
 function showReward(item) {
 
@@ -134,17 +90,13 @@ function showReward(item) {
 
     reward.style.display = "block";
 
+    // кнопка KEEP
     document.getElementById("btn-keep").onclick = () => {
-        reward.style.display = "none";
         location.reload();
     };
 
+    // кнопка SELL
     document.getElementById("btn-sell").onclick = () => {
-        reward.style.display = "none";
         location.reload();
     };
 }
-
-/* ========================================================================= */
-/* END */
-/* ========================================================================= */
