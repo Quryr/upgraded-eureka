@@ -1,4 +1,3 @@
-// === Все кейсы ===
 const allCases = [
   { id: "crystal_candy", name: "Crystal Candy", img: "/static/assets/cases/crystal_candy.png", price: 550 },
   { id: "glam_lock", name: "Glam Lock", img: "/static/assets/cases/glam_lock.png", price: 700 },
@@ -16,8 +15,14 @@ const allCases = [
   { id: "pepe_drop", name: "Pepe Drop", img: "/static/assets/cases/pepe_drop.png", price: 500 },
   { id: "cool_doggo", name: "Cool Doggo", img: "/static/assets/cases/cool_doggo.png", price: 650 },
   { id: "party_crew", name: "Party Crew", img: "/static/assets/cases/party_crew.png", price: 800 },
-  { id: "ban_hammer", name: "Ban Hammer", img: "/static/assets/cases/ban_hammer.png", price: 950 }
+  { id: "ban_hammer", name: "Ban Hammer", img: "/static/assets/cases/ban_hammer.png", price: 950 },
+
+  // 🧠 COLLECTIONS & UNIQUE
+  { id: "bday_box", name: "Bday Box", img: "/static/assets/cases/bday_box.png", price: 800 },
+  { id: "retro_wave", name: "Retro Wave", img: "/static/assets/cases/retro_wave.png", price: 950 },
+  { id: "infinity_vault", name: "Infinity Vault", img: "/static/assets/cases/infinity_vault.png", price: 1100 },
+  { id: "toxic_vibes", name: "Toxic Vibes", img: "/static/assets/cases/toxic_vibes.png", price: 1250 },
+  { id: "emerald_blaze", name: "Emerald Blaze", img: "/static/assets/cases/emerald_blaze.png", price: 1400 }
 ];
 
-// === Делаем доступным глобально ===
 window.allCases = allCases;
