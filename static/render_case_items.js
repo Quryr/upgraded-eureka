@@ -31,17 +31,15 @@ function renderCaseItems(containerId, casePath, itemCount, caseName) {
     const card = document.createElement("div");
     card.className = "item-card";
     card.innerHTML = `
-      <div class="item-img">
-        <img src="${item.imagePath}" alt="Item ${item.index}" style="width:${item.size}px;height:${item.size}px;">
-      </div>
-      <div class="item-info">
-        <p class="item-name">Item ${item.index}</p>
-        <p class="item-price">
-          <img src="/static/assets/icons/star.png" class="currency-icon" alt="⭐">
-          <span class="price-value">${item.price ?? "—"}</span>
-        </p>
-      </div>
-    `;
-    container.appendChild(card);
-  }
-}
+  <div class="item-img">
+    <img src="${item.imagePath}" alt="Item ${item.index}" style="width:${item.size}px;height:${item.size}px;">
+  </div>
+  <div class="item-info">
+    <p class="item-name">${window.caseItemNames?.[caseName]?.[item.index] || ("Item " + item.index)}</p>
+    <p class="item-price">
+      <img src="/static/assets/icons/star.png" class="currency-icon" alt="⭐">
+      <span class="price-value">${item.price ?? "—"}</span>
+    </p>
+  </div>
+`;
+
