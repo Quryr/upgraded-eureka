@@ -76,11 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (openCaseBtn) {
         openCaseBtn.addEventListener("click", () => {
-            startCaseSpin({
-                caseName: caseName,
-                caseInfo: caseInfo,
-                count: selectedCount
-            });
+            startCaseSpin(caseName, caseInfo, selectedCount);
         });
     }
 });
