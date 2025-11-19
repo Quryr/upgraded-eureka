@@ -33,11 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (selectedCase.price) {
         casePrice.innerHTML = `
-            <div class="case-subtitle">
-                <span>${selectedCase.price}</span>
-                <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+            <div class="case-price-outer">
+                <span class="case-price-num">${selectedCase.price}</span>
+                <img src="/static/assets/icons/star.png" class="case-price-star">
             </div>
         `;
+
     } else {
         casePrice.innerHTML = `<div class="case-subtitle">БЕСПЛАТНО</div>`;
     }
