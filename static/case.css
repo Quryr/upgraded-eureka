@@ -429,3 +429,33 @@ body {
     height: 100px;               /* фиксируем размер картинки */
     object-fit: contain;         /* чтобы картинка не растягивалась */
 }
+/* ========================================================================= *//* ========================================================================= */
+.case-price-outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    margin-top: 10px;
+
+    font-weight: 800;
+    font-size: 26px;
+    color: #ffffff;
+
+    letter-spacing: 0.5px;
+}
+
+.case-price-num {
+    font-weight: 800;
+    font-size: 26px;
+    color: #ffffff;
+
+    text-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
+.case-price-star {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transform: translateY(1px);
+}
