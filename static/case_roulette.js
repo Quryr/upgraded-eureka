@@ -1,29 +1,29 @@
 // =========================================================
-// 🎰 ИДЕАЛЬНАЯ РУБЛЕЖНАЯ РУЛЕТКА — БЕЗ БАГОВ, ЧЁТКО ПО ЦЕНТРУ
+// 🎰 ИДЕАЛЬНАЯ РУЛЕТКА — ПЛАВНАЯ, ДОЛГАЯ, С БОУНСОМ
 // =========================================================
 
 window.startCaseSpin = function (caseName, caseInfo, count = 1) {
 
-    // --- элементы ---
+    // элементы
     const header = document.querySelector(".case-header");
     const itemsGrid = document.getElementById("items-grid");
     const wrapper = document.getElementById("roulette-wrapper");
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
-    // скрываем картинку и сетку
+    // скрываем только верх кейса, но НЕ сетку предметов
     header.style.display = "none";
 
     // показываем рулетку
     wrapper.style.display = "block";
     reward.style.display = "none";
 
-    // очищаем и сбрасываем
+    // ресет
     strip.innerHTML = "";
     strip.style.transition = "none";
     strip.style.transform = "translateX(0)";
 
-    // --- данные ---
+    // данные
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
     const drops = window.caseDropRates?.[caseName] || {};
@@ -39,16 +39,16 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
         });
     }
 
-    // --- выбор победителя по шансам ---
+    // выбор победителя по шансам
     const weighted = [];
     items.forEach(it => {
         for (let c = 0; c < it.chance * 10; c++) weighted.push(it);
     });
     const winner = weighted[Math.floor(Math.random() * weighted.length)];
 
-    // --- строим длинную ленту ---
+    // строим длинную ленту
     const reel = [];
-    for (let r = 0; r < 60; r++) reel.push(...items);
+    for (let r = 0; r < 80; r++) reel.push(...items);
 
     reel.forEach(it => {
         const d = document.createElement("div");
@@ -60,31 +60,41 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
         strip.appendChild(d);
     });
 
-    // === вычислить точное место выигрыша ===
-    const CELL = 150;          // ширина ячейки
-    const FRAME = 1100;        // ширина рулетки (адаптировал под твой дизайн)
+    // вычисляем остановку
+    const CELL = 150;
+    const FRAME = 1100;
     const CENTER = FRAME / 2 - CELL / 2;
 
-    // берём НЕ первое совпадение, а далёкое:
     const indexes = [];
     reel.forEach((it, i) => {
         if (it.id === winner.id) indexes.push(i);
     });
 
-    const index = indexes[indexes.length - 4]; // крутим далеко вперёд
-    const stopX = index * CELL - CENTER;
+    // дальний индекс → длинное вращение
+    const index = indexes[indexes.length - 6];
+    const realStopX = index * CELL - CENTER;
 
-    // запускаем анимацию
+    // overshoot
+    const overshootX = realStopX + 50;
+
+    // старт анимации — длинная, плавная
     setTimeout(() => {
-        strip.style.transition = "transform 6s cubic-bezier(.08,.6,0,1)";
-        strip.style.transform = `translateX(-${stopX}px)`;
+        strip.style.transition = "transform 7.4s cubic-bezier(.1,.6,0,1)";
+        strip.style.transform = `translateX(-${overshootX}px)`;
     }, 50);
 
-    // показываем награду
+    // bounce назад
+    setTimeout(() => {
+        strip.style.transition = "transform 0.35s ease-out";
+        strip.style.transform = `translateX(-${realStopX}px)`;
+    }, 7500);
+
+    // показать награду
     setTimeout(() => {
         showReward(winner);
-    }, 6200);
+    }, 8000);
 };
+
 
 
 // =========================================================
@@ -113,11 +123,11 @@ function showReward(item) {
         location.reload();
     };
 
-    // 🔥 кнопка «КРУТИТЬ ЕЩЁ»
+    // 🔥 КРУТИТЬ ЕЩЁ
     document.getElementById("btn-again").onclick = () => {
         reward.style.display = "none";
         document.querySelector(".case-header").style.display = "block";
-        document.getElementById("items-grid").style.display = "grid";
         document.getElementById("roulette-wrapper").style.display = "none";
+        // itemsGrid не трогаем — он всегда виден
     };
 }
