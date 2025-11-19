@@ -436,3 +436,21 @@ body {
     color: #ffffff;
     margin-bottom: 20px;
 }
+/* Уничтожаем тень, полосы, фоны, которые кто-то добавляет */
+.case-price *,
+.case-price::before,
+.case-price::after,
+.case-header *,
+.case-header::before,
+.case-header::after {
+    background: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    border: none !important;
+    outline: none !important;
+}
+.case-price::before,
+.case-price::after {
+    content: none !important;
+    display: none !important;
+}
