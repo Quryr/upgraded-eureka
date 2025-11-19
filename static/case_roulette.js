@@ -1,13 +1,13 @@
 // =========================================================
-// 🎰 РУЛЕТКА v4.0 — СТАБИЛЬНАЯ, ТОЧНАЯ, НЕ РАНДОМНАЯ
+// 🎰 РУЛЕТКА v5.0 — ДЛИННАЯ, ПРАВИЛЬНАЯ, БЕЗ ЦЕНТРАЦИИ
 // =========================================================
 
 window.startCaseSpin = function (caseName, caseInfo) {
 
-    const header = document.querySelector(".case-header");
+    const header  = document.querySelector(".case-header");
     const wrapper = document.getElementById("roulette-wrapper");
-    const strip = document.getElementById("roulette-strip");
-    const reward = document.getElementById("reward-block");
+    const strip   = document.getElementById("roulette-strip");
+    const reward  = document.getElementById("reward-block");
 
     header.style.display = "none";
     wrapper.style.display = "block";
@@ -15,9 +15,9 @@ window.startCaseSpin = function (caseName, caseInfo) {
 
     strip.innerHTML = "";
     strip.style.transition = "none";
-    strip.style.transform = "translateX(0)";
+    strip.style.transform  = "translateX(0)";
 
-    // данные
+    // === данные предметов ===
     const names  = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
     const drops  = window.caseDropRates?.[caseName] || {};
@@ -33,7 +33,7 @@ window.startCaseSpin = function (caseName, caseInfo) {
         });
     }
 
-    // выбор победителя
+    // === выбор победителя ===
     const weighted = [];
     items.forEach(it => {
         for (let c = 0; c < it.chance * 10; c++) weighted.push(it);
@@ -41,26 +41,23 @@ window.startCaseSpin = function (caseName, caseInfo) {
     const winner = weighted[Math.floor(Math.random() * weighted.length)];
 
     // =========================================================
-    // 🔵 ЛЕНТА — много предметов + победитель на фикс. позиции
+    // 🟦 СТРОИМ ЛЕНТУ — КАК РАНЬШЕ, ОГРОМНУЮ
     // =========================================================
 
-    const BEFORE = 150;
-    const AFTER  = 80;
-    const WINNER_INDEX = BEFORE;
-
     const reel = [];
+    const REPEAT = 120; // ← это даёт длинную красивую прокрутку
 
-    for (let i = 0; i < BEFORE; i++) {
-        reel.push(items[Math.floor(Math.random() * items.length)]);
+    for (let r = 0; r < REPEAT; r++) {
+        reel.push(...items);
     }
 
-    reel.push(winner);
+    // находим индекс победителя в этой ленте
+    const winnerIndex = reel.findIndex(it => it.id === winner.id);
 
-    for (let i = 0; i < AFTER; i++) {
-        reel.push(items[Math.floor(Math.random() * items.length)]);
-    }
+    // =========================================================
+    // 🟦 РЕНДЕР ПРЕДМЕТОВ
+    // =========================================================
 
-    // рендер
     reel.forEach(it => {
         const d = document.createElement("div");
         d.className = "roulette-cell";
@@ -72,23 +69,16 @@ window.startCaseSpin = function (caseName, caseInfo) {
     });
 
     // =========================================================
-    // 🔵 ТОЧНЫЙ РАСЧЁТ ОСТАНОВКИ ПОД ЦЕНТР ЛИНИИ
+    // 🟦 ПЛАВНОЕ ДЛИННОЕ ЗАМЕДЛЕНИЕ
     // =========================================================
 
     const CELL = 150;
+    const stopX = winnerIndex * CELL;
 
-    const FRAME_WIDTH = document.querySelector(".roulette-frame").offsetWidth;
-    const CENTER_OFFSET = FRAME_WIDTH / 2 - CELL / 2;
-
-    const stopX = WINNER_INDEX * CELL - CENTER_OFFSET;
-
-    // =========================================================
-    // 🔵 ПЛАВНОЕ ЗАМЕДЛЕНИЕ — ИДЕАЛЬНОЕ 7.5 сек
-    // =========================================================
-
+    // Просто тормозим к точке — без центрирования
     setTimeout(() => {
         strip.style.transition = "transform 7.5s cubic-bezier(.08,.85,.2,1)";
-        strip.style.transform = `translateX(-${stopX}px)`;
+        strip.style.transform   = `translateX(-${stopX}px)`;
     }, 50);
 
     setTimeout(() => {
@@ -99,7 +89,7 @@ window.startCaseSpin = function (caseName, caseInfo) {
 
 
 // =========================================================
-// 🎁 БЛОК НАГРАДЫ
+// 🎁 РЕЗУЛЬТАТ
 // =========================================================
 
 function showReward(item) {
@@ -107,7 +97,7 @@ function showReward(item) {
     const reward = document.getElementById("reward-block");
 
     document.getElementById("reward-img").src  = item.img;
-    document.getElementById("reward-name").textContent = item.name;
+    document.getElementById("reward-name").textContent  = item.name;
     document.getElementById("reward-price").textContent = `⭐ ${item.price}`;
 
     reward.style.display = "block";
