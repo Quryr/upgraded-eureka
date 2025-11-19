@@ -451,3 +451,12 @@ body {
   transform: translateY(2px) translateX(-1px);
   transition: transform 0.2s ease;
 }
+/* === Исправление звезды внутри кейса === */
+#case-price img.star-icon {
+    width: 32px !important;
+    height: 32px !important;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    transform: translateY(2px) translateX(-1px) !important;
+}
