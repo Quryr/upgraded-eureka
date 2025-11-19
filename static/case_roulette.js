@@ -48,7 +48,7 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
 
     // строим длинную ленту
     const reel = [];
-    for (let r = 0; r < 80; r++) reel.push(...items);
+    for (let r = 0; r < 25; r++) reel.push(...items);
 
     reel.forEach(it => {
         const d = document.createElement("div");
