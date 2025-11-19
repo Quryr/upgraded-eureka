@@ -416,18 +416,7 @@ body {
     object-fit: contain;         /* чтобы картинка не растягивалась */
 }
 /* ========================================================================= *//* ========================================================================= */
-.case-subtitle {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3px;
-  margin-top: 10px;
-  font-size: 22px;
-  font-weight: 900;
-  color: #ffffff;
-  line-height: 1;
-}
-
+/* Звезда как на главной карточке */
 .star-icon {
   width: 32px;
   height: 32px;
@@ -437,27 +426,13 @@ body {
   transform: translateY(2px) translateX(-1px);
   transition: transform 0.2s ease;
 }
-/* === Исправление звезды внутри кейса === */
 .case-price {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    font-size: 28px;
+    gap: 4px;
+    font-size: 24px;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 25px;
-}
-
-/* Тот же стиль, что и на главной, только меньше */
-.case-price-star {
-    width: 26px;
-    height: 26px;
-    aspect-ratio: 1/1;
-    object-fit: contain;
-    transform: translateY(2px);
-    filter: none !important;
-    background: none !important;
-    box-shadow: none !important;
-    border: none !important;
+    margin-bottom: 20px;
 }
