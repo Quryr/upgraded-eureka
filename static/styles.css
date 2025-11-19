@@ -272,15 +272,6 @@ html, body {
   line-height: 1;
 }
 
-.star-icon {
-  width: 32px;
-  height: 32px;
-  aspect-ratio: 1/1;
-  object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
-  transform: translateY(2px) translateX(-1px);
-  transition: transform 0.2s ease;
-}
 
 .case-card:hover .star-icon {
   transform: translateY(2px) translateX(-1px) scale(1.05);
