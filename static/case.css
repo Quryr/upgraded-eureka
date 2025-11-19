@@ -415,3 +415,17 @@ body {
 /* ========================================================================= */
 /* END */
 /* ========================================================================= */
+.roulette-cell {
+    width: 150px;
+    height: 150px;               /* фиксированная высота ячейки */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.roulette-img {
+    width: 100px;
+    height: 100px;               /* фиксируем размер картинки */
+    object-fit: contain;         /* чтобы картинка не растягивалась */
+}
