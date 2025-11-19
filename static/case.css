@@ -454,9 +454,26 @@ body {
     content: none !important;
     display: none !important;
 }
-.case-subtitle {
+.case-header,
+.case-price {
     background: none !important;
     box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+}
+
+/* Уничтожаем мусорные псевдоэлементы */
+.case-header::before,
+.case-header::after,
+.case-price::before,
+.case-price::after {
+    content: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    display: none !important;
+}
+
+/* Внутренние элементы тоже очищаем */
+.case-header * {
+    background: none !important;
+    box-shadow: none !important;
 }
