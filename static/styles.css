@@ -392,13 +392,6 @@ html, body {
 .case-link:hover {
   text-decoration: none;
 }
-.case-price img {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
-  vertical-align: middle;
-  transform: translateY(2px);
-}
 
 /* Демо-переключатель */
 .demo-mode-container {
