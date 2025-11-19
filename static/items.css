@@ -1,5 +1,5 @@
 /* ========================================================= */
-/*  ITEM CARD — полностью обновлённый стиль                 */
+/*  ITEM CARD — полностью обновлённый финальный стиль        */
 /* ========================================================= */
 
 .item-card {
@@ -7,14 +7,14 @@
   border: 1px solid rgba(0, 200, 255, 0.15);
   border-radius: 18px;
   padding: 14px;
-  margin: 10px;
+  margin: 14px auto;
 
-  width: 160px;                         /* Чуть шире, ровнее */
+  width: 160px;
   text-align: center;
   color: #d8e9ff;
 
   box-shadow: 0 0 15px rgba(0, 200, 255, 0.22);
-  transition: all 0.25s ease;
+  transition: all 0.28s ease;
   display: inline-block;
 }
 
@@ -33,14 +33,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 120px;     /* Высота области под предмет */
+  height: 120px;
 }
 
 .item-img img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.22s ease, filter 0.22s ease;
+  transition: transform 0.25s ease, filter 0.25s ease;
 }
 
 .item-card:hover .item-img img {
@@ -64,21 +64,21 @@
 
 
 /* ========================================================= */
-/*  PRICE (как на странице кейса)                           */
+/*  PRICE — стиль полностью как на странице кейса           */
 /* ========================================================= */
 
 .item-price {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 6px !important;
+  gap: 8px !important;
 
-  font-size: 20px !important;     /* Было 13px */
-  font-weight: 800 !important;    /* Более жирно */
-  color: #ffffff !important;      /* Белый как в кейсе */
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
 
   margin-top: 8px !important;
-  margin-bottom: 0 !important;
+  margin-bottom: 4px !important;
 
   background: none !important;
   box-shadow: none !important;
@@ -87,13 +87,13 @@
 
 
 /* ========================================================= */
-/*  PRICE STAR ICON — увеличенная, как в блоке кейса        */
+/*  PRICE STAR ICON — новая увеличенная, ровная, чистая      */
 /* ========================================================= */
 
 .item-price img,
 .currency-icon {
-  width: 24px !important;     /* Было 16px */
-  height: 24px !important;
+  width: 26px !important;
+  height: 26px !important;
 
   object-fit: contain !important;
   transform: translateY(2px) !important;
@@ -104,3 +104,17 @@
   box-shadow: none !important;
   border: none !important;
 }
+
+
+/* ========================================================= */
+/* Фиксим любой мусор, который мог добавляться ранее         */
+/* ========================================================= */
+
+.item-price *,
+.item-price::before,
+.item-price::after {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
