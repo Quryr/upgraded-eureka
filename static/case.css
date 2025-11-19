@@ -418,12 +418,9 @@ body {
 /* ========================================================================= *//* ========================================================================= */
 /* Звезда как на главной карточке */
 .star-icon {
-  width: 40px;      /* БЫЛО 32px */
-  height: 40px;     /* БЫЛО 32px */
-  aspect-ratio: 1/1;
+  width: 32px;      /* БЫЛО 32px */
+  height: 32px;     /* БЫЛО 32px */
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
-  transform: translateY(3px) translateX(-2px); /* при необходимости чуть подровнять */
   transition: transform 0.2s ease;
 }
 .case-price {
