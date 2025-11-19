@@ -13,7 +13,6 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
 
     // скрываем картинку и сетку
     header.style.display = "none";
-    itemsGrid.style.display = "none";
 
     // показываем рулетку
     wrapper.style.display = "block";
