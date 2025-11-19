@@ -422,6 +422,7 @@ body {
   height: 32px;     /* БЫЛО 32px */
   object-fit: contain;
   transition: transform 0.2s ease;
+    transform: translateY(0px) translateX(0px) !important;
 }
 .case-price {
     display: flex;
