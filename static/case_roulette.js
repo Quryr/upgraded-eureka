@@ -1,6 +1,5 @@
 // =========================================================
-// 🎰 ПЛАВНАЯ РУЛЕТКА — БЕЗ ДЁРГАНИЙ, БЕЗ ЦЕНТРИРОВАНИЯ,
-// ОСТАНАВЛИВАЕТСЯ ТАМ, ГДЕ ДОЛЖНА, МАКСИМАЛЬНО РЕАЛИСТИЧНО
+// 🎰 ИДЕАЛЬНАЯ РУЛЕТКА — ПЛАВНАЯ, ДОЛГАЯ, С БОУНСОМ
 // =========================================================
 
 window.startCaseSpin = function (caseName, caseInfo, count = 1) {
@@ -12,19 +11,19 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
-    // скрываем только header, сетку НЕ скрываем
+    // скрываем только верх кейса, но НЕ сетку предметов
     header.style.display = "none";
 
-    // рулетка видна
+    // показываем рулетку
     wrapper.style.display = "block";
     reward.style.display = "none";
 
-    // сброс
+    // ресет
     strip.innerHTML = "";
     strip.style.transition = "none";
     strip.style.transform = "translateX(0)";
 
-    // данные кейса
+    // данные
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
     const drops = window.caseDropRates?.[caseName] || {};
@@ -51,7 +50,6 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
     const reel = [];
     for (let r = 0; r < 80; r++) reel.push(...items);
 
-    // рендер ячеек
     reel.forEach(it => {
         const d = document.createElement("div");
         d.className = "roulette-cell";
@@ -62,35 +60,35 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
         strip.appendChild(d);
     });
 
-    // параметры
-    const CELL = 150; // твоя ширина ячейки
+    // вычисляем остановку
+    const CELL = 150;
+    const FRAME = 1100;
+    const CENTER = FRAME / 2 - CELL / 2;
 
-    // список индексов победного предмета
     const indexes = [];
     reel.forEach((it, i) => {
         if (it.id === winner.id) indexes.push(i);
     });
 
-    // выбираем дальний индекс для длинного вращения
+    // дальний индекс → длинное вращение
     const index = indexes[indexes.length - 6];
+    const realStopX = index * CELL - CENTER;
 
-    // ⚠️ НИКАКОГО центрирования!  
-    // рулетка останавливается ЕСТЕСТВЕННО.
-    const stopX = index * CELL;
+    // overshoot
+    const overshootX = realStopX + 50;
 
-    // =========================================================
-    // 🎬 ПЛАВНАЯ ДОЛГАЯ ОСТАНОВКА — НИКАКИХ СКАЧКОВ И ПОДГОНКИ
-    // =========================================================
+    // старт анимации — длинная, плавная
     setTimeout(() => {
-        strip.style.transition = "transform 9s cubic-bezier(0.05, 0.30, 0.10, 1)";
-        strip.style.transform = `translateX(-${stopX}px)`;
+        strip.style.transition = "transform 7.4s cubic-bezier(.1,.6,0,1)";
+        strip.style.transform = `translateX(-${overshootX}px)`;
     }, 50);
 
-    // показать награду после завершения вращения
+    // показать награду
     setTimeout(() => {
         showReward(winner);
-    }, 9200);
+    }, 8000);
 };
+
 
 
 // =========================================================
@@ -109,7 +107,7 @@ function showReward(item) {
 
     // оставить предмет
     document.getElementById("btn-keep").onclick = () => {
-        alert("Предмет оставлен!");
+        alert("Вы оставили предмет!");
         location.reload();
     };
 
@@ -119,11 +117,11 @@ function showReward(item) {
         location.reload();
     };
 
-    // крутить ещё
+    // 🔥 КРУТИТЬ ЕЩЁ
     document.getElementById("btn-again").onclick = () => {
         reward.style.display = "none";
         document.querySelector(".case-header").style.display = "block";
         document.getElementById("roulette-wrapper").style.display = "none";
-        // itemsGrid остаётся видимым — ты просил
+        // itemsGrid не трогаем — он всегда виден
     };
 }
