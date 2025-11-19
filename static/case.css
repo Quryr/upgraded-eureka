@@ -454,3 +454,9 @@ body {
     content: none !important;
     display: none !important;
 }
+.case-subtitle {
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
