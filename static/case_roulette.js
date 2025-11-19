@@ -48,7 +48,7 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
 
     // строим длинную ленту
     const reel = [];
-    for (let r = 0; r < 10; r++) reel.push(...items);
+    for (let r = 0; r < 80; r++) reel.push(...items);
 
     reel.forEach(it => {
         const d = document.createElement("div");
@@ -79,10 +79,18 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
     const overshootX = realStopX + 50;
 
     // старт анимации — длинная, плавная
+// === ЭТАП 1 — быстро крутим почти до победителя ===
     setTimeout(() => {
-        strip.style.transition = "transform 7.4s cubic-bezier(.02,.45,.08,1)";
-        strip.style.transform = `translateX(-${overshootX}px)`;
+        strip.style.transition = "transform 5s linear";
+        strip.style.transform = `translateX(-${realStopX - 400}px)`;
     }, 50);
+    
+    // === ЭТАП 2 — плавное замедление к победителю ===
+    setTimeout(() => {
+        strip.style.transition = "transform 2.4s cubic-bezier(.15,.55,0,1)";
+        strip.style.transform = `translateX(-${realStopX}px)`;
+    }, 5050);
+
 
     // показать награду
     setTimeout(() => {
