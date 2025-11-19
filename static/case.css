@@ -106,15 +106,6 @@ body {
     text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
 }
 
-#case-price {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 35px;
-}
 
 
 
