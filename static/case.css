@@ -258,7 +258,8 @@ body {
 }
 
 .roulette-frame {
-    width: 900px;
+    width: 100%;
+    max-width: 1100px;
     height: 180px;
     margin: 20px auto;
     padding: 20px 0;
