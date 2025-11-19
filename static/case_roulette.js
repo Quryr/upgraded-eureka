@@ -80,16 +80,20 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
 
     // старт анимации — длинная, плавная
 // === ЭТАП 1 — быстро крутим почти до победителя ===
+    // === 1. ДАЛЬНИЙ ПРОКРУТ ДО ПОЧТИ ФИНИША (реально быстро) ===
+    const fastDistance = realStopX - 2000; // крутим ОЧЕНЬ далеко
+    
     setTimeout(() => {
-        strip.style.transition = "transform 5s linear";
-        strip.style.transform = `translateX(-${realStopX - 400}px)`;
+        strip.style.transition = "transform 5s cubic-bezier(.05,.7,0,1)"; // плавный разгон + равномерное вращение
+        strip.style.transform = `translateX(-${fastDistance}px)`;
     }, 50);
     
-    // === ЭТАП 2 — плавное замедление к победителю ===
+    // === 2. ФИНАЛЬНАЯ ПОДВОДКА С ПЛАВНЫМ СИЛЬНЫМ ЗАМЕДЛЕНИЕМ ===
     setTimeout(() => {
         strip.style.transition = "transform 2.4s cubic-bezier(.15,.55,0,1)";
         strip.style.transform = `translateX(-${realStopX}px)`;
     }, 5050);
+
 
 
     // показать награду
