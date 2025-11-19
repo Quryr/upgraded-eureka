@@ -449,6 +449,7 @@ body {
     margin-bottom: 25px;
 }
 
+/* звезда без glow, без фона */
 .case-price-star {
     width: 28px;
     height: 28px;
@@ -458,8 +459,8 @@ body {
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
-    margin: 0;
     padding: 0;
+    margin: 0;
     transform: translateY(2px);
 }
 
