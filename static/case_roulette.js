@@ -79,7 +79,7 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
 
     // старт анимации — длинная, плавная
     setTimeout(() => {
-        strip.style.transition = "transform 7.4s cubic-bezier(.05,.55,.15,1)";
+        strip.style.transition = "transform 7.4s cubic-bezier(.02,.45,.08,1)";
         strip.style.transform = `translateX(-${overshootX}px)`;
     }, 50);
 
