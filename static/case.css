@@ -439,24 +439,32 @@ body {
 }
 /* === Исправление звезды внутри кейса === */
 #case-price {
-    display: inline-flex;
-    align-items: center;
+    display: flex;
     justify-content: center;
+    align-items: center;
     gap: 6px;
-    font-size: 28px;
     font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 35px;
+    font-size: 30px;
+    margin-top: 15px;
+}
+
+#case-price .case-star {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    background: none !important;
+    filter: none !important;
 }
 
 #case-price img {
     width: 28px;
     height: 28px;
     object-fit: contain;
-    transform: translateY(1px);
-    margin: 0;
-    padding: 0;
-    filter: none !important; /* убрать glow, рамки и эффекты */
+    filter: none !important;
     background: none !important;
+    box-shadow: none !important;
     border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
