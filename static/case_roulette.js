@@ -1,22 +1,26 @@
 // =========================================================
-// 🎰 ИДЕАЛЬНАЯ РУЛЕТКА — ОДИНАРНЫЙ ПРОКРУТ + ПЛАВНОЕ ДОЛГОЕ ЗАМЕДЛЕНИЕ
+// 🎰 РУЛЕТКА v3.0 — ФИНАЛЬНАЯ, СТАБИЛЬНАЯ, ПРАВИЛЬНАЯ
 // =========================================================
 
 window.startCaseSpin = function (caseName, caseInfo) {
 
+    // элементы
     const header = document.querySelector(".case-header");
     const wrapper = document.getElementById("roulette-wrapper");
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
+    // скрываем верх и показываем рулетку
     header.style.display = "none";
     wrapper.style.display = "block";
     reward.style.display = "none";
 
+    // чистим ленту
     strip.innerHTML = "";
     strip.style.transition = "none";
     strip.style.transform = "translateX(0)";
 
+    // данные предметов
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
     const drops  = window.caseDropRates?.[caseName] || {};
@@ -32,16 +36,38 @@ window.startCaseSpin = function (caseName, caseInfo) {
         });
     }
 
-    // взвешенный рандом
+    // выбор победителя по шансам
     const weighted = [];
     items.forEach(it => {
         for (let c = 0; c < it.chance * 10; c++) weighted.push(it);
     });
     const winner = weighted[Math.floor(Math.random() * weighted.length)];
 
-    // супер длинная лента
+    // =========================================================
+    // 🟦 СБОР ЛЕНТЫ — ГАРАНТИРУЕМ ПОЗИЦИЮ ПОБЕДИТЕЛЯ
+    // =========================================================
+
     const reel = [];
-    for (let r = 0; r < 140; r++) reel.push(...items);
+
+    // 60 случайных предметов "до победителя"
+    for (let i = 0; i < 60; i++) {
+        const rand = items[Math.floor(Math.random() * items.length)];
+        reel.push(rand);
+    }
+
+    // победитель ровно в позиции 60
+    const WINNER_INDEX = 60; 
+    reel.push(winner);
+
+    // ещё 20 предметов после победителя
+    for (let i = 0; i < 20; i++) {
+        const rand = items[Math.floor(Math.random() * items.length)];
+        reel.push(rand);
+    }
+
+    // =========================================================
+    // 🟦 РЕНДЕР ПРЕДМЕТОВ В ЛЕНТЕ
+    // =========================================================
 
     reel.forEach(it => {
         const d = document.createElement("div");
@@ -53,47 +79,53 @@ window.startCaseSpin = function (caseName, caseInfo) {
         strip.appendChild(d);
     });
 
-    // === расчёт остановки ===
+    // =========================================================
+    // 🟦 ДВИЖЕНИЕ РУЛЕТКИ — ПЛАВНОЕ 7.5сек ЗАМЕДЛЕНИЕ
+    // =========================================================
+
     const CELL = 150;
+    const stopX = WINNER_INDEX * CELL;
 
-    const indexes = [];
-    reel.forEach((it, i) => {
-        if (it.id === winner.id) indexes.push(i);
-    });
-
-    // берём очень далёкий элемент → долгое вращение
-    const index = indexes[indexes.length - 5];
-
-    // ❗ НЕТ центрирования вообще
-    const realStopX = index * CELL;
-
-    // плавное замедление с очень сильным тормозом
     setTimeout(() => {
         strip.style.transition = "transform 7.5s cubic-bezier(.08,.85,.2,1)";
-        strip.style.transform = `translateX(-${realStopX}px)`;
+        strip.style.transform = `translateX(-${stopX}px)`;
     }, 50);
 
-    // через 8 секунд показываем выигрыш
-    setTimeout(() => showReward(winner), 8200);
+    // показываем награду
+    setTimeout(() => {
+        showReward(winner);
+    }, 7600);
 };
 
 
+
 // =========================================================
-// 🎁 БЛОК НАГРАДЫ
+// 🎁 БЛОК НАГРАДЫ (KEEP / SELL / SPIN AGAIN)
 // =========================================================
+
 function showReward(item) {
 
     const reward = document.getElementById("reward-block");
 
-    document.getElementById("reward-img").src = item.img;
+    document.getElementById("reward-img").src  = item.img;
     document.getElementById("reward-name").textContent = item.name;
     document.getElementById("reward-price").textContent = `⭐ ${item.price}`;
 
     reward.style.display = "block";
 
-    document.getElementById("btn-keep").onclick = () => location.reload();
-    document.getElementById("btn-sell").onclick = () => location.reload();
+    // KEEP
+    document.getElementById("btn-keep").onclick = () => {
+        alert("Вы оставили предмет!");
+        location.reload();
+    };
 
+    // SELL
+    document.getElementById("btn-sell").onclick = () => {
+        alert("Предмет продан!");
+        location.reload();
+    };
+
+    // SPIN AGAIN
     document.getElementById("btn-again").onclick = () => {
         reward.style.display = "none";
         document.querySelector(".case-header").style.display = "block";
