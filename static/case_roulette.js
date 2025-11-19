@@ -1,29 +1,22 @@
 // =========================================================
-// 🎰 ИДЕАЛЬНАЯ РУЛЕТКА — ПЛАВНАЯ, ДОЛГАЯ, С БОУНСОМ
+// 🎰 ИДЕАЛЬНАЯ РУЛЕТКА — ПЛАВНОЕ УСКОРЕНИЕ + ПЛАВНОЕ ТОРМОЖЕНИЕ
 // =========================================================
 
-window.startCaseSpin = function (caseName, caseInfo, count = 1) {
+window.startCaseSpin = function (caseName, caseInfo) {
 
-    // элементы
     const header = document.querySelector(".case-header");
-    const itemsGrid = document.getElementById("items-grid");
     const wrapper = document.getElementById("roulette-wrapper");
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
-    // скрываем только верх кейса, но НЕ сетку предметов
     header.style.display = "none";
-
-    // показываем рулетку
     wrapper.style.display = "block";
     reward.style.display = "none";
 
-    // ресет
     strip.innerHTML = "";
     strip.style.transition = "none";
     strip.style.transform = "translateX(0)";
 
-    // данные
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
     const drops = window.caseDropRates?.[caseName] || {};
@@ -39,16 +32,15 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
         });
     }
 
-    // выбор победителя по шансам
     const weighted = [];
     items.forEach(it => {
         for (let c = 0; c < it.chance * 10; c++) weighted.push(it);
     });
     const winner = weighted[Math.floor(Math.random() * weighted.length)];
 
-    // строим длинную ленту
+    // Лента
     const reel = [];
-    for (let r = 0; r < 80; r++) reel.push(...items);
+    for (let r = 0; r < 120; r++) reel.push(...items);
 
     reel.forEach(it => {
         const d = document.createElement("div");
@@ -60,7 +52,6 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
         strip.appendChild(d);
     });
 
-    // вычисляем остановку
     const CELL = 150;
     const FRAME = 1100;
     const CENTER = FRAME / 2 - CELL / 2;
@@ -70,38 +61,30 @@ window.startCaseSpin = function (caseName, caseInfo, count = 1) {
         if (it.id === winner.id) indexes.push(i);
     });
 
-    // дальний индекс → длинное вращение
-    const index = indexes[indexes.length - 2];
+    // далёкий индекс → длинная прокрутка
+    const index = indexes[indexes.length - 3];
     const realStopX = index * CELL - CENTER;
 
+    // безопасный дальний старт
+    const fastDistance = Math.max(realStopX - 3000, 500);
 
-    // overshoot
-    const overshootX = realStopX + 50;
-
-    // старт анимации — длинная, плавная
-// === ЭТАП 1 — быстро крутим почти до победителя ===
-    // === 1. ДАЛЬНИЙ ПРОКРУТ ДО ПОЧТИ ФИНИША (реально быстро) ===
-    const fastDistance = realStopX - 2000; // крутим ОЧЕНЬ далеко
-    
+    // === 1. Ускорение (быстро, но плавно) ===
     setTimeout(() => {
-        strip.style.transition = "transform 5s cubic-bezier(.05,.7,0,1)"; // плавный разгон + равномерное вращение
+        strip.style.transition = "transform 4.5s cubic-bezier(.25,.8,.5,1)";
         strip.style.transform = `translateX(-${fastDistance}px)`;
     }, 50);
-    
-    // === 2. ФИНАЛЬНАЯ ПОДВОДКА С ПЛАВНЫМ СИЛЬНЫМ ЗАМЕДЛЕНИЕМ ===
+
+    // === 2. Долгое красивое замедление ===
     setTimeout(() => {
-        strip.style.transition = "transform 2.4s cubic-bezier(.15,.55,0,1)";
+        strip.style.transition = "transform 3.5s cubic-bezier(.1,.55,0,1)";
         strip.style.transform = `translateX(-${realStopX}px)`;
-    }, 5050);
+    }, 4600);
 
-
-
-    // показать награду
+    // Показ награды
     setTimeout(() => {
         showReward(winner);
-    }, 8000);
+    }, 8200);
 };
-
 
 
 // =========================================================
