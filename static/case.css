@@ -116,11 +116,6 @@ body {
     margin-bottom: 35px;
 }
 
-#case-price img {
-    width: 20px;
-    height: 20px;
-    transform: translateY(2px);
-}
 
 
 /* ========================================================================= */
@@ -452,11 +447,25 @@ body {
   transition: transform 0.2s ease;
 }
 /* === Исправление звезды внутри кейса === */
-#case-price img.star-icon {
-    width: 32px !important;
-    height: 32px !important;
-    aspect-ratio: 1/1;
+#case-price {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 35px;
+}
+
+#case-price img {
+    width: 28px;
+    height: 28px;
     object-fit: contain;
-    image-rendering: -webkit-optimize-contrast;
-    transform: translateY(2px) translateX(-1px) !important;
+    transform: translateY(1px);
+    margin: 0;
+    padding: 0;
+    filter: none !important; /* убрать glow, рамки и эффекты */
+    background: none !important;
+    border: none !important;
 }
