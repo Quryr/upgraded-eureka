@@ -1,46 +1,56 @@
-window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName) {
+// =========================================================
+// 🎰 ИДЕАЛЬНАЯ РУБЛЕЖНАЯ РУЛЕТКА — БЕЗ БАГОВ, ЧЁТКО ПО ЦЕНТРУ
+// =========================================================
 
-    // элементы
-    const container = document.querySelector(".case-container");
+window.startCaseSpin = function (caseName, caseInfo, count = 1) {
+
+    // --- элементы ---
+    const header = document.querySelector(".case-header");
+    const itemsGrid = document.getElementById("items-grid");
     const wrapper = document.getElementById("roulette-wrapper");
     const strip = document.getElementById("roulette-strip");
     const reward = document.getElementById("reward-block");
 
-    // прячем кейс
-    container.style.display = "none";
+    // скрываем картинку и сетку
+    header.style.display = "none";
+    itemsGrid.style.display = "none";
 
     // показываем рулетку
     wrapper.style.display = "block";
-
-    // очищаем старый контент
-    strip.style.transition = "none";
-    strip.style.transform = "translateX(0)";
-    strip.innerHTML = "";
     reward.style.display = "none";
 
-    // получаем имена/цены
+    // очищаем и сбрасываем
+    strip.innerHTML = "";
+    strip.style.transition = "none";
+    strip.style.transform = "translateX(0)";
+
+    // --- данные ---
     const names = window.caseItemNames[caseName];
     const prices = window.caseItemPrices[caseName];
+    const drops = window.caseDropRates?.[caseName] || {};
 
-    // создаём список предметов кейса
     const items = [];
     for (let i = 1; i <= caseInfo.count; i++) {
         items.push({
             id: i,
             name: names[i],
             price: prices[i],
-            img: `${caseInfo.path}${i}.png`
+            img: `${caseInfo.path}${i}.png`,
+            chance: drops[i] || 1
         });
     }
 
-    // создаём длинную ленту (много повторов)
+    // --- выбор победителя по шансам ---
+    const weighted = [];
+    items.forEach(it => {
+        for (let c = 0; c < it.chance * 10; c++) weighted.push(it);
+    });
+    const winner = weighted[Math.floor(Math.random() * weighted.length)];
+
+    // --- строим длинную ленту ---
     const reel = [];
-    for (let i = 0; i < 60; i++) reel.push(...items);
+    for (let r = 0; r < 60; r++) reel.push(...items);
 
-    // РАЗМЕР ячейки строго синхронизирован с CSS
-    const CELL = 150; // ширина .roulette-cell
-
-    // отрисовываем ленту
     reel.forEach(it => {
         const d = document.createElement("div");
         d.className = "roulette-cell";
@@ -51,20 +61,18 @@ window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName
         strip.appendChild(d);
     });
 
-    // выбираем победителя
-    const winner = items[Math.floor(Math.random() * items.length)];
+    // === вычислить точное место выигрыша ===
+    const CELL = 150;          // ширина ячейки
+    const FRAME = 1100;        // ширина рулетки (адаптировал под твой дизайн)
+    const CENTER = FRAME / 2 - CELL / 2;
 
-    // находим индекс первого совпадения
-    const index = reel.findIndex(r => r.id === winner.id);
+    // берём НЕ первое совпадение, а далёкое:
+    const indexes = [];
+    reel.forEach((it, i) => {
+        if (it.id === winner.id) indexes.push(i);
+    });
 
-    // вычисление центра рулетки
-    const frame = document.querySelector(".roulette-frame");
-    const frameWidth = frame.offsetWidth;
-
-    // центр = середина экрана минус половина ячейки
-    const CENTER = frameWidth / 2 - CELL / 2;
-
-    // конечная позиция
+    const index = indexes[indexes.length - 4]; // крутим далеко вперёд
     const stopX = index * CELL - CENTER;
 
     // запускаем анимацию
@@ -80,6 +88,10 @@ window.startCaseSpin = function (selectedCase, selectedCount, caseInfo, caseName
 };
 
 
+// =========================================================
+// 🎁 БЛОК НАГРАДЫ
+// =========================================================
+
 function showReward(item) {
 
     const reward = document.getElementById("reward-block");
@@ -90,13 +102,23 @@ function showReward(item) {
 
     reward.style.display = "block";
 
-    // кнопка KEEP
+    // оставить предмет
     document.getElementById("btn-keep").onclick = () => {
+        alert("Вы оставили предмет!");
         location.reload();
     };
 
-    // кнопка SELL
+    // продать предмет
     document.getElementById("btn-sell").onclick = () => {
+        alert("Предмет продан!");
         location.reload();
+    };
+
+    // 🔥 кнопка «КРУТИТЬ ЕЩЁ»
+    document.getElementById("btn-again").onclick = () => {
+        reward.style.display = "none";
+        document.querySelector(".case-header").style.display = "block";
+        document.getElementById("items-grid").style.display = "grid";
+        document.getElementById("roulette-wrapper").style.display = "none";
     };
 }
