@@ -388,5 +388,35 @@ window.caseItemNames = {
 
   <script src="/static/case_roulette.js"></script>
   <script src="/static/case.js" defer></script>
+  <!-- === LOGIN MODAL === -->
+<div class="modal hidden" id="login-modal">
+  <div class="modal-content">
+    <h2>Login</h2>
+    
+    <input type="text" id="login-username" placeholder="Username">
+    <input type="password" id="login-password" placeholder="Password">
+
+    <button class="modal-btn" id="login-submit">LOGIN</button>
+    <p class="modal-error" id="login-error"></p>
+
+    <span class="modal-close" data-close="login-modal">×</span>
+  </div>
+</div>
+
+<!-- === SIGNUP MODAL === -->
+<div class="modal hidden" id="signup-modal">
+  <div class="modal-content">
+    <h2>Sign Up</h2>
+
+    <input type="text" id="signup-username" placeholder="Username">
+    <input type="password" id="signup-password" placeholder="Password">
+
+    <button class="modal-btn" id="signup-submit">CREATE ACCOUNT</button>
+    <p class="modal-error" id="signup-error"></p>
+
+    <span class="modal-close" data-close="signup-modal">×</span>
+  </div>
+</div>
+
 </body>
 </html>
