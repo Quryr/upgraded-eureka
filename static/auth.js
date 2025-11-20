@@ -9,6 +9,32 @@ function logoutUser() {
     localStorage.removeItem("user");
 }
 
+// ====== BALANCE FUNCTIONS ======
+function getBalance() {
+    const u = loadUser();
+    return u ? u.balance : 0;
+}
+
+function changeBalance(amount) {
+    const user = loadUser();
+    if (!user) return false;
+
+    user.balance += amount;
+
+    if (user.balance < 0) return false;
+
+    saveUser(user);
+    updateUIBalance();
+    return true;
+}
+
+function updateUIBalance() {
+    const user = loadUser();
+    if (user) {
+        const el = document.getElementById("profile-balance");
+        if (el) el.textContent = user.balance;
+    }
+}
 
 // ====== DOM ELEMENTS ======
 const loginModal = document.getElementById("login-modal");
@@ -30,10 +56,9 @@ const profileName = document.getElementById("profile-username");
 const profileBalance = document.getElementById("profile-balance");
 const logoutBtn = document.getElementById("logout-btn");
 
-
 // ====== MODAL OPEN ======
-loginBtn.addEventListener("click", () => loginModal.classList.remove("hidden"));
-signupBtn.addEventListener("click", () => signupModal.classList.remove("hidden"));
+loginBtn?.addEventListener("click", () => loginModal.classList.remove("hidden"));
+signupBtn?.addEventListener("click", () => signupModal.classList.remove("hidden"));
 
 document.querySelectorAll(".modal-close").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -42,9 +67,8 @@ document.querySelectorAll(".modal-close").forEach(btn => {
     });
 });
 
-
 // ====== SIGN UP ======
-signupSubmit.addEventListener("click", () => {
+signupSubmit?.addEventListener("click", () => {
     const username = document.getElementById("signup-username").value.trim();
     const password = document.getElementById("signup-password").value.trim();
 
@@ -60,9 +84,8 @@ signupSubmit.addEventListener("click", () => {
     applyUser();
 });
 
-
 // ====== LOGIN ======
-loginSubmit.addEventListener("click", () => {
+loginSubmit?.addEventListener("click", () => {
     const username = document.getElementById("login-username").value.trim();
     const password = document.getElementById("login-password").value.trim();
 
@@ -77,8 +100,7 @@ loginSubmit.addEventListener("click", () => {
     applyUser();
 });
 
-
-// ====== APPLY USER DATA TO UI ======
+// ====== APPLY USER ======
 function applyUser() {
     const user = loadUser();
 
@@ -93,9 +115,8 @@ function applyUser() {
 
 applyUser();
 
-
 // ====== LOGOUT ======
-logoutBtn.addEventListener("click", () => {
+logoutBtn?.addEventListener("click", () => {
     logoutUser();
     location.reload();
 });
