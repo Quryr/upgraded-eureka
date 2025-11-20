@@ -1,13 +1,21 @@
-/* ============================================
-   SIMPLE LOCALSTORAGE AUTH SYSTEM
-   ============================================ */
+// ====== LOCALSTORAGE HELPERS ======
+function saveUser(data) {
+    localStorage.setItem("user", JSON.stringify(data));
+}
+function loadUser() {
+    return JSON.parse(localStorage.getItem("user"));
+}
+function logoutUser() {
+    localStorage.removeItem("user");
+}
 
-/* ---- UI Elements ---- */
+
+// ====== DOM ELEMENTS ======
 const loginModal = document.getElementById("login-modal");
 const signupModal = document.getElementById("signup-modal");
 
-const loginBtn = document.getElementById("login-btn-nav");
-const signupBtn = document.getElementById("signup-btn-nav");
+const loginBtn = document.getElementById("login-btn");
+const signupBtn = document.getElementById("signup-btn");
 
 const loginSubmit = document.getElementById("login-submit");
 const signupSubmit = document.getElementById("signup-submit");
@@ -15,130 +23,79 @@ const signupSubmit = document.getElementById("signup-submit");
 const loginError = document.getElementById("login-error");
 const signupError = document.getElementById("signup-error");
 
-const profileBlock = document.getElementById("profile-block");
-const profileName = document.getElementById("profile-name");
+const navAuth = document.getElementById("nav-auth");
+const navProfile = document.getElementById("nav-profile");
+
+const profileName = document.getElementById("profile-username");
+const profileBalance = document.getElementById("profile-balance");
 const logoutBtn = document.getElementById("logout-btn");
 
 
-/* ============================================
-   OPEN / CLOSE MODALS
-   ============================================ */
-
-function openModal(id) {
-    document.getElementById(id).classList.remove("hidden");
-}
-
-function closeModal(id) {
-    document.getElementById(id).classList.add("hidden");
-}
+// ====== MODAL OPEN ======
+loginBtn.addEventListener("click", () => loginModal.classList.remove("hidden"));
+signupBtn.addEventListener("click", () => signupModal.classList.remove("hidden"));
 
 document.querySelectorAll(".modal-close").forEach(btn => {
     btn.addEventListener("click", () => {
-        closeModal(btn.dataset.close);
+        const id = btn.dataset.close;
+        document.getElementById(id).classList.add("hidden");
     });
 });
 
-window.addEventListener("click", e => {
-    if (e.target.classList.contains("modal")) {
-        e.target.classList.add("hidden");
-    }
-});
 
-
-/* ============================================
-   AUTH LOGIC
-   ============================================ */
-
-// Save account
-function saveUser(username, password) {
-    localStorage.setItem("user", JSON.stringify({
-        username,
-        password,
-        balance: 10000     // стартовый баланс
-    }));
-}
-
-// Load account
-function loadUser() {
-    const data = localStorage.getItem("user");
-    return data ? JSON.parse(data) : null;
-}
-
-// Update navbar after login
-function updateNavbar() {
-    const user = loadUser();
-
-    if (user) {
-        // Hide login/signup
-        document.getElementById("auth-buttons").style.display = "none";
-
-        // Show profile
-        profileBlock.style.display = "flex";
-        profileName.textContent = user.username;
-    }
-}
-
-/* ============================================
-   SIGNUP
-   ============================================ */
-
+// ====== SIGN UP ======
 signupSubmit.addEventListener("click", () => {
     const username = document.getElementById("signup-username").value.trim();
     const password = document.getElementById("signup-password").value.trim();
 
-    if (username.length < 3) {
-        signupError.textContent = "Username must be at least 3 characters";
-        return;
-    }
-    if (password.length < 3) {
-        signupError.textContent = "Password must be at least 3 characters";
+    if (!username || !password) {
+        signupError.textContent = "Fill all fields!";
         return;
     }
 
-    saveUser(username, password);
-    signupError.textContent = "";
-    closeModal("signup-modal");
+    const user = { username, password, balance: 10000 };
+    saveUser(user);
 
-    updateNavbar();
+    signupModal.classList.add("hidden");
+    applyUser();
 });
 
 
-/* ============================================
-   LOGIN
-   ============================================ */
-
+// ====== LOGIN ======
 loginSubmit.addEventListener("click", () => {
     const username = document.getElementById("login-username").value.trim();
     const password = document.getElementById("login-password").value.trim();
 
-    const user = loadUser();
+    const saved = loadUser();
 
-    if (!user || user.username !== username || user.password !== password) {
-        loginError.textContent = "Incorrect username or password";
+    if (!saved || saved.username !== username || saved.password !== password) {
+        loginError.textContent = "Wrong username or password!";
         return;
     }
 
-    loginError.textContent = "";
-    closeModal("login-modal");
-
-    updateNavbar();
+    loginModal.classList.add("hidden");
+    applyUser();
 });
 
 
-/* ============================================
-   LOGOUT
-   ============================================ */
+// ====== APPLY USER DATA TO UI ======
+function applyUser() {
+    const user = loadUser();
 
+    if (user) {
+        navAuth.classList.add("hidden");
+        navProfile.classList.remove("hidden");
+
+        profileName.textContent = user.username;
+        profileBalance.textContent = user.balance;
+    }
+}
+
+applyUser();
+
+
+// ====== LOGOUT ======
 logoutBtn.addEventListener("click", () => {
-    localStorage.removeItem("user");
+    logoutUser();
     location.reload();
-});
-
-
-/* ============================================
-   AUTO LOGIN ON PAGE LOAD
-   ============================================ */
-
-document.addEventListener("DOMContentLoaded", () => {
-    updateNavbar();
 });
