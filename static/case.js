@@ -90,27 +90,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🎡 ЗАПУСК РУЛЕТКИ
     // ----------------------------------
 
-    openCaseBtn.addEventListener("click", () => {
+openCaseBtn.addEventListener("click", () => {
+    const user = loadUser();
+    if (!user) return alert("You must login first!");
 
-        const user = loadUser();
+    const need = selectedCase.price * selectedCount;
+    if (user.balance < need) return alert("Not enough stars!");
 
-        if (!user) {
-            alert("You must login first!");
-            return;
-        }
-
-        const need = selectedCase.price * selectedCount;
-
-        if (user.balance < need) {
-            alert("Not enough stars!");
-            return;
-        }
-
-        // списываем звезды
-        changeBalance(-need);
-
-        // запускаем рулетку
-        startCaseSpin(caseName, caseInfo, selectedCount);
-    });
-
+    changeBalance(-need);
+    startCaseSpin(caseName, caseInfo, selectedCount);
 });
+
+}); // ← закрываем DOMContentLoaded
