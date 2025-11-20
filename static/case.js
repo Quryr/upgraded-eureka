@@ -75,10 +75,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🎡 ЗАПУСК РУЛЕТКИ
     // ----------------------------------
 
-    if (openCaseBtn) {
-        openCaseBtn.addEventListener("click", () => {
-            startCaseSpin(caseName, caseInfo, selectedCount);
-        });
+    openCaseBtn.addEventListener("click", () => {
+
+    const user = loadUser();
+    if (!user) {
+        alert("You must login first!");
+        return;
+    }
+
+    const need = selectedCase.price * selectedCount;
+
+        if (user.balance < need) {
+            alert("Not enough stars!");
+            return;
+        }
+    
+        changeBalance(-need); // списываем баланс
+    
+        startCaseSpin(caseName, caseInfo, selectedCount);
+    });
+
     }
 });
 
