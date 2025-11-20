@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ✨ ПРОВЕРКА И СПИСАНИЕ БАЛАНСА
     // ----------------------------------
 
-    function changeBalance(amount) {
+    window.changeBalance = function(amount) {
         const user = loadUser();
         if (!user) return;
 
