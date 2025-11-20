@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const itemsGrid = document.getElementById("items-grid");
     const openCaseBtn = document.querySelector(".case-btn-main");
 
+    // Проверка загрузки данных
     if (!window.allCases) {
         caseTitle.textContent = "DATA NOT LOADED";
         return;
@@ -31,15 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
     caseImage.src = selectedCase.img;
     caseTitle.textContent = selectedCase.name;
 
-        if (selectedCase.price) {
-            casePrice.innerHTML = `
-                <div class="case-subtitle">
-                    <span>${selectedCase.price}</span>
-                    <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
-                </div>
-            `;
-        }
- else {
+    if (selectedCase.price) {
+        casePrice.innerHTML = `
+            <div class="case-subtitle">
+                <span>${selectedCase.price}</span>
+                <img src="/static/assets/icons/star.png" class="star-icon" alt="⭐">
+            </div>
+        `;
+    } else {
         casePrice.innerHTML = `<div class="case-subtitle">БЕСПЛАТНО</div>`;
     }
 
@@ -72,32 +72,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ----------------------------------
+    // ✨ ПРОВЕРКА И СПИСАНИЕ БАЛАНСА
+    // ----------------------------------
+
+    function changeBalance(amount) {
+        const user = loadUser();
+        if (!user) return;
+
+        user.balance += amount;
+        saveUser(user);
+
+        const balanceEl = document.getElementById("profile-balance");
+        if (balanceEl) balanceEl.textContent = user.balance;
+    }
+
+    // ----------------------------------
     // 🎡 ЗАПУСК РУЛЕТКИ
     // ----------------------------------
 
     openCaseBtn.addEventListener("click", () => {
 
-    const user = loadUser();
-    if (!user) {
-        alert("You must login first!");
-        return;
-    }
+        const user = loadUser();
 
-    const need = selectedCase.price * selectedCount;
+        if (!user) {
+            alert("You must login first!");
+            return;
+        }
+
+        const need = selectedCase.price * selectedCount;
 
         if (user.balance < need) {
             alert("Not enough stars!");
             return;
         }
-    
-        changeBalance(-need); // списываем баланс
-    
+
+        // списываем звезды
+        changeBalance(-need);
+
+        // запускаем рулетку
         startCaseSpin(caseName, caseInfo, selectedCount);
     });
 
-    }
 });
-
-
-
-
