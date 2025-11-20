@@ -553,3 +553,123 @@ html, body {
 
 .multi-btn {
   background: rgba(0, 160, 255, 
+
+                   /* ========================================================= */
+/*  AUTH BUTTONS (Login / Sign Up)                           */
+/* ========================================================= */
+
+.auth-btn {
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.35);
+    background: rgba(0, 40, 60, 0.55);
+    color: #dff6ff;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.auth-btn:hover {
+    background: rgba(0, 255, 255, 0.28);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.auth-btn.primary {
+    background: linear-gradient(90deg, #00f0ff, #007bff);
+    color: white;
+    border: none;
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.4);
+}
+
+.auth-btn.primary:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.75);
+}
+
+
+/* ========================================================= */
+/*  PROFILE BOX (после входа)                                */
+/* ========================================================= */
+
+#nav-profile {
+    display: flex;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 14px;
+    border-radius: 12px;
+    background: rgba(0, 35, 60, 0.55);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.18);
+}
+
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.5));
+}
+
+#profile-username {
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    text-shadow: 0 0 10px rgba(0,255,255,0.6);
+}
+
+.profile-balance {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 5px;
+    padding-left: 8px;
+    border-left: 1px solid rgba(0,255,255,0.25);
+}
+
+.profile-star {
+    width: 18px;
+    height: 18px;
+    transform: translateY(1px);
+}
+
+#profile-balance {
+    font-size: 17px;
+    font-weight: 700;
+    color: #dff6ff;
+}
+
+
+/* ========================================================= */
+/*  LOGOUT BUTTON                                            */
+/* ========================================================= */
+
+.logout-btn {
+    margin-left: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 80, 80, 0.6);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #ff8080;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    transition: 0.25s ease;
+    text-transform: uppercase;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 50, 50, 0.2);
+    box-shadow: 0 0 12px rgba(255, 100, 100, 0.5);
+    color: #ffbaba;
+}
