@@ -113,9 +113,11 @@ function showReward(item) {
 
     // продать предмет
     document.getElementById("btn-sell").onclick = () => {
-        alert("Предмет продан!");
-        location.reload();
+    changeBalance(item.price);
+    alert(`Продано за ${item.price}⭐`);
+    location.reload();
     };
+
 
     // 🔥 КРУТИТЬ ЕЩЁ
     document.getElementById("btn-again").onclick = () => {
