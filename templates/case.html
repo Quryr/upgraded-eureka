@@ -185,15 +185,23 @@
       <a href="#">PROFILE</a>
     </nav>
 
-    <div class="nav-right">
-      <div class="balance">
-        <img src="/static/assets/icons/star.png" alt="⭐" class="star-icon-nav" />
-        <span id="star-balance">10 000</span>
-      </div>
-      <div class="profile-icon">
-        <img src="/static/assets/icons/profile.png" alt="Profile" />
-      </div>
+<div class="nav-right" id="nav-auth">
+    <button class="auth-btn" id="login-btn">LOGIN</button>
+    <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
+</div>
+
+    <div class="nav-right hidden" id="nav-profile">
+        <div class="profile-box">
+            <img src="/static/assets/icons/profile.png" class="profile-avatar">
+            <span id="profile-username"></span>
+            <div class="profile-balance">
+                <img src="/static/assets/icons/star.png" class="profile-star">
+                <span id="profile-balance"></span>
+            </div>
+            <button class="logout-btn" id="logout-btn">LOGOUT</button>
+        </div>
     </div>
+
   </header>
 
 <div class="case-container">
