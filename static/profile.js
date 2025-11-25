@@ -1,54 +1,68 @@
 /*************************************************
- * PROFILE.JS — логика страницы профиля Gifts Battle
+ * PROFILE.JS — Gifts Battle
+ * Загружаем пользователя, инвентарь, статистику
  *************************************************/
 
-/* ====== ЗАГРУЗКА ДАННЫХ ПОЛЬЗОВАТЕЛЯ ====== */
 
-// Заглушка — берём ник и баланс из auth.js / localStorage
-function loadUserData() {
-    const username = localStorage.getItem("username") || "USER";
-    const balance = localStorage.getItem("balance") || 0;
+/* ==========================
+   ЗАГРУЗКА ДАННЫХ ПОЛЬЗОВАТЕЛЯ
+========================== */
+function loadProfileUser() {
+    const user = loadUser();
+    if (!user) return;
 
     // Верхняя панель
-    const topUsername = document.getElementById("profile-username");
+    const topName = document.getElementById("profile-username");
     const topBalance = document.getElementById("profile-balance");
 
-    // На странице профиля
-    const pageUsername = document.getElementById("profile-username-page");
+    if (topName) topName.textContent = user.username;
+    if (topBalance) topBalance.textContent = user.balance;
+
+    // Основной блок профиля
+    const pageName = document.getElementById("profile-username-page");
     const pageBalance = document.getElementById("profile-balance-page");
 
-    if (topUsername) topUsername.textContent = username;
-    if (pageUsername) pageUsername.textContent = username;
-
-    if (topBalance) topBalance.textContent = balance;
-    if (pageBalance) pageBalance.textContent = balance;
+    if (pageName) pageName.textContent = user.username;
+    if (pageBalance) pageBalance.textContent = user.balance;
 }
 
 
-/* ====== СТАТИСТИКА ПОЛЬЗОВАТЕЛЯ ====== */
+/* ==========================
+   СТАТИСТИКА
+========================== */
+function loadProfileStats() {
+    const user = loadUser();
+    if (!user) return;
 
-function loadStats() {
-    const cases = localStorage.getItem("stat_cases") || 0;
-    const upgrades = localStorage.getItem("stat_upgrades") || 0;
-    const contracts = localStorage.getItem("stat_contracts") || 0;
+    if (!user.stats) {
+        // создаём если нет
+        user.stats = {
+            casesOpened: 0,
+            upgradesDone: 0,
+            contractsDone: 0
+        };
+        saveUser(user);
+    }
 
-    document.getElementById("stat-cases").textContent = cases;
-    document.getElementById("stat-upgrades").textContent = upgrades;
-    document.getElementById("stat-contracts").textContent = contracts;
+    document.getElementById("stat-cases").textContent = user.stats.casesOpened;
+    document.getElementById("stat-upgrades").textContent = user.stats.upgradesDone;
+    document.getElementById("stat-contracts").textContent = user.stats.contractsDone;
 }
 
 
-/* ====== ИНВЕНТАРЬ ====== */
-
-// Предметы лежат в localStorage как массив
+/* ==========================
+   ИНВЕНТАРЬ
+========================== */
 function loadInventory() {
-    let inventory = JSON.parse(localStorage.getItem("inventory") || "[]");
+    const user = loadUser();
+    if (!user) return;
 
+    const inventory = user.inventory || [];
     const grid = document.getElementById("inventory-grid");
     grid.innerHTML = "";
 
     if (inventory.length === 0) {
-        grid.innerHTML = `<p style="color:#ccc;">Инвентарь пуст.</p>`;
+        grid.innerHTML = `<p style="color:#ccc;">Инвентарь пуст</p>`;
         return;
     }
 
@@ -57,78 +71,83 @@ function loadInventory() {
         div.classList.add("inventory-item");
 
         div.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
+            <img src="${item.img}" alt="${item.name}">
             <div class="inventory-item-name">${item.name}</div>
-            <div class="inventory-item-price">${item.price} ★</div>
+            <div class="inventory-item-price">${item.price} ⭐</div>
         `;
 
-        // Открываем модалку при клике
         div.onclick = () => openItemModal(item, index);
-
         grid.appendChild(div);
     });
 }
 
 
-/* ====== МОДАЛКА ПРЕДМЕТА ====== */
+/* ==========================
+   МОДАЛКА ПРЕДМЕТА
+========================== */
 
-const itemModal = document.getElementById("item-modal");
-let selectedItemIndex = null;
+let currentItemIndex = null;
 
 function openItemModal(item, index) {
-    selectedItemIndex = index;
+    currentItemIndex = index;
 
     document.getElementById("item-name").textContent = item.name;
-    document.getElementById("item-image").src = item.image;
+    document.getElementById("item-image").src = item.img;
 
-    itemModal.classList.remove("hidden");
+    document.getElementById("item-modal").classList.remove("hidden");
 }
 
 document.querySelectorAll(".modal-close").forEach(btn => {
-    btn.onclick = () => itemModal.classList.add("hidden");
+    btn.onclick = () => {
+        document.getElementById("item-modal").classList.add("hidden");
+    };
 });
 
 
-/* ====== ПРОДАТЬ ПРЕДМЕТ ====== */
-
+/* ==========================
+   ПРОДАТЬ
+========================== */
 document.getElementById("sell-item").onclick = () => {
-    let inventory = JSON.parse(localStorage.getItem("inventory") || "[]");
-    const item = inventory[selectedItemIndex];
+    const user = loadUser();
+    if (!user) return;
 
-    let balance = Number(localStorage.getItem("balance") || 0);
-    balance += Number(item.price);
+    const item = user.inventory[currentItemIndex];
 
-    localStorage.setItem("balance", balance);
-    inventory.splice(selectedItemIndex, 1);
+    user.balance += Number(item.price);
+    user.inventory.splice(currentItemIndex, 1);
 
-    localStorage.setItem("inventory", JSON.stringify(inventory));
+    saveUser(user);
 
-    itemModal.classList.add("hidden");
-    loadUserData();
+    loadProfileUser();
     loadInventory();
+
+    document.getElementById("item-modal").classList.add("hidden");
 };
 
 
-/* ====== ВЫВЕСТИ ПРЕДМЕТ ====== */
-
+/* ==========================
+   ВЫВЕСТИ
+========================== */
 document.getElementById("withdraw-item").onclick = () => {
-    let inventory = JSON.parse(localStorage.getItem("inventory") || "[]");
+    const user = loadUser();
+    if (!user) return;
 
-    // Здесь будет логика вывода
-    alert("Заявка на вывод предмета отправлена!");
+    alert("Заявка на вывод отправлена администратору!");
 
-    inventory.splice(selectedItemIndex, 1);
-    localStorage.setItem("inventory", JSON.stringify(inventory));
+    user.inventory.splice(currentItemIndex, 1);
+    saveUser(user);
 
-    itemModal.classList.add("hidden");
     loadInventory();
+    document.getElementById("item-modal").classList.add("hidden");
 };
 
 
-/* ====== ИНИЦИАЛИЗАЦИЯ ====== */
+/* ==========================
+   ИНИЦИАЛИЗАЦИЯ
+========================== */
 
 window.onload = () => {
-    loadUserData();
-    loadStats();
+    loadProfileUser();
+    loadProfileStats();
     loadInventory();
 };
