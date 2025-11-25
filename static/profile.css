@@ -201,3 +201,36 @@
 .modal-btn.green {
     background: #18d459;
 }
+.inventory-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.inv-btn {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    transition: 0.15s;
+    font-family: 'Rubik', sans-serif;
+}
+
+.sell-btn {
+    background: #ff4040;
+}
+
+.sell-btn:hover {
+    background: #ff5555;
+}
+
+.withdraw-btn {
+    background: #00b36e;
+}
+
+.withdraw-btn:hover {
+    background: #00cc7f;
+}
