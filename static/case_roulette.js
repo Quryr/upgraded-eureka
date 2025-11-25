@@ -107,9 +107,11 @@ function showReward(item) {
 
     // оставить предмет
     document.getElementById("btn-keep").onclick = () => {
-        alert("Вы оставили предмет!");
+        addInventoryItem(item);
+        alert("Предмет добавлен в инвентарь!");
         location.reload();
     };
+
 
     // продать предмет
     document.getElementById("btn-sell").onclick = () => {
