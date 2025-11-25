@@ -16,6 +16,21 @@ function ensureInventory() {
 function logoutUser() {
     localStorage.removeItem("user");
 }
+function addInventoryItem(item) {
+    const user = loadUser();
+    if (!user) return;
+
+    if (!user.inventory) user.inventory = [];
+
+    user.inventory.push({
+        id: item.id,
+        name: item.name,
+        img: item.img,
+        price: item.price
+    });
+
+    saveUser(user);
+}
 
 // ====== BALANCE FUNCTIONS ======
 function getBalance() {
