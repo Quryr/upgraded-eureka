@@ -177,42 +177,49 @@
    КНОПКИ ДЕЙСТВИЙ
 ------------------------------ */
 
+/* --- Кнопки действий в карточке инвентаря --- */
 .inventory-actions {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 12px;
+    margin-top: 15px;
 }
 
+/* Общий стиль */
 .inv-btn {
     padding: 10px 0;
     border: none;
-    border-radius: 10px;
-    font-size: 16px;
+    border-radius: 12px;
+    font-size: 15px;
     cursor: pointer;
-    color: white;
+    color: #fff;
     font-family: 'Rubik', sans-serif;
-    transition: 0.2s ease;
+    transition: 0.25s ease;
+    letter-spacing: 0.5px;
 }
 
-/* Продать */
+/* Продать — неон-красный, но мягкий */
 .sell-btn {
-    background: linear-gradient(90deg, #ff4b4b, #d62c2c);
-    box-shadow: 0 0 12px rgba(255, 70, 70, 0.4);
+    background: linear-gradient(180deg, #ff5c5c, #c93b3b);
+    box-shadow: 0 0 12px rgba(255, 90, 90, 0.35);
 }
 
 .sell-btn:hover {
-    background: linear-gradient(90deg, #ff6a6a, #e03939);
-    box-shadow: 0 0 20px rgba(255, 80, 80, 0.6);
+    background: linear-gradient(180deg, #ff7474, #d04646);
+    box-shadow: 0 0 18px rgba(255, 110, 110, 0.5);
+    transform: translateY(-2px);
 }
 
-/* Вывести */
+/* Вывести — фирменный неон GiftsBattle */
 .withdraw-btn {
-    background: linear-gradient(90deg, #00c57a, #00995b);
-    box-shadow: 0 0 12px rgba(0, 255, 170, 0.35);
+    background: linear-gradient(180deg, #00eaff, #00b8d4);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+    color: #002a33;
+    font-weight: 600;
 }
 
 .withdraw-btn:hover {
-    background: linear-gradient(90deg, #00e08b, #00aa66);
-    box-shadow: 0 0 20px rgba(0, 255, 170, 0.55);
+    background: linear-gradient(180deg, #33f3ff, #00c9e6);
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.5);
+    transform: translateY(-2px);
 }
