@@ -17,37 +17,41 @@ html, body {
 
 /* === НАВИГАЦИЯ === */
 .top-nav {
-    width: 100%;
-    background: rgba(10, 10, 25, 0.95);
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    border-bottom: 1px solid rgba(0, 255, 255, 0.22);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+  width: 100%;
+  background: rgba(10, 10, 25, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 34px;
+  border-bottom: 1px solid rgba(120, 100, 255, 0.25);
+  box-shadow: 0 2px 22px rgba(40, 30, 100, 0.35);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  height: 52px;
+  box-sizing: border-box;
 }
-
-.logo { height: 46px; }
 
 .nav-center {
-    display: flex;
-    gap: 40px;
+  display: flex;
+  gap: 45px;
 }
 
-.nav-link {
-    color: #bcd5ff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 700;
+.nav-center a {
+  text-decoration: none;
+  color: #cfd7ff;
+  font-weight: 700;
+  font-size: 15.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  position: relative;
 }
 
-.nav-link.active,
-.nav-link:hover {
-    color: #00eaff;
+.nav-center a.active,
+.nav-center a:hover {
+  color: #00eaff;
 }
 
 /* === ОБЩИЙ КОНТЕЙНЕР === */
