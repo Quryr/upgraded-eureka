@@ -10,8 +10,11 @@ def index():
 def case():
     return render_template('case.html')
 
+@app.route('/upgrade')
+def upgrade():
+    return render_template('upgrade.html')
+
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
