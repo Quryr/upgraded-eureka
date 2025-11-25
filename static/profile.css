@@ -174,33 +174,6 @@
    МОДАЛ ОПЕРАЦИЙ С ПРЕДМЕТОМ
 ------------------------------ */
 
-#item-modal .modal-content {
-    max-width: 420px;
-    background: rgba(0,0,0,0.6);
-    border: 1px solid rgba(0,255,255,0.25);
-    border-radius: 14px;
-}
-
-.item-modal-image {
-    width: 70%;
-    margin: 15px auto;
-    display: block;
-}
-
-.item-actions {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.modal-btn.red {
-    background: #ff3c3c;
-}
-
-.modal-btn.green {
-    background: #18d459;
-}
 .inventory-actions {
     display: flex;
     justify-content: center;
