@@ -70,11 +70,17 @@ function loadInventory() {
         const div = document.createElement("div");
         div.classList.add("inventory-item");
 
-        div.innerHTML = `
-            <img src="${item.img}" alt="${item.name}">
-            <div class="inventory-item-name">${item.name}</div>
-            <div class="inventory-item-price">${item.price} ⭐</div>
-        `;
+         div.innerHTML = `
+             <img src="${item.img}" alt="${item.name}">
+             <div class="inventory-item-name">${item.name}</div>
+             <div class="inventory-item-price">${item.price} ⭐</div>
+         
+             <div class="inventory-actions">
+                 <button class="inv-btn sell-btn" data-index="${index}">Sell</button>
+                 <button class="inv-btn withdraw-btn" data-index="${index}">Withdraw</button>
+             </div>
+         `;
+
 
         div.onclick = () => openItemModal(item, index);
         grid.appendChild(div);
