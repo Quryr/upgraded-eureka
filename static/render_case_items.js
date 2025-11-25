@@ -42,11 +42,12 @@ function renderCaseItems(containerId, casePath, itemCount, caseName) {
       <div class="item-info">
         <p class="item-name">${itemName}</p>
         <p class="item-price">
-          <img src="/static/assets/icons/star.png" class="currency-icon" alt="⭐">
           <span class="price-value">${item.price ?? "—"}</span>
+          <img src="/static/assets/icons/star.png" class="currency-icon" alt="⭐">
         </p>
       </div>
     `;
+
 
     container.appendChild(card);
   }
