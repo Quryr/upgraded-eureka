@@ -646,10 +646,14 @@ html, body {
     border-left: 1px solid rgba(0,255,255,0.25);
 }
 
+/* ⭐ Звезда в профиле — такая же, как в кейсах, только уменьшенная */
 .profile-star {
-    width: 18px;
-    height: 18px;
-    transform: translateY(1px);
+    width: 24px;                 /* немного меньше, чем 32px */
+    height: 24px;
+    aspect-ratio: 1/1;           /* гарантирует квадратность */
+    object-fit: contain;         /* не растягивает */
+    image-rendering: -webkit-optimize-contrast;
+    transform: translateY(1px);  /* для выравнивания */
 }
 
 #profile-balance {
