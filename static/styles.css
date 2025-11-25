@@ -640,7 +640,6 @@ html, body {
 .profile-balance {
     display: flex;
     align-items: center;
-    gap: 4px;
     margin-left: 5px;
     padding-left: 8px;
     border-left: 1px solid rgba(0,255,255,0.25);
@@ -652,8 +651,7 @@ html, body {
     height: 24px;
     aspect-ratio: 1/1;           /* гарантирует квадратность */
     object-fit: contain;         /* не растягивает */
-    image-rendering: -webkit-optimize-contrast;
-    transform: translateY(1px);  /* для выравнивания */
+    transform: translateY(-1px);  /* для выравнивания */
 }
 
 #profile-balance {
