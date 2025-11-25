@@ -647,8 +647,8 @@ html, body {
 
 /* ⭐ Звезда в профиле — такая же, как в кейсах, только уменьшенная */
 .profile-star {
-    width: 24px;                 /* немного меньше, чем 32px */
-    height: 24px;
+    width: 28px;                 /* немного меньше, чем 32px */
+    height: 28px;
     aspect-ratio: 1/1;           /* гарантирует квадратность */
     object-fit: contain;         /* не растягивает */
     transform: translateY(-1px);  /* для выравнивания */
