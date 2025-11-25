@@ -3,6 +3,13 @@
  * Темная неоновая стилистика, совместимая с сайтом
  *************************************************/
 
+/* ФИКС РЕЗКОГО ПЕРЕХОДА ФОНА */
+body {
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 /* Общая обёртка */
 .profile-page {
     width: 90%;
@@ -10,6 +17,10 @@
     margin: 140px auto 40px;
     color: #fff;
     font-family: 'Rubik', sans-serif;
+
+    /* плавный конец страницы */
+    min-height: 60vh;
+    padding-bottom: 200px;
 }
 
 
@@ -17,7 +28,7 @@
    АВАТАРКИ
 ------------------------------ */
 
-/* 🔵 Маленькая аватарка в NAVBAR */
+/* Маленькая аватарка в NAVBAR */
 .profile-avatar-small {
     width: 38px;
     height: 38px;
@@ -26,7 +37,7 @@
     object-fit: cover;
 }
 
-/* 🔵 Большая аватарка на странице профиля */
+/* Большая аватарка */
 .profile-avatar-big {
     width: 95px;
     height: 95px;
@@ -136,6 +147,7 @@
     gap: 22px;
 }
 
+
 /* Карточка предмета */
 .inventory-item {
     background: rgba(0,0,0,0.45);
@@ -145,7 +157,6 @@
     text-align: center;
     cursor: default;
     transition: 0.25s ease;
-    width: 200px;
 }
 
 .inventory-item:hover {
@@ -169,7 +180,7 @@
 .inventory-item-price {
     font-size: 15px;
     color: #00eaff;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 
@@ -177,15 +188,13 @@
    КНОПКИ ДЕЙСТВИЙ
 ------------------------------ */
 
-/* --- Кнопки действий в карточке инвентаря --- */
 .inventory-actions {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 15px;
 }
 
-/* Общий стиль */
+/* Общий стиль кнопок */
 .inv-btn {
     padding: 10px 0;
     border: none;
@@ -198,7 +207,7 @@
     letter-spacing: 0.5px;
 }
 
-/* Продать — неон-красный, но мягкий */
+/* Продать — мягкий неон-красный */
 .sell-btn {
     background: linear-gradient(180deg, #ff5c5c, #c93b3b);
     box-shadow: 0 0 12px rgba(255, 90, 90, 0.35);
@@ -210,7 +219,7 @@
     transform: translateY(-2px);
 }
 
-/* Вывести — фирменный неон GiftsBattle */
+/* Вывести — фирменный бирюзовый */
 .withdraw-btn {
     background: linear-gradient(180deg, #00eaff, #00b8d4);
     box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
