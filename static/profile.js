@@ -1,6 +1,6 @@
 /*************************************************
  * PROFILE.JS — Gifts Battle
- * Загружаем пользователя, инвентарь, статистику
+ * Готовая логика профиля без модалок
  *************************************************/
 
 
@@ -35,7 +35,6 @@ function loadProfileStats() {
     if (!user) return;
 
     if (!user.stats) {
-        // создаём если нет
         user.stats = {
             casesOpened: 0,
             upgradesDone: 0,
@@ -70,82 +69,56 @@ function loadInventory() {
         const div = document.createElement("div");
         div.classList.add("inventory-item");
 
-         div.innerHTML = `
-             <img src="${item.img}" alt="${item.name}">
-             <div class="inventory-item-name">${item.name}</div>
-             <div class="inventory-item-price">${item.price} ⭐</div>
-         
-             <div class="inventory-actions">
-                 <button class="inv-btn sell-btn" data-index="${index}">Sell</button>
-                 <button class="inv-btn withdraw-btn" data-index="${index}">Withdraw</button>
-             </div>
-         `;
+        div.innerHTML = `
+            <img src="${item.img}" alt="${item.name}">
+            <div class="inventory-item-name">${item.name}</div>
+            <div class="inventory-item-price">${item.price} ⭐</div>
 
+            <div class="inventory-actions">
+                <button class="inv-btn sell-btn" data-index="${index}">Sell</button>
+                <button class="inv-btn withdraw-btn" data-index="${index}">Withdraw</button>
+            </div>
+        `;
 
-        div.onclick = () => openItemModal(item, index);
         grid.appendChild(div);
     });
 }
 
 
 /* ==========================
-   МОДАЛКА ПРЕДМЕТА
+   SELL / WITHDRAW
 ========================== */
+document.addEventListener("click", function(e) {
 
-let currentItemIndex = null;
+    // ——— SELL ———
+    if (e.target.classList.contains("sell-btn")) {
+        const index = e.target.dataset.index;
+        const user = loadUser();
+        const item = user.inventory[index];
 
-function openItemModal(item, index) {
-    currentItemIndex = index;
+        user.balance += Number(item.price);
+        user.inventory.splice(index, 1);
+        saveUser(user);
 
-    document.getElementById("item-name").textContent = item.name;
-    document.getElementById("item-image").src = item.img;
+        loadProfileUser();
+        loadInventory();
+        return;
+    }
 
-    document.getElementById("item-modal").classList.remove("hidden");
-}
+    // ——— WITHDRAW ———
+    if (e.target.classList.contains("withdraw-btn")) {
+        const index = e.target.dataset.index;
+        const user = loadUser();
 
-document.querySelectorAll(".modal-close").forEach(btn => {
-    btn.onclick = () => {
-        document.getElementById("item-modal").classList.add("hidden");
-    };
+        alert("Withdrawal request sent!");
+
+        user.inventory.splice(index, 1);
+        saveUser(user);
+
+        loadInventory();
+        return;
+    }
 });
-
-
-/* ==========================
-   ПРОДАТЬ
-========================== */
-document.getElementById("sell-item").onclick = () => {
-    const user = loadUser();
-    if (!user) return;
-
-    const item = user.inventory[currentItemIndex];
-
-    user.balance += Number(item.price);
-    user.inventory.splice(currentItemIndex, 1);
-
-    saveUser(user);
-
-    loadProfileUser();
-    loadInventory();
-
-    document.getElementById("item-modal").classList.add("hidden");
-};
-
-
-/* ==========================
-   ВЫВЕСТИ
-========================== */
-document.getElementById("withdraw-item").onclick = () => {
-    const user = loadUser();
-    if (!user) return;
-
-    alert("Заявка на вывод отправлена администратору!");
-
-    user.inventory.splice(currentItemIndex, 1);
-    saveUser(user);
-
-    loadInventory();
-    document.getElementById("item-modal").classList.add("hidden");
-};
 
 
 /* ==========================
