@@ -100,7 +100,13 @@ signupSubmit?.addEventListener("click", () => {
         return;
     }
 
-    const user = { username, password, balance: 1000 };
+    const user = { 
+    username, 
+    password, 
+    balance: 1000,
+    inventory: [] 
+};
+
     saveUser(user);
 
     signupModal.classList.add("hidden");
