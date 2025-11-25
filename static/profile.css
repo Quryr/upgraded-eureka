@@ -14,6 +14,30 @@
 
 
 /* ------------------------------
+   АВАТАРКИ
+------------------------------ */
+
+/* 🔵 Маленькая аватарка в NAVBAR */
+.profile-avatar-small {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    border: 2px solid #00eaff;
+    object-fit: cover;
+}
+
+/* 🔵 Большая аватарка на странице профиля */
+.profile-avatar-big {
+    width: 95px;
+    height: 95px;
+    border-radius: 12px;
+    border: 2px solid #00eaff;
+    background: rgba(0,0,0,0.3);
+    object-fit: cover;
+}
+
+
+/* ------------------------------
    БЛОК ПРОФИЛЯ
 ------------------------------ */
 
@@ -26,14 +50,6 @@
     border: 1px solid rgba(0,255,255,0.25);
     border-radius: 14px;
     backdrop-filter: blur(6px);
-}
-
-.profile-avatar {
-    width: 95px;
-    height: 95px;
-    border-radius: 12px;
-    border: 2px solid #00eaff;
-    background: rgba(0,0,0,0.3);
 }
 
 .profile-header-info {
