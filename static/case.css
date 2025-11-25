@@ -389,7 +389,6 @@ body {
     margin-top: 4px;
     display: flex;
     justify-content: center;
-    gap: 4px;
 }
 
 .item-price img {
