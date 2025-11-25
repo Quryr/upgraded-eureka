@@ -2,12 +2,128 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Profile</title>
+  <title>Profile | Gifts Battle</title>
+
   <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/profile.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <h1 style="color: white; text-align: center; padding-top: 50px;">
-    PROFILE PAGE (пустая заглушка)
-  </h1>
+
+  <!-- === ВЕРХНЯЯ НАВИГАЦИЯ — ПОЛНОСТЬЮ С ГЛАВНОЙ index.html === -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <img src="/static/assets/logo.png" alt="Logo" class="logo">
+      <span class="logo-text">GIFTS BATTLE</span>
+    </div>
+
+    <nav class="nav-center">
+      <a href="/" class="nav-link">CASES</a>
+      <a href="/upgrade" class="nav-link">UPGRADE</a>
+      <a href="#" class="nav-link">CONTESTS</a>
+      <a href="#" class="nav-link">FRIENDS</a>
+      <a href="/profile" class="nav-link active">PROFILE</a>
+    </nav>
+
+    <div class="nav-right" id="nav-auth">
+      <button class="auth-btn" id="login-btn">LOGIN</button>
+      <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
+    </div>
+  
+    <div class="nav-right hidden" id="nav-profile">
+      <div class="profile-box">
+        <img src="/static/assets/icons/profile.png" class="profile-avatar">
+        <span id="profile-username"></span>
+
+        <div class="profile-balance">
+          <img src="/static/assets/icons/star.png" class="profile-star">
+          <span id="profile-balance"></span>
+        </div>
+
+        <button class="logout-btn" id="logout-btn">LOGOUT</button>
+      </div>
+    </div>
+  </header>
+  <!-- === КОНЕЦ ВЕРХНЕЙ ПАНЕЛИ === -->
+
+
+
+  <!-- === СТРАНИЦА ПРОФИЛЯ === -->
+  <div class="profile-page">
+
+    <!-- ПРОФИЛЬ -->
+    <section class="profile-header-box">
+      <img src="/static/assets/icons/profile.png" class="profile-avatar">
+
+      <div class="profile-header-info">
+        <h1 class="profile-username" id="profile-username-page">USERNAME</h1>
+
+        <div class="profile-balance">
+          <img src="/static/assets/icons/star.png" class="profile-star">
+          <span id="profile-balance-page">0</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- СТАТИСТИКА -->
+    <section class="profile-stats">
+      <div class="stat-card">
+        <div class="stat-title">Открыто кейсов</div>
+        <div class="stat-value" id="stat-cases">0</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Сделано апгрейдов</div>
+        <div class="stat-value" id="stat-upgrades">0</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Выполнено контрактов</div>
+        <div class="stat-value" id="stat-contracts">0</div>
+      </div>
+    </section>
+
+
+
+    <!-- ИНВЕНТАРЬ -->
+    <section class="inventory-section">
+      <h2 class="inventory-title">Ваш инвентарь</h2>
+
+      <div class="inventory-grid" id="inventory-grid">
+        <!-- Предметы загружаются через profile.js -->
+      </div>
+    </section>
+
+  </div>
+
+
+
+  <!-- === МОДАЛ: ПРОДАТЬ / ВЫВЕСТИ === -->
+  <div class="modal hidden" id="item-modal">
+    <div class="modal-content">
+
+      <h2 id="item-name"></h2>
+      <img id="item-image" class="item-modal-image" src="" alt="item">
+
+      <div class="item-actions">
+        <button class="modal-btn red" id="sell-item">Продать</button>
+        <button class="modal-btn green" id="withdraw-item">Вывести</button>
+      </div>
+
+      <span class="modal-close" data-close="item-modal">×</span>
+    </div>
+  </div>
+
+
+
+  <!-- === JS === -->
+  <script src="/static/data.js" defer></script>
+  <script src="/static/script.js" defer></script>
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/profile.js" defer></script>
+
 </body>
 </html>
