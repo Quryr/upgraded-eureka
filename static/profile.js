@@ -75,8 +75,8 @@ function loadInventory() {
             <div class="inventory-item-price">${item.price} ⭐</div>
 
             <div class="inventory-actions">
-                <button class="inv-btn sell-btn" data-index="${index}">Sell</button>
-                <button class="inv-btn withdraw-btn" data-index="${index}">Withdraw</button>
+               <button class="inv-btn sell-btn" data-index="${index}">Продать</button>
+               <button class="inv-btn withdraw-btn" data-index="${index}">Вывести</button>
             </div>
         `;
 
