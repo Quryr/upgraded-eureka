@@ -276,7 +276,6 @@ html, body {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 3px;
   margin-top: 10px;
   font-size: 22px;
   font-weight: 900;
@@ -289,8 +288,7 @@ html, body {
   height: 32px;
   aspect-ratio: 1/1;
   object-fit: contain;
-  image-rendering: -webkit-optimize-contrast;
-  transform: translateY(2px) translateX(-2px);
+  transform: translateY(3px) translateX(-2px);
   transition: transform 0.2s ease;
 }
 
