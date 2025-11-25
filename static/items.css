@@ -71,7 +71,6 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
 
   font-size: 20px !important;
   font-weight: 800 !important;
@@ -92,13 +91,12 @@
 
 .item-price img,
 .currency-icon {
-  width: 26px !important;
-  height: 26px !important;
+  width: 30px !important;
+  height: 30px !important;
 
   object-fit: contain !important;
-  transform: translateY(2px) !important;
+  transform: translateY(4px) !important;
 
-  image-rendering: -webkit-optimize-contrast !important;
 
   background: none !important;
   box-shadow: none !important;
