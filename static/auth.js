@@ -5,6 +5,14 @@ function saveUser(data) {
 function loadUser() {
     return JSON.parse(localStorage.getItem("user"));
 }
+function ensureInventory() {
+    const user = loadUser();
+    if (!user) return;
+
+    if (!user.inventory) user.inventory = [];
+    saveUser(user);
+}
+
 function logoutUser() {
     localStorage.removeItem("user");
 }
@@ -120,3 +128,4 @@ logoutBtn?.addEventListener("click", () => {
     logoutUser();
     location.reload();
 });
+ensureInventory();
