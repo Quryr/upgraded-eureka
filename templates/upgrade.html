@@ -25,15 +25,14 @@
         <a href="/profile" class="nav-link">PROFILE</a>
     </nav>
 
-    <div class="nav-right hidden" id="nav-auth">
+    <div class="nav-right" id="nav-auth">
         <button class="auth-btn" id="login-btn">LOGIN</button>
         <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
     </div>
 
     <div class="nav-right hidden" id="nav-profile">
         <div class="profile-box">
-            <img src="/static/assets/icons/profile.png" class="profile-avatar">
-
+            <img src="/static/assets/icons/profile.png" class="profile-avatar-small">
             <span id="profile-username"></span>
 
             <div class="profile-balance">
@@ -63,18 +62,17 @@
             </div>
         </div>
 
-        <!-- инвентарь -->
         <div class="upgrade-inventory" id="upgrade-inventory"></div>
     </div>
 
 
 
-    <!-- ========== CENTER: WHEEL + CHANCE ========== -->
+    <!-- ========== CENTER: WHEEL ========== -->
     <div class="upgrade-center">
 
         <div class="wheel-container">
             <canvas id="upgrade-wheel" width="300" height="300"></canvas>
-            <img class="wheel-arrow" src="/static/assets/icons/wheel-arrow.png">
+            <div class="wheel-arrow"></div>
         </div>
 
         <div class="chance-display">
@@ -87,6 +85,7 @@
             <button class="chance-btn" data-mult="2">x2</button>
             <button class="chance-btn" data-mult="5">x5</button>
             <button class="chance-btn" data-mult="10">x10</button>
+
             <button class="chance-btn" data-set="30">30%</button>
             <button class="chance-btn" data-set="50">50%</button>
             <button class="chance-btn" data-set="75">75%</button>
@@ -112,6 +111,8 @@
 
 </div>
 
+<script src="/static/data.js" defer></script>
+<script src="/static/script.js" defer></script>
 <script src="/static/auth.js" defer></script>
 <script src="/static/upgrade.js" defer></script>
 
