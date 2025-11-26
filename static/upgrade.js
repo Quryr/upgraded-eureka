@@ -1,4 +1,13 @@
 /* ==========================================================
+   0. ПРОВЕРКА ЗАГРУЗКИ ВСЕХ ДАННЫХ
+========================================================== */
+if (!window.caseMap || !window.caseItemNames || !window.caseItemPrices) {
+    console.error("ERROR: caseMap / caseItemNames / caseItemPrices not loaded!");
+}
+
+
+
+/* ==========================================================
    1. СОБИРАЕМ ВСЕ ПРЕДМЕТЫ ИЗ ВСЕХ КЕЙСОВ
 ========================================================== */
 
@@ -6,25 +15,25 @@ function buildAllItems() {
     const items = [];
 
     for (const caseName in caseMap) {
-        const caseInfo = caseMap[caseName];
-        const path = caseInfo.path;
-        const total = caseInfo.count;
-
+        const info = caseMap[caseName];
         const names = caseItemNames[caseName] || {};
         const prices = caseItemPrices[caseName] || {};
 
-        for (let i = 1; i <= total; i++) {
+        for (let i = 1; i <= info.count; i++) {
+            const price = prices[i];
+            if (price == null) continue; // пропускаем мусор
+
             items.push({
                 case: caseName,
                 index: i,
                 name: names[i] || ("Item " + i),
-                price: prices[i] ?? null,
-                img: `${path}${i}.png`
+                price: price,
+                img: `${info.path}${i}.png`
             });
         }
     }
 
-    return items.filter(it => it.price !== null);
+    return items.sort((a, b) => a.price - b.price);
 }
 
 const ALL_ITEMS = buildAllItems();
@@ -42,7 +51,7 @@ let currentChance = 0;
 
 
 /* ==========================================================
-   3. ОТРИСОВКА ИНВЕНТАРЯ
+   3. ОТРИСОВКА ИНВЕНТАРЯ ПОЛЬЗОВАТЕЛЯ
 ========================================================== */
 
 function loadUpgradeInventory() {
@@ -53,7 +62,6 @@ function loadUpgradeInventory() {
     inv.innerHTML = "";
 
     user.inventory.forEach((item, index) => {
-
         const div = document.createElement("div");
         div.className = "upgrade-item";
 
@@ -63,7 +71,7 @@ function loadUpgradeInventory() {
             <div class="upgrade-item-price">${item.price} ⭐</div>
         `;
 
-        div.onclick = () => selectSourceItem(item);
+        div.addEventListener("click", () => selectSourceItem(item));
         inv.appendChild(div);
     });
 }
@@ -86,12 +94,13 @@ function selectSourceItem(item) {
 
     renderTargetList();
     updateChance(0);
+    document.getElementById("upgrade-btn").disabled = true;
 }
 
 
 
 /* ==========================================================
-   5. ПОСТРОЕНИЕ СПИСКА ПРАВЫХ ПРЕДМЕТОВ
+   5. СТРОИМ СПИСОК ДОСТУПНЫХ ЦЕЛЕВЫХ ПРЕДМЕТОВ
 ========================================================== */
 
 function renderTargetList() {
@@ -100,26 +109,22 @@ function renderTargetList() {
     const list = document.getElementById("upgrade-target-list");
     list.innerHTML = "";
 
-    const sPrice = selectedSource.price;
+    const sourcePrice = selectedSource.price;
 
-    // выбираем все предметы дороже
-    const possible = ALL_ITEMS.filter(it => it.price > sPrice)
-        .sort((a, b) => a.price - b.price);
+    ALL_ITEMS.filter(i => i.price > sourcePrice)
+        .forEach(item => {
+            const div = document.createElement("div");
+            div.className = "target-item";
 
-    possible.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "target-item";
+            div.innerHTML = `
+                <img src="${item.img}" class="target-item-img">
+                <div class="target-item-name">${item.name}</div>
+                <div class="target-item-price">${item.price} ⭐</div>
+            `;
 
-        div.innerHTML = `
-            <img src="${item.img}" class="target-item-img">
-            <div class="target-item-name">${item.name}</div>
-            <div class="target-item-price">${item.price} ⭐</div>
-        `;
-
-        div.onclick = () => selectTargetItem(item);
-
-        list.appendChild(div);
-    });
+            div.addEventListener("click", () => selectTargetItem(item));
+            list.appendChild(div);
+        });
 }
 
 
@@ -137,8 +142,7 @@ function selectTargetItem(item) {
         <div class="upgrade-selected-price">${item.price} ⭐</div>
     `;
 
-    // обновляем шанс
-    let chance = (selectedSource.price / selectedTarget.price) * 100;
+    const chance = (selectedSource.price / selectedTarget.price) * 100;
     updateChance(chance);
 
     document.getElementById("upgrade-btn").disabled = false;
@@ -159,96 +163,92 @@ function updateChance(val) {
 
 
 /* ==========================================================
-   8. КНОПКИ ФИКСИРОВАННОГО ШАНСА (30/50/75)
+   8. КНОПКИ ШАНСОВ (X2 X5 X10 + 30%/50%/75%)
 ========================================================== */
 
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
     if (!e.target.classList.contains("chance-btn")) return;
     if (!selectedSource) return;
 
     // множители
     if (e.target.dataset.mult) {
         const mult = Number(e.target.dataset.mult);
-        const needPrice = selectedSource.price * mult;
+        const targetPriceNeed = selectedSource.price * mult;
 
-        // ищем ближайший предмет дороже
-        const sorted = ALL_ITEMS
-            .filter(i => i.price >= needPrice)
-            .sort((a, b) => a.price - b.price);
-
-        if (sorted.length === 0) return;
-
-        selectTargetItem(sorted[0]);
+        const best = ALL_ITEMS.filter(i => i.price >= targetPriceNeed)[0];
+        if (best) selectTargetItem(best);
         return;
     }
 
-    // фикс проценты
+    // фиксированный процент
     if (e.target.dataset.set) {
-        const chance = Number(e.target.dataset.set);
+        const percent = Number(e.target.dataset.set);
+        const needPrice = selectedSource.price / (percent / 100);
 
-        // вычисляем требуемую цену target
-        const tPrice = selectedSource.price / (chance / 100);
-
-        const sorted = ALL_ITEMS
-            .filter(i => i.price >= tPrice)
-            .sort((a, b) => a.price - b.price);
-
-        if (sorted.length === 0) return;
-
-        selectTargetItem(sorted[0]);
+        const best = ALL_ITEMS.filter(i => i.price >= needPrice)[0];
+        if (best) selectTargetItem(best);
     }
 });
 
 
 
 /* ==========================================================
-   9. КОЛЕСО (CANVAS) — ЧЕСТНОЕ ВРАЩЕНИЕ
+   9. CANVAS-КОЛЕСО (отрисовка Win/Lose сектора)
 ========================================================== */
 
-const wheelCanvas = document.getElementById("upgrade-wheel");
-const ctx = wheelCanvas.getContext("2d");
-const center = 150;
+const canvas = document.getElementById("upgrade-wheel");
+const ctx = canvas.getContext("2d");
+const cx = canvas.width / 2;
+const cy = canvas.height / 2;
+const radius = 130;
 
-function drawWheel(winSectorAngle) {
-    ctx.clearRect(0, 0, 300, 300);
+function drawWheel(winAngle) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // сектора: win / lose
+    // WIN-сектор
     ctx.beginPath();
-    ctx.moveTo(center, center);
-    ctx.fillStyle = "rgba(0,255,180,0.55)";
-    ctx.arc(center, center, 140, 0, winSectorAngle);
+    ctx.moveTo(cx, cy);
+    ctx.fillStyle = "rgba(0,255,150,0.55)";
+    ctx.arc(cx, cy, radius, 0, winAngle, false);
     ctx.fill();
 
+    // LOSE-сектор
     ctx.beginPath();
-    ctx.moveTo(center, center);
-    ctx.fillStyle = "rgba(255,40,60,0.55)";
-    ctx.arc(center, center, 140, winSectorAngle, Math.PI * 2);
+    ctx.moveTo(cx, cy);
+    ctx.fillStyle = "rgba(255,60,80,0.55)";
+    ctx.arc(cx, cy, radius, winAngle, Math.PI * 2, false);
     ctx.fill();
 }
 
+
+
+/* ==========================================================
+   10. АНИМАЦИЯ ВРАЩЕНИЯ КОЛЕСА
+========================================================== */
+
 function spinWheel() {
-    const winFraction = currentChance / 100;
-    const winAngle = Math.PI * 2 * winFraction;
+    return new Promise((resolve) => {
+        const winAngle = (currentChance / 100) * Math.PI * 2;
 
-    drawWheel(winAngle);
-
-    return new Promise(resolve => {
-        let angle = Math.random() * Math.PI * 2;
-        const speed = 0.25;
+        // начальная скорость
+        let angle = 0;
+        let speed = 0.35;
 
         function animate() {
             ctx.save();
-            ctx.clearRect(0, 0, 300, 300);
-            ctx.translate(center, center);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.translate(cx, cy);
             ctx.rotate(angle);
-            ctx.translate(-center, -center);
+            ctx.translate(-cx, -cy);
+
             drawWheel(winAngle);
             ctx.restore();
 
             angle += speed;
-            speed *= 0.991;
+            speed *= 0.984; // медленное затухание
 
-            if (speed < 0.003) {
+            if (speed < 0.004) {
                 const final = angle % (Math.PI * 2);
                 resolve(final <= winAngle);
                 return;
@@ -264,34 +264,44 @@ function spinWheel() {
 
 
 /* ==========================================================
-   10. НАЖАТИЕ КНОПКИ UPGRADE
+   11. НАЖАТИЕ КНОПКИ "АПГРЕЙД"
 ========================================================== */
 
-document.getElementById("upgrade-btn").onclick = async () => {
+document.getElementById("upgrade-btn").addEventListener("click", async () => {
     if (!selectedSource || !selectedTarget) return;
 
     const win = await spinWheel();
-
     const user = loadUser();
 
-    // убираем источник
-    const idx = user.inventory.findIndex(it =>
-        it.name === selectedSource.name &&
-        it.price === selectedSource.price
+    // удалить исходный предмет
+    const idx = user.inventory.findIndex(
+        it => it.name === selectedSource.name && it.price === selectedSource.price
     );
     if (idx >= 0) user.inventory.splice(idx, 1);
 
     if (win) {
         user.inventory.push(selectedTarget);
-        alert("Вы выиграли: " + selectedTarget.name);
+        alert("УСПЕХ! Вы получили: " + selectedTarget.name);
     } else {
-        alert("Проигрыш…");
+        alert("Провал…");
     }
 
     saveUser(user);
+
+    // обновить инвентарь
     loadUpgradeInventory();
 
-    // сброс UI
+    // сбросить UI
+    resetUpgradeUI();
+});
+
+
+
+/* ==========================================================
+   12. СБРОС UI
+========================================================== */
+
+function resetUpgradeUI() {
     document.getElementById("upgrade-source").innerHTML = `
         <div class="upgrade-placeholder">
             <img src="/static/assets/icons/upgrade-placeholder.png" class="placeholder-img">
@@ -308,15 +318,14 @@ document.getElementById("upgrade-btn").onclick = async () => {
     selectedSource = null;
     selectedTarget = null;
     document.getElementById("upgrade-btn").disabled = true;
-};
+}
 
 
 
 /* ==========================================================
-   11. ИНИЦИАЛИЗАЦИЯ
+   13. INIT
 ========================================================== */
 
 window.onload = () => {
     loadUpgradeInventory();
 };
-
