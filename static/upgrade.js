@@ -1,158 +1,227 @@
-/*************************************************
- *  UPGRADE.JS — МЕХАНИКА АПГРЕЙДА
- *************************************************/
+/* ============================================================
+      UPGRADE.JS — ЛОГИКА ВЫБОРА ПРЕДМЕТОВ И ФИЛЬТРОВ
+============================================================ */
 
-let selectedItem = null; // предмет, выбранный в левую панель
-let user = null;
 
-/* ============================================
-   ЗАГРУЗКА ПОЛЬЗОВАТЕЛЯ + ИНВЕНТАРЯ
-============================================ */
-function initUpgrade() {
-    user = loadUser();
-    if (!user) return;
+/* ============================
+   ГЛОБАЛЬНЫЕ ДАННЫЕ
+============================ */
 
-    loadInventory(); // из profile.js (мы подключили его!)
-    attachInventoryHandlers();
-    attachSlotReturnHandler();
-    attachMultiplierButtons();
+let selectedLeft = null;      // предмет, который сейчас в левом слоте
+let selectedRight = null;     // предмет в правом слоте
+let currentMultiplier = null; // выбранный x2/x5/x10/30%/50%/75%
+
+// СЮДА ты позже дашь список ВСЕХ предметов на сайте
+let ALL_ITEMS = []; 
+
+
+/* ============================
+   ЗАГРУЗКА ИНВЕНТАРЯ
+============================ */
+
+function renderInventory() {
+    const user = loadUser();
+    if (!user || !user.inventory) return;
+
+    const grid = document.getElementById("inventory-grid");
+    grid.innerHTML = "";
+
+    user.inventory.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.classList.add("inventory-item");
+        div.dataset.index = index;
+
+        div.innerHTML = `
+            <img src="${item.img}">
+            <div class="inventory-item-name">${item.name}</div>
+            <div class="inventory-item-price">${item.price} ⭐</div>
+        `;
+
+        div.onclick = () => selectLeftItem(item, index);
+        grid.appendChild(div);
+    });
 }
 
-window.addEventListener("load", initUpgrade);
+
+/* ============================
+   ВСТАВИТЬ ПРЕДМЕТ В ЛЕВЫЙ СЛОТ
+============================ */
+
+function selectLeftItem(item, index) {
+
+    // если в левом слоте уже есть предмет → вернуть его обратно в инвентарь
+    if (selectedLeft) {
+        returnLeftToInventory();
+    }
+
+    selectedLeft = { ...item, invIndex: index };
+
+    const slot = document.getElementById("left-slot");
+    slot.innerHTML = `
+        <img src="${item.img}" class="slot-image filled">
+    `;
+
+    // обновить награды справа
+    renderPossibleRewards();
+    updateChance();
+}
+
+
+/* ============================
+   ВОЗВРАТ ПРЕДМЕТА В ИНВЕНТАРЬ
+============================ */
+
+function returnLeftToInventory() {
+    if (!selectedLeft) return;
+
+    const user = loadUser();
+    if (!user) return;
+
+    // возвращаем предмет
+    user.inventory.push({
+        name: selectedLeft.name,
+        img: selectedLeft.img,
+        price: selectedLeft.price
+    });
+
+    saveUser(user);
+
+    selectedLeft = null;
+
+    document.getElementById("left-slot").innerHTML =
+        `<img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">`;
+
+    renderInventory();
+    renderPossibleRewards();
+    updateChance();
+}
+
+
+/* ============================
+   КЛИК ПО ЛЕВОМУ СЛОТУ → ОЧИСТКА
+============================ */
+
+document.getElementById("left-slot").onclick = () => {
+    if (selectedLeft) {
+        returnLeftToInventory();
+    }
+};
 
 
 
-/* ============================================
-   ОБРАБОТКА КЛИКА ПО ПРЕДМЕТУ ИЗ ИНВЕНТАРЯ
-============================================ */
-function attachInventoryHandlers() {
-    const grid = document.getElementById("inventory-grid");
-    if (!grid) return;
+/* ============================
+   ВЫБОР МУЛЬТИПЛИКАТОРА
+============================ */
 
-    grid.addEventListener("click", function (e) {
-        const itemDiv = e.target.closest(".inventory-item");
-        if (!itemDiv) return;
+document.querySelectorAll(".mult-btn").forEach(btn => {
+    btn.onclick = () => {
+        document.querySelectorAll(".mult-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
 
-        const index = itemDiv.dataset.index;
-        const item = user.inventory[index];
-        if (!item) return;
+        currentMultiplier = btn.dataset.m ? Number(btn.dataset.m) : null;
+        currentPercent = btn.dataset.p ? Number(btn.dataset.p) : null;
 
-        moveToLeftSlot(item, index);
+        renderPossibleRewards();
+        updateChance();
+    };
+});
+
+
+
+/* ============================
+   ПОКАЗАТЬ ВОЗМОЖНЫЕ НАГРАДЫ
+============================ */
+
+function renderPossibleRewards() {
+    const grid = document.getElementById("possible-grid");
+    grid.innerHTML = "";
+
+    if (!selectedLeft || !currentMultiplier) return;
+
+    const targetPrice = selectedLeft.price * currentMultiplier;
+
+    // фильтрация
+    const list = ALL_ITEMS.filter(i =>
+        Math.abs(i.price - targetPrice) <= targetPrice * 0.25 // ±25% допуск
+    );
+
+    list.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("inventory-item");
+
+        div.innerHTML = `
+            <img src="${item.img}">
+            <div class="inventory-item-name">${item.name}</div>
+            <div class="inventory-item-price">${item.price} ⭐</div>
+        `;
+
+        div.onclick = () => selectRightItem(item);
+
+        grid.appendChild(div);
     });
 }
 
 
 
-/* ============================================
-   ПЕРЕМЕЩЕНИЕ ПРЕДМЕТА В ЛЕВЫЙ СЛОТ
-============================================ */
-function moveToLeftSlot(item, index) {
-    const leftSlot = document.getElementById("left-slot");
+/* ============================
+   КЛИК ПО НАГРАДЕ (ПРАВЫЙ СЛОТ)
+============================ */
 
-    // если уже есть предмет → вернуть его в инвентарь
-    if (selectedItem !== null) {
-        user.inventory.push(selectedItem);
-    }
+function selectRightItem(item) {
+    selectedRight = item;
 
-    // вытащить предмет из инвентаря
-    user.inventory.splice(index, 1);
-    saveUser(user);
+    const slot = document.getElementById("right-slot");
 
-    // показать предмет в слоте
-    renderLeftSlot(item);
-
-    selectedItem = item;
-
-    // обновить инвентарь
-    loadInventory();
-    attachInventoryHandlers();
+    slot.innerHTML = `
+        <img src="${item.img}" class="slot-image filled">
+    `;
 
     updateChance();
 }
 
 
+/* ============================
+   КЛИК ПО ПРАВОМУ СЛОТУ — ОЧИСТКА
+============================ */
 
-/* ============================================
-   ОТРИСОВКА ПРЕДМЕТА В ЛЕВОМ СЛОТЕ
-============================================ */
-function renderLeftSlot(item) {
-    const leftSlot = document.getElementById("left-slot");
-
-    leftSlot.innerHTML = `
-        <img src="${item.img}" class="slot-image active" id="left-slot-item">
-    `;
-}
-
-
-
-/* ============================================
-   КЛИК ПО ЛЕВОМУ СЛОТУ — ВЕРНУТЬ ПРЕДМЕТ
-============================================ */
-function attachSlotReturnHandler() {
-    const leftSlot = document.getElementById("left-slot");
-
-    leftSlot.addEventListener("click", function () {
-        if (!selectedItem) return;
-
-        // вернуть предмет обратно
-        user.inventory.push(selectedItem);
-        saveUser(user);
-
-        selectedItem = null;
-
-        // очистить слот
-        leftSlot.innerHTML = `
-            <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">
-        `;
-
-        loadInventory();
-        attachInventoryHandlers();
-
-        updateChance();
-    });
-}
+document.getElementById("right-slot").onclick = () => {
+    selectedRight = null;
+    document.getElementById("right-slot").innerHTML =
+        `<img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">`;
+    updateChance();
+};
 
 
 
-/* ============================================
-   МУЛЬТИПЛИКАТОР (x2 / x5 / 50% / 75%)
-============================================ */
-let currentMultiplier = 1;
+/* ============================
+      ОБНОВИТЬ ШАНСЫ
+============================ */
 
-function attachMultiplierButtons() {
-    document.querySelectorAll(".mult-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelectorAll(".mult-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-
-            if (btn.dataset.m) {
-                currentMultiplier = Number(btn.dataset.m);
-            } else if (btn.dataset.p) {
-                // Конвертация процентов в относительный множитель
-                currentMultiplier = 100 / Number(btn.dataset.p);
-            }
-
-            updateChance();
-        });
-    });
-}
-
-
-
-/* ============================================
-   ОБНОВЛЕНИЕ ШАНСА В ЦЕНТРЕ
-============================================ */
 function updateChance() {
-    const chanceDiv = document.getElementById("chance-number");
+    const chanceEl = document.getElementById("chance-number");
 
-    if (!selectedItem) {
-        chanceDiv.textContent = "0%";
+    if (!selectedLeft || !selectedRight) {
+        chanceEl.textContent = "0%";
         return;
     }
 
-    // Формула временная:
-    let chance = Math.round(100 / currentMultiplier);
-    if (chance > 100) chance = 100;
+    // формула шанса (примерная, можно заменить)
+    const chance = Math.max(1, Math.min(95,
+        Math.floor((selectedLeft.price / selectedRight.price) * 100)
+    ));
 
-    chanceDiv.textContent = chance + "%";
+    chanceEl.textContent = chance + "%";
 }
+
+
+
+/* ============================
+      ПЕРВОНАЧАЛЬНЫЙ СТАРТ
+============================ */
+
+window.onload = () => {
+    loadProfileUser();
+    renderInventory();
+    renderPossibleRewards();
+    updateChance();
+};
