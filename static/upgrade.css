@@ -1,148 +1,239 @@
-/* === ОБЩИЙ КОНТЕЙНЕР АПГРЕЙДА === */
+/*************************************************
+ * UPGRADE PAGE — GIFTS BATTLE
+ * Чистый неон, стиль кейсов, плавные тени
+ *************************************************/
+
 .upgrade-wrapper {
-    padding-top: 120px;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
+    width: 92%;
+    max-width: 1500px;
+    margin: 130px auto 60px;
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 1fr;
+    gap: 40px;
 }
 
-/* === БОКОВЫЕ ПАНЕЛИ === */
-.upgrade-block {
-    width: 340px;
-    background: rgba(5, 8, 20, 0.45);
-    padding: 20px;
-    border-radius: 16px;
-    border: 1px solid rgba(0, 255, 255, 0.15);
-    box-shadow: 0 0 18px rgba(0, 255, 255, 0.12);
+
+/* ===============================
+   ЗАГОЛОВКИ КОЛОНОК
+=============================== */
+
+.upgrade-title {
     text-align: center;
-}
-
-.upgrade-slot {
-    width: 100%;
-    height: 250px;
-    background: rgba(0, 20, 40, 0.4);
-    border-radius: 14px;
-    margin-top: 15px;
-    border: 1px solid rgba(0, 255, 255, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.slot-image {
-    width: 300px;
-    opacity: 0.4;
-}
-
-.slot-text {
-    margin-top: 10px;
-    color: #88a5cc;
-}
-
-/* === ДОБАВИТЬ БАЛАНС === */
-.upgrade-add-balance {
-    margin-top: 25px;
-    text-align: left;
-    font-size: 16px;
-    color: #a9dfff;
-}
-
-.upgrade-add-balance input {
-    width: 100%;
-}
-
-.balance-value {
-    float: right;
-}
-
-/* === ЦЕНТРАЛЬНЫЙ КРУГ === */
-.upgrade-center {
-    width: 420px;
-    text-align: center;
-}
-
-.circle-wrapper {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    margin: 0 auto;
-}
-
-.circle {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 7px solid rgba(0, 255, 255, 0.2);
-    box-shadow: 0 0 25px rgba(0,255,255,0.25);
-}
-
-.circle-inner {
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    border: 5px solid rgba(0, 255, 255, 0.6);
-    box-shadow: 0 0 15px rgba(0,200,255,0.6);
-}
-
-.chance-number {
-    position: absolute;
-    top: 105px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 38px;
+    font-size: 26px;
     font-weight: 700;
-    color: #00f0ff;
-    text-shadow: 0 0 12px rgba(0,255,255,0.9);
+    color: #d7e9ff;
+    font-family: 'Rajdhani';
+    margin-bottom: 18px;
+    text-shadow: 0 0 15px rgba(0,255,255,0.4);
 }
 
-/* === КНОПКА АПГРЕЙДА === */
+
+/* ===============================
+   БОКСЫ ДЛЯ ПОДАРКОВ (левый + правый)
+=============================== */
+
+.upgrade-box {
+    width: 100%;
+    height: 330px;
+
+    background: rgba(5,10,25,0.45);
+    border: 1px solid rgba(0,255,255,0.25);
+    border-radius: 18px;
+    backdrop-filter: blur(5px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.15),
+        inset 0 0 30px rgba(0,200,255,0.10);
+}
+
+.upgrade-placeholder img {
+    width: 130px;
+    opacity: 0.55;
+}
+
+.upgrade-selected-img {
+    width: 160px;
+    margin-bottom: 12px;
+}
+
+.upgrade-selected-name {
+    font-size: 18px;
+    color: #cfeeff;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.upgrade-selected-price {
+    font-size: 16px;
+    color: #00eaff;
+    text-align: center;
+    margin-top: 6px;
+}
+
+
+
+/* ===============================
+   ИНВЕНТАРЬ ПОД ЛЕВЫМ СЛОТОМ
+=============================== */
+
+.upgrade-inventory {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
+    gap: 16px;
+}
+
+/* карточка предмета */
+.upgrade-item {
+    background: rgba(10,20,35,0.45);
+    border: 1px solid rgba(0,255,255,0.2);
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+
+    transition: 0.25s ease;
+    cursor: pointer;
+
+    box-shadow: 0 0 12px rgba(0,255,255,0.08);
+}
+
+.upgrade-item:hover {
+    border-color: #00eaff;
+    transform: translateY(-4px);
+    box-shadow: 0 0 20px rgba(0,255,255,0.25);
+}
+
+.upgrade-item-img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.upgrade-item-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #d8f3ff;
+    margin-bottom: 4px;
+}
+
+.upgrade-item-price {
+    font-size: 14px;
+    color: #00d8ff;
+}
+
+
+
+/* ===============================
+   ЦЕНТРАЛЬНЫЙ ЧАНС КРУГА
+=============================== */
+
+.upgrade-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* светящийся круг */
+.chance-circle {
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: radial-gradient(circle,
+        rgba(0,255,255,0.25) 0%,
+        rgba(0,200,255,0.12) 40%,
+        rgba(0,120,255,0.1) 70%,
+        rgba(0,40,80,0.1) 100%
+    );
+
+    box-shadow:
+        0 0 25px rgba(0,255,255,0.25),
+        inset 0 0 35px rgba(0,130,255,0.25);
+}
+
+#chance-value {
+    font-family: 'Rajdhani';
+    font-weight: 900;
+    font-size: 48px;
+    color: #00eaff;
+    text-shadow: 0 0 10px rgba(0,255,255,0.6);
+}
+
+
+/* ===============================
+   КНОПКА АПГРЕЙДА
+=============================== */
+
 .upgrade-btn {
     margin-top: 25px;
-    width: 100%;
-    padding: 14px 0;
-    background: linear-gradient(90deg, #00f0ff, #007bff);
+    padding: 14px 45px;
+
+    border-radius: 14px;
+    background: linear-gradient(90deg, #00eaff, #006eff);
     border: none;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
+
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    font-family: 'Rajdhani';
+
     cursor: pointer;
-    box-shadow: 0 0 18px rgba(0,255,255,0.45);
+    transition: 0.25s;
+    text-transform: uppercase;
+
+    box-shadow:
+        0 0 18px rgba(0,255,255,0.4),
+        inset 0 0 20px rgba(0,150,255,0.2);
 }
 
 .upgrade-btn:hover {
     transform: scale(1.05);
+    box-shadow:
+        0 0 30px rgba(0,255,255,0.7),
+        inset 0 0 30px rgba(0,150,255,0.3);
 }
 
-/* === КНОПКИ MULTI === */
-.mult-buttons {
+
+/* ===============================
+   КНОПКИ ШАНСОВ
+=============================== */
+
+.chance-controls {
+    margin-top: 18px;
     display: flex;
-    justify-content: center;
     gap: 10px;
-    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.mult-buttons button {
-    padding: 8px 15px;
-    border: 1px solid rgba(0,255,255,0.3);
-    background: rgba(0,40,60,0.55);
-    color: #cfefff;
+.chance-btn {
+    padding: 6px 16px;
     border-radius: 10px;
+
+    background: rgba(0,150,255,0.15);
+    border: 1px solid rgba(0,255,255,0.25);
+
+    color: #e3f7ff;
+    font-family: 'Rajdhani';
     font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-/* === ПОИСК СПРАВА === */
-.search-block input {
-    margin-top: 20px;
-    width: 100%;
-    padding: 10px;
-    background: rgba(0,30,50,0.5);
-    border: 1px solid rgba(0,255,255,0.3);
-    border-radius: 10px;
+.chance-btn:hover {
+    background: rgba(0,255,255,0.3);
     color: white;
+    transform: translateY(-2px);
 }
