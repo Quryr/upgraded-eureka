@@ -1,94 +1,101 @@
 /*************************************************
- * upgrade.js — логика апгрейда Gifts Battle
+ *          UPGRADE.JS — FINAL VERSION
  *************************************************/
 
 /* ==========================
-   ЗАГРУЗКА ПОЛЬЗОВАТЕЛЯ
-========================== */
-function loadProfileUser() {
-    const user = loadUser();
-    if (!user) return;
+      ПОДГРУЗКА ИНВЕНТАРЯ
+=========================== */
 
-    const topName = document.getElementById("profile-username");
-    const topBalance = document.getElementById("profile-balance");
-
-    if (topName) topName.textContent = user.username;
-    if (topBalance) topBalance.textContent = user.balance;
-}
-
-/* ==========================
-   ПОДГРУЗКА ИНВЕНТАРЯ
-========================== */
 function loadUpgradeInventory() {
     const user = loadUser();
-    if (!user) return;
+    if (!user || !user.inventory) return;
 
-    const inventory = user.inventory || [];
     const grid = document.getElementById("inventory-grid");
     grid.innerHTML = "";
 
-    if (inventory.length === 0) {
-        grid.innerHTML = `<p style="color:#ccc;">Инвентарь пуст</p>`;
-        return;
-    }
-
-    inventory.forEach((item, index) => {
+    user.inventory.forEach((item, index) => {
         const div = document.createElement("div");
         div.classList.add("inventory-item");
 
         div.innerHTML = `
             <img src="${item.img}" alt="${item.name}">
             <div class="inventory-item-name">${item.name}</div>
-            <div class="inventory-item-price">${item.price} ⭐</div>
+            <div class="inventory-item-price">
+                ${item.price}
+                <img src="/static/assets/icons/star.png">
+            </div>
         `;
 
-        // Выбор предмета
-        div.addEventListener("click", () => selectLeftItem(item, index, div));
-
+        div.addEventListener("click", () => selectItemForUpgrade(item, index));
         grid.appendChild(div);
     });
 }
 
-/* ==========================
-   ВЫБОР ПРЕДМЕТА В ЛЕВЫЙ СЛОТ
-========================== */
+/* =======================================
+      ВЫБОР ПРЕДМЕТА В ЛЕВУЮ ПАНЕЛЬ
+======================================= */
 
-let selectedLeft = null;
+let selectedItem = null;
+let selectedItemIndex = null;
 
-function selectLeftItem(item, index, elementDiv) {
-    selectedLeft = { item, index };
+function selectItemForUpgrade(item, index) {
+    selectedItem = item;
+    selectedItemIndex = index;
 
-    // Удаляем подсветку у всех
-    document.querySelectorAll(".inventory-item").forEach(el =>
-        el.classList.remove("selected")
-    );
+    const leftSlot = document.getElementById("left-slot");
+    leftSlot.innerHTML = `
+        <img src="${item.img}" class="slot-image" style="opacity:1; width:180px;">
+    `;
 
-    // Подсвечиваем выбранный
-    elementDiv.classList.add("selected");
-
-    // Вставляем иконку в левый слот
-    const slot = document.getElementById("left-slot");
-    slot.innerHTML = `<img src="${item.img}" class="slot-image selected-slot">`;
+    highlightSelectedInventory(index);
 }
 
+/* Подсветка выбранной карточки */
+function highlightSelectedInventory(activeIndex) {
+    const cards = document.querySelectorAll(".inventory-item");
 
-/* ==========================
-   КНОПКИ X2/X5/X10/ПРОЦЕНТЫ
-========================== */
+    cards.forEach((card, idx) => {
+        if (idx === activeIndex) {
+            card.style.boxShadow = "0 0 25px rgba(0,255,255,0.7)";
+            card.style.transform = "scale(1.03)";
+        } else {
+            card.style.boxShadow = "";
+            card.style.transform = "";
+        }
+    });
+}
 
-document.querySelectorAll(".mult-btn").forEach(btn => {
+/* ===============================
+      MULT-КНОПКИ (x2, x5, %)
+=============================== */
+
+const multButtons = document.querySelectorAll(".mult-btn");
+
+multButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-        document.querySelectorAll(".mult-btn").forEach(b => b.classList.remove("active"));
+        multButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
     });
 });
 
+/* ==============================
+      ОБРАБОТКА ДО КНОПКИ
+============================== */
 
-/* ==========================
-   ИНИЦИАЛИЗАЦИЯ
-========================== */
+document.querySelector(".upgrade-btn").addEventListener("click", () => {
+    if (!selectedItem) {
+        alert("Выберите предмет для апгрейда!");
+        return;
+    }
+
+    alert("Механика апгрейда позже — предмет выбран!");
+});
+
+/* ==============================
+      ИНИЦИАЛИЗАЦИЯ СТРАНИЦЫ
+============================== */
 
 window.onload = () => {
-    loadProfileUser();
-    loadUpgradeInventory();
+    loadProfileUser();     // из auth.js
+    loadUpgradeInventory(); // подгружаем предметы
 };
