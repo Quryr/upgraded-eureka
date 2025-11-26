@@ -2,16 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Upgrade | Gifts Battle</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
-
-    <!-- ГЛАВНЫЙ СТИЛЕВОЙ ФАЙЛ -->
     <link rel="stylesheet" href="/static/styles.css">
-
-    <!-- СТИЛИ АПГРЕЙДА -->
     <link rel="stylesheet" href="/static/upgrade.css">
 </head>
 
@@ -19,96 +12,94 @@
 
 <header class="top-nav">
     <div class="nav-left">
-      <img src="/static/assets/logo.png" alt="Logo" class="logo">
-      <span class="logo-text">GIFTS BATTLE</span>
+        <img src="/static/assets/logo.png" class="logo">
+        <span class="logo-text">GIFTS BATTLE</span>
     </div>
 
     <nav class="nav-center">
-      <a href="/" class="nav-link">CASES</a>
-      <a href="/upgrade" class="nav-link active">UPGRADE</a>
-      <a href="#">CONTESTS</a>
-      <a href="#">FRIENDS</a>
-      <a href="/profile" class="nav-link">PROFILE</a>
+        <a href="/" class="nav-link">CASES</a>
+        <a href="/upgrade" class="nav-link active">UPGRADE</a>
+        <a href="#" class="nav-link">CONTESTS</a>
+        <a href="#" class="nav-link">FRIENDS</a>
+        <a href="/profile" class="nav-link">PROFILE</a>
     </nav>
 
-    <div class="nav-right" id="nav-auth">
-      <button class="auth-btn" id="login-btn">LOGIN</button>
-      <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
+    <div class="nav-right hidden" id="nav-auth">
+        <button class="auth-btn" id="login-btn">LOGIN</button>
+        <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
     </div>
-  
+
     <div class="nav-right hidden" id="nav-profile">
-      <div class="profile-box">
-        <img src="/static/assets/icons/profile.png" class="profile-avatar">
-        <span id="profile-username"></span>
+        <div class="profile-box">
+            <img src="/static/assets/icons/profile.png" class="profile-avatar">
+            <span id="profile-username"></span>
 
-        <div class="profile-balance">
-            <span id="profile-balance"></span>
-            <img src="/static/assets/icons/star.png" class="profile-star">
+            <div class="profile-balance">
+                <span id="profile-balance"></span>
+                <img src="/static/assets/icons/star.png" class="profile-star">
+            </div>
+
+            <button class="logout-btn" id="logout-btn">LOGOUT</button>
         </div>
-
-
-        <button class="logout-btn" id="logout-btn">LOGOUT</button>
-      </div>
     </div>
 </header>
 
 
+<!-- ===== UPGRADE MAIN BLOCK ===== -->
 <div class="upgrade-wrapper">
 
-    <!-- ЛЕВАЯ СТОРОНА -->
-    <div class="upgrade-block left">
-        <h2>Выберите подарок для апгрейда</h2>
+    <!-- ==== LEFT SIDE ==== -->
+    <div class="upgrade-column">
+        <h2 class="upgrade-title">Выберите подарок</h2>
 
-        <div class="upgrade-slot left-slot">
-            <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">
-            <p class="slot-text">до 6 NFT подарков</p>
+        <div class="upgrade-box" id="upgrade-source">
+            <div class="upgrade-placeholder">
+                <img src="/static/assets/icons/gift-empty.png" class="placeholder-img">
+            </div>
         </div>
 
-        <div class="upgrade-add-balance">
-            <span>Добавить баланса:</span>
-            <input type="range" min="0" max="100" value="0">
-            <span class="balance-value">0 ⭐</span>
-        </div>
+        <!-- INVENTORY ITEMS HERE -->
+        <div class="upgrade-inventory" id="upgrade-inventory"></div>
+
     </div>
 
-    <!-- ЦЕНТРАЛЬНЫЙ МЕХАНИЗМ -->
+
+    <!-- ==== MIDDLE ==== -->
     <div class="upgrade-center">
-        <div class="circle-wrapper">
-            <div class="circle"></div>
-            <div class="circle-inner"></div>
-            <div class="chance-number">42%</div>
+        <div class="chance-circle">
+            <span id="chance-value">42%</span>
         </div>
 
-        <button class="upgrade-btn">АПГРЕЙДНУТЬ</button>
+        <button class="upgrade-btn" id="upgrade-btn">АПГРЕЙДНУТЬ</button>
 
-        <div class="mult-buttons">
-            <button>x2</button>
-            <button>x5</button>
-            <button>x10</button>
-            <button>30%</button>
-            <button>50%</button>
-            <button>75%</button>
+        <div class="chance-controls">
+            <button class="chance-btn">x2</button>
+            <button class="chance-btn">x5</button>
+            <button class="chance-btn">x10</button>
+            <button class="chance-btn">30%</button>
+            <button class="chance-btn">50%</button>
+            <button class="chance-btn">75%</button>
         </div>
     </div>
 
-    <!-- ПРАВАЯ СТОРОНА -->
-    <div class="upgrade-block right">
-        <h2>Выберите подарок, который хотите получить</h2>
 
-        <div class="upgrade-slot right-slot">
-            <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">
-            <p class="slot-text">цель апгрейда</p>
-        </div>
+    <!-- ==== RIGHT SIDE ==== -->
+    <div class="upgrade-column">
+        <h2 class="upgrade-title">Целевой подарок</h2>
 
-        <div class="search-block">
-            <input type="text" placeholder="Поиск подарков...">
+        <div class="upgrade-box" id="upgrade-target">
+            <div class="upgrade-placeholder">
+                <img src="/static/assets/icons/gift-empty.png" class="placeholder-img">
+            </div>
         </div>
     </div>
 
 </div>
 
-<!-- Скрипт авторизации как на главной -->
-<script src="/static/auth.js"></script>
+
+
+<script src="/static/auth.js" defer></script>
+<script src="/static/upgrade.js" defer></script>
 
 </body>
 </html>
