@@ -10,6 +10,7 @@
 
 <body>
 
+<!-- ======== НАВИГАЦИЯ ======== -->
 <header class="top-nav">
     <div class="nav-left">
         <img src="/static/assets/logo.png" class="logo">
@@ -32,6 +33,7 @@
     <div class="nav-right hidden" id="nav-profile">
         <div class="profile-box">
             <img src="/static/assets/icons/profile.png" class="profile-avatar">
+            
             <span id="profile-username"></span>
 
             <div class="profile-balance">
@@ -45,59 +47,86 @@
 </header>
 
 
-<!-- ===== UPGRADE MAIN BLOCK ===== -->
+
+
+<!-- ======================================================= -->
+<!-- ===================== UPGRADE ZONE ===================== -->
+<!-- ======================================================= -->
+
 <div class="upgrade-wrapper">
 
-    <!-- ==== LEFT SIDE ==== -->
+
+    <!-- ========== LEFT SIDE (SOURCE ITEM) ========== -->
     <div class="upgrade-column">
         <h2 class="upgrade-title">Выберите подарок</h2>
 
+        <!-- Основной бокс -->
         <div class="upgrade-box" id="upgrade-source">
             <div class="upgrade-placeholder">
-                <img src="/static/assets/icons/gift-empty.png" class="placeholder-img">
+                <img src="/static/assets/icons/upgrade-placeholder.png" class="placeholder-img">
             </div>
         </div>
 
-        <!-- INVENTORY ITEMS HERE -->
+        <!-- Инвентарь -->
         <div class="upgrade-inventory" id="upgrade-inventory"></div>
-
     </div>
 
 
-    <!-- ==== MIDDLE ==== -->
+
+
+    <!-- ========== CENTER (WHEEL + CONTROLS) ========== -->
     <div class="upgrade-center">
-        <div class="chance-circle">
-            <span id="chance-value">42%</span>
+
+        <!-- CANVAS-КОЛЕСО -->
+        <div class="wheel-container">
+            <canvas id="upgrade-wheel" width="260" height="260"></canvas>
+            <img class="wheel-arrow" src="/static/assets/icons/wheel-arrow.png">
         </div>
 
-        <button class="upgrade-btn" id="upgrade-btn">АПГРЕЙДНУТЬ</button>
+        <!-- Текст шанса -->
+        <div class="chance-display">
+            <span id="chance-value">0.00%</span>
+        </div>
 
+        <!-- Кнопка -->
+        <button class="upgrade-btn" id="upgrade-btn" disabled>АПГРЕЙДНУТЬ</button>
+
+        <!-- Модификаторы -->
         <div class="chance-controls">
-            <button class="chance-btn">x2</button>
-            <button class="chance-btn">x5</button>
-            <button class="chance-btn">x10</button>
-            <button class="chance-btn">30%</button>
-            <button class="chance-btn">50%</button>
-            <button class="chance-btn">75%</button>
+            <button class="chance-btn" data-mult="2">x2</button>
+            <button class="chance-btn" data-mult="5">x5</button>
+            <button class="chance-btn" data-mult="10">x10</button>
+            <button class="chance-btn" data-set="30">30%</button>
+            <button class="chance-btn" data-set="50">50%</button>
+            <button class="chance-btn" data-set="75">75%</button>
         </div>
+
     </div>
 
 
-    <!-- ==== RIGHT SIDE ==== -->
+
+
+    <!-- ========== RIGHT SIDE (TARGET ITEM) ========== -->
     <div class="upgrade-column">
         <h2 class="upgrade-title">Целевой подарок</h2>
 
+        <!-- Основной бокс -->
         <div class="upgrade-box" id="upgrade-target">
             <div class="upgrade-placeholder">
-                <img src="/static/assets/icons/gift-empty.png" class="placeholder-img">
+                <img src="/static/assets/icons/upgrade-placeholder.png" class="placeholder-img">
             </div>
         </div>
+
+        <!-- Список возможных целевых предметов -->
+        <div class="upgrade-target-list" id="upgrade-target-list"></div>
     </div>
+
 
 </div>
 
 
 
+<!-- ===================== SCRIPTS ===================== -->
 <script src="/static/auth.js" defer></script>
 <script src="/static/upgrade.js" defer></script>
 
