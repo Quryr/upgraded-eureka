@@ -1,46 +1,45 @@
 /*************************************************
  * UPGRADE PAGE — GIFTS BATTLE
- * Неоновая стилистика, мощная структура
+ * Неон / глянец / плавная структура
  *************************************************/
 
 
 /* ===============================
-   ОБЩИЙ КОНТЕЙНЕР
+   ГЛАВНАЯ СЕТКА
 =============================== */
 
 .upgrade-wrapper {
     width: 92%;
     max-width: 1500px;
-    margin: 130px auto 60px;
+    margin: 130px auto 80px;
     display: grid;
     grid-template-columns: 1fr 0.9fr 1fr;
-    gap: 45px;
+    gap: 50px;
 }
 
 
 
 /* ===============================
-   ЗАГОЛОВКИ КОЛОНОК
+   ЗАГОЛОВКИ
 =============================== */
 
 .upgrade-title {
     text-align: center;
     font-size: 28px;
-    font-weight: 800;
-    color: #daf3ff;
-    font-family: 'Rajdhani', sans-serif;
-    letter-spacing: 1px;
+    color: #dff9ff;
+    font-weight: 900;
+    font-family: 'Rajdhani';
     margin-bottom: 20px;
-
-    text-shadow: 
-        0 0 12px rgba(0,255,255,0.5),
-        0 0 22px rgba(0,255,255,0.4);
+    letter-spacing: 1px;
+    text-shadow:
+        0 0 12px rgba(0,255,255,0.55),
+        0 0 22px rgba(0,255,255,0.35);
 }
 
 
 
 /* ===============================
-   БЛОКИ ПРЕДМЕТОВ (левый + правый)
+   БОКСЫ ЛЕВЫЙ/ПРАВЫЙ
 =============================== */
 
 .upgrade-column {
@@ -52,37 +51,36 @@
     width: 100%;
     height: 330px;
 
-    background: rgba(5,10,25,0.45);
-    border: 1px solid rgba(0,255,255,0.25);
+    background: rgba(5,10,25,0.42);
+    border: 1px solid rgba(0,255,255,0.28);
     border-radius: 18px;
     backdrop-filter: blur(6px);
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     box-shadow:
-        0 0 22px rgba(0,255,255,0.15),
-        inset 0 0 35px rgba(0,200,255,0.10);
+        0 0 25px rgba(0,255,255,0.18),
+        inset 0 0 35px rgba(0,160,255,0.12);
 }
 
 .placeholder-img {
-    width: 140px;
+    width: 150px;
     opacity: 0.5;
 }
 
 .upgrade-selected-img {
-    width: 170px;
+    width: 180px;
     object-fit: contain;
     margin-bottom: 10px;
 }
 
 .upgrade-selected-name {
     font-size: 18px;
-    color: #d7f9ff;
-    margin-top: 5px;
     text-align: center;
+    color: #d9faff;
     font-weight: 600;
 }
 
@@ -96,7 +94,7 @@
 
 
 /* ===============================
-   ИНВЕНТАРЬ (под левым слотом)
+   ЛЕВЫЙ ИНВЕНТАРЬ
 =============================== */
 
 .upgrade-inventory {
@@ -108,14 +106,16 @@
 
 .upgrade-item {
     background: rgba(10,20,35,0.45);
-    border: 1px solid rgba(0,255,255,0.25);
+    border: 1px solid rgba(0,255,255,0.28);
     border-radius: 14px;
     padding: 14px;
     text-align: center;
-
     cursor: pointer;
+
     transition: 0.25s ease;
-    box-shadow: 0 0 12px rgba(0,255,255,0.08);
+    box-shadow:
+        0 0 12px rgba(0,255,255,0.10),
+        inset 0 0 25px rgba(0,160,255,0.08);
 }
 
 .upgrade-item:hover {
@@ -123,32 +123,32 @@
     transform: translateY(-5px);
     box-shadow:
         0 0 22px rgba(0,255,255,0.35),
-        0 0 35px rgba(0,180,255,0.20);
+        inset 0 0 35px rgba(0,160,255,0.18);
 }
 
 .upgrade-item-img {
     width: 95px;
     height: 95px;
-    object-fit: contain;
     margin-bottom: 10px;
+    object-fit: contain;
 }
 
 .upgrade-item-name {
     font-size: 15px;
-    font-weight: 600;
-    color: #e4f8ff;
+    font-weight: 700;
+    color: #e7faff;
     margin-bottom: 5px;
 }
 
 .upgrade-item-price {
     font-size: 14px;
-    color: #00d8ff;
+    color: #00d7ff;
 }
 
 
 
 /* ===============================
-   ПРАВЫЙ СПИСОК ЦЕЛЕВЫХ ПРЕДМЕТОВ
+   ПРАВЫЕ ТАРГЕТ-ПРЕДМЕТЫ
 =============================== */
 
 .upgrade-target-list {
@@ -160,15 +160,16 @@
 
 .target-item {
     background: rgba(10,20,35,0.45);
-    border: 1px solid rgba(0,255,255,0.25);
+    border: 1px solid rgba(0,255,255,0.28);
     border-radius: 14px;
     padding: 14px;
-
-    text-align: center;
     cursor: pointer;
-    transition: 0.25s ease;
+    text-align: center;
 
-    box-shadow: 0 0 12px rgba(0,255,255,0.08);
+    transition: 0.25s ease;
+    box-shadow:
+        0 0 12px rgba(0,255,255,0.10),
+        inset 0 0 25px rgba(0,160,255,0.08);
 }
 
 .target-item:hover {
@@ -176,7 +177,7 @@
     transform: translateY(-5px);
     box-shadow:
         0 0 22px rgba(0,255,255,0.35),
-        0 0 35px rgba(0,180,255,0.20);
+        inset 0 0 35px rgba(0,160,255,0.18);
 }
 
 .target-item-img {
@@ -188,20 +189,20 @@
 
 .target-item-name {
     font-size: 15px;
-    font-weight: 600;
-    color: #e4f8ff;
+    font-weight: 700;
+    color: #e7faff;
     margin-bottom: 5px;
 }
 
 .target-item-price {
     font-size: 14px;
-    color: #00d8ff;
+    color: #00d7ff;
 }
 
 
 
 /* ===============================
-   ЦЕНТР — КОЛЕСО
+   КОЛЕСО — WHEEL
 =============================== */
 
 .upgrade-center {
@@ -211,39 +212,51 @@
 }
 
 .wheel-container {
+    position: relative;
     width: 330px;
     height: 330px;
-
-    position: relative;
-
-    border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(0,255,255,0.15) 0%,
-        rgba(0,160,255,0.08) 40%,
-        rgba(0,80,150,0.07) 70%,
-        rgba(0,30,60,0.06) 100%
-    );
-
-    box-shadow:
-        0 0 25px rgba(0,255,255,0.25),
-        inset 0 0 45px rgba(0,150,255,0.20);
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(0,255,255,0.15) 0%,
+        rgba(0,150,255,0.12) 35%,
+        rgba(0,100,180,0.1) 65%,
+        rgba(0,40,80,0.08) 100%
+    );
+
+    box-shadow:
+        0 0 28px rgba(0,255,255,0.25),
+        inset 0 0 45px rgba(0,150,255,0.22);
 }
 
-#wheel {
+#upgrade-wheel {
+    z-index: 2;
     position: absolute;
 }
+
+
+
+/* ---------- СТРЕЛКА — ЧИСТЫЙ CSS ---------- */
 
 .wheel-arrow {
-    width: 55px;
     position: absolute;
-    top: -14px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    filter: drop-shadow(0 0 12px rgba(255,255,255,0.8));
+
+    width: 0;
+    height: 0;
+
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 38px solid #fff;
+
+    filter: drop-shadow(0 0 14px rgba(255,255,255,0.9))
+            drop-shadow(0 0 22px rgba(0,255,255,0.7));
 }
 
 
@@ -253,15 +266,17 @@
 =============================== */
 
 .chance-display {
-    margin-top: 20px;
+    margin-top: 25px;
+
     font-family: 'Rajdhani';
-    font-size: 46px;
     font-weight: 900;
+    font-size: 46px;
+
     color: #00eaff;
 
     text-shadow:
-        0 0 12px rgba(0,255,255,0.7),
-        0 0 22px rgba(0,255,255,0.4);
+        0 0 15px rgba(0,255,255,0.8),
+        0 0 30px rgba(0,255,255,0.4);
 }
 
 
@@ -271,19 +286,19 @@
 =============================== */
 
 .upgrade-btn {
-    margin-top: 28px;
-    padding: 15px 55px;
+    margin-top: 32px;
+    padding: 16px 55px;
 
     border-radius: 16px;
     border: none;
 
-    font-size: 24px;
+    background: linear-gradient(90deg, #00f0ff, #007bff);
+    color: #fff;
+
+    font-size: 23px;
     font-weight: 900;
     font-family: 'Rajdhani';
     letter-spacing: 1px;
-
-    background: linear-gradient(90deg, #00f0ff, #008bff);
-    color: #fff;
 
     cursor: pointer;
     transition: 0.25s ease;
@@ -296,47 +311,47 @@
 .upgrade-btn:hover:not(:disabled) {
     transform: scale(1.06);
     box-shadow:
-        0 0 45px rgba(0,255,255,0.7),
+        0 0 45px rgba(0,255,255,0.75),
         inset 0 0 45px rgba(0,150,255,0.35);
 }
 
 .upgrade-btn:disabled {
-    opacity: 0.4;
+    opacity: 0.35;
     cursor: default;
 }
 
 
 
 /* ===============================
-   КНОПКИ ШАНСОВ (X2 X5 X10 30% 50%)
+   КНОПКИ X2 X5 X10 30/50/75
 =============================== */
 
 .chance-controls {
-    margin-top: 20px;
+    margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
     justify-content: center;
+    gap: 12px;
 }
 
 .chance-btn {
-    padding: 8px 20px;
+    padding: 10px 20px;
     border-radius: 12px;
 
     background: rgba(0,150,255,0.15);
-    border: 1px solid rgba(0,255,255,0.25);
+    border: 1px solid rgba(0,255,255,0.28);
 
-    color: #e6faff;
     font-family: 'Rajdhani';
     font-weight: 700;
-    letter-spacing: 0.5px;
+    font-size: 16px;
+    color: #eaffff;
 
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
 
 .chance-btn:hover {
     background: rgba(0,255,255,0.35);
-    box-shadow: 0 0 15px rgba(0,255,255,0.35);
     transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(0,255,255,0.35);
 }
