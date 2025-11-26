@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Upgrade | Gifts Battle</title>
 
-    <!-- ОБЩИЕ СТИЛИ -->
     <link rel="stylesheet" href="/static/styles.css">
-
-    <!-- СТИЛИ АПГРЕЙДА -->
     <link rel="stylesheet" href="/static/upgrade.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- =============== NAVBAR =============== -->
+<!-- =========================== NAVBAR =========================== -->
 <header class="top-nav">
     <div class="nav-left">
-      <img src="/static/assets/logo.png" alt="Logo" class="logo">
+      <img src="/static/assets/logo.png" class="logo">
       <span class="logo-text">GIFTS BATTLE</span>
     </div>
 
@@ -33,27 +28,23 @@
     </nav>
 
     <div class="nav-right hidden" id="nav-profile">
-      <div class="profile-box">
-        <img src="/static/assets/icons/profile.png" class="profile-avatar">
-        <span id="profile-username"></span>
+        <div class="profile-box">
+            <img src="/static/assets/icons/profile.png" class="profile-avatar">
+            <span id="profile-username"></span>
 
-        <div class="profile-balance">
-          <img src="/static/assets/icons/star.png" class="profile-star">
-          <span id="profile-balance"></span>
+            <div class="profile-balance">
+            <img src="/static/assets/icons/star.png" class="profile-star">
+            <span id="profile-balance"></span>
+            </div>
+
+            <button class="logout-btn" id="logout-btn">LOGOUT</button>
         </div>
-
-        <button class="logout-btn" id="logout-btn">LOGOUT</button>
-      </div>
-    </div>
-
-    <div class="nav-right" id="nav-auth">
-      <button class="auth-btn" id="login-btn">LOGIN</button>
-      <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
     </div>
 </header>
 
 
-<!-- =============== ОСНОВНОЙ UI =============== -->
+
+<!-- =========================== ОСНОВНОЙ UI =========================== -->
 
 <div class="upgrade-wrapper">
 
@@ -62,12 +53,14 @@
         <h2>Выберите подарок для апгрейда</h2>
 
         <div class="upgrade-slot" id="left-slot">
-            <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">
+            <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image" id="left-img">
         </div>
     </div>
 
+
     <!-- ЦЕНТР -->
     <div class="upgrade-center">
+
         <div class="circle-wrapper">
             <div class="circle"></div>
             <div class="circle-inner"></div>
@@ -86,41 +79,46 @@
         </div>
     </div>
 
+
     <!-- ПРАВАЯ ПАНЕЛЬ -->
     <div class="upgrade-block">
         <h2>Выберите подарок, который хотите получить</h2>
 
         <div class="upgrade-slot" id="right-slot">
-            <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">
+            <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image" id="right-img">
         </div>
     </div>
 
 </div>
 
 
-<!-- =============== ИНВЕНТАРЬ ПОД ЛЕВОЙ ПАНЕЛЬЮ =============== -->
 
-<h3 class="inventory-title">Ваши предметы:</h3>
+<!-- =========================== ИНВЕНТАРЬ СЛЕВА =========================== -->
 
-<div id="inventory-grid" class="inventory-grid"></div>
-
-
-<!-- =============== СПИСОК НАГРАД ПОД ПРАВОЙ ПАНЕЛЬЮ =============== -->
-
-<h3 class="inventory-title">Возможные награды:</h3>
-
-<div id="upgrade-options-grid" class="inventory-grid"></div>
+<div class="under-panel-wrapper left-under">
+    <h3 class="inventory-title">Ваши предметы:</h3>
+    <div id="inventory-under-left" class="inventory-grid"></div>
+</div>
 
 
-<!-- SCRIPTS -->
+<!-- =========================== НАГРАДЫ СПРАВА =========================== -->
+
+<div class="under-panel-wrapper right-under">
+    <h3 class="inventory-title">Возможные награды:</h3>
+    <div id="rewards-under-right" class="inventory-grid"></div>
+</div>
+
+
+
+<!-- =========================== JS =========================== -->
+
 <script src="/static/auth.js"></script>
-<script src="/static/profile.js"></script>
 <script src="/static/upgrade.js"></script>
 
 <script>
 window.onload = () => {
-    loadProfileUser();
-    loadUpgradeInventory(); // именно этот метод
+    loadUserToNavbar();   // твоя логика авторизации
+    initUpgradePage();    // инициализация страницы апгрейда
 };
 </script>
 
