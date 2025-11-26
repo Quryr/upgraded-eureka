@@ -1,101 +1,162 @@
 /*************************************************
- *          UPGRADE.JS — FINAL VERSION
+ *  UPGRADE.JS — ЛОГИКА АПГРЕЙДА
  *************************************************/
 
-/* ==========================
-      ПОДГРУЗКА ИНВЕНТАРЯ
-=========================== */
+/* ===== ЗАГРУЗКА ПОЛЬЗОВАТЕЛЯ ===== */
 
-function loadUpgradeInventory() {
+function loadUser() {
+    return JSON.parse(localStorage.getItem("gifts_user")) || null;
+}
+
+function saveUser(user) {
+    localStorage.setItem("gifts_user", JSON.stringify(user));
+}
+
+/* ===== ЭЛЕМЕНТЫ СТРАНИЦЫ ===== */
+
+const leftSlot = document.getElementById("left-slot");
+const leftSlotImage = leftSlot.querySelector("img");
+
+const rightSlot = document.getElementById("right-slot");
+const rightSlotImage = rightSlot.querySelector("img");
+
+const chanceNumber = document.querySelector(".chance-number");
+
+const inventoryGrid = document.getElementById("inventory-grid");
+
+/* ===== ПЕРЕМЕННЫЕ ===== */
+
+let selectedItem = null;   // предмет из инвентаря
+let targetItem = null;     // предмет цели (в будущем)
+let currentChance = 42;    // шанс по умолчанию
+let multiplierMode = null; // x2 x5 x10
+let percentMode = null;    // 30% 50% 75%
+
+
+/* ===========================================
+   ЗАГРУЗКА ИНВЕНТАРЯ ПОЛЬЗОВАТЕЛЯ
+=========================================== */
+
+function loadInventoryUpgrade() {
     const user = loadUser();
     if (!user || !user.inventory) return;
 
-    const grid = document.getElementById("inventory-grid");
-    grid.innerHTML = "";
+    inventoryGrid.innerHTML = "";
 
     user.inventory.forEach((item, index) => {
+
         const div = document.createElement("div");
         div.classList.add("inventory-item");
 
         div.innerHTML = `
-            <img src="${item.img}" alt="${item.name}">
+            <img src="${item.img}">
             <div class="inventory-item-name">${item.name}</div>
-            <div class="inventory-item-price">
-                ${item.price}
-                <img src="/static/assets/icons/star.png">
-            </div>
+            <div class="inventory-item-price">${item.price} ⭐</div>
         `;
 
-        div.addEventListener("click", () => selectItemForUpgrade(item, index));
-        grid.appendChild(div);
+        // обработка клика по предмету
+        div.addEventListener("click", () => selectLeftItem(item, div));
+
+        inventoryGrid.appendChild(div);
     });
 }
 
-/* =======================================
-      ВЫБОР ПРЕДМЕТА В ЛЕВУЮ ПАНЕЛЬ
-======================================= */
+/* ===========================================
+   ВЫБОР ПРЕДМЕТА В ЛЕВЫЙ СЛОТ
+=========================================== */
 
-let selectedItem = null;
-let selectedItemIndex = null;
+function selectLeftItem(item, cardElement) {
 
-function selectItemForUpgrade(item, index) {
+    // снять выделение со всех карточек
+    document.querySelectorAll(".inventory-item").forEach(el => {
+        el.classList.remove("selected");
+    });
+
+    // выделить выбранную
+    cardElement.classList.add("selected");
+
     selectedItem = item;
-    selectedItemIndex = index;
 
-    const leftSlot = document.getElementById("left-slot");
-    leftSlot.innerHTML = `
-        <img src="${item.img}" class="slot-image" style="opacity:1; width:180px;">
-    `;
+    // обновляем изображение в слоте
+    leftSlotImage.src = item.img;
+    leftSlotImage.style.opacity = "1";
 
-    highlightSelectedInventory(index);
+    updateChance();
 }
 
-/* Подсветка выбранной карточки */
-function highlightSelectedInventory(activeIndex) {
-    const cards = document.querySelectorAll(".inventory-item");
 
-    cards.forEach((card, idx) => {
-        if (idx === activeIndex) {
-            card.style.boxShadow = "0 0 25px rgba(0,255,255,0.7)";
-            card.style.transform = "scale(1.03)";
-        } else {
-            card.style.boxShadow = "";
-            card.style.transform = "";
-        }
-    });
-}
+/* ===========================================
+   ПЕРЕСЧЕТ ШАНСА
+=========================================== */
 
-/* ===============================
-      MULT-КНОПКИ (x2, x5, %)
-=============================== */
-
-const multButtons = document.querySelectorAll(".mult-btn");
-
-multButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        multButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-    });
-});
-
-/* ==============================
-      ОБРАБОТКА ДО КНОПКИ
-============================== */
-
-document.querySelector(".upgrade-btn").addEventListener("click", () => {
+function updateChance() {
     if (!selectedItem) {
-        alert("Выберите предмет для апгрейда!");
+        chanceNumber.textContent = "0%";
         return;
     }
 
-    alert("Механика апгрейда позже — предмет выбран!");
+    let chance = currentChance;
+
+    // МОД Х MULTIPLIER (x2 x5 x10)
+    if (multiplierMode) {
+        chance = currentChance * multiplierMode;
+    }
+
+    // МОД ПРОЦЕНТА (30% 50% 75%)
+    if (percentMode) {
+        chance = percentMode;
+    }
+
+    // ограничение
+    if (chance > 95) chance = 95;
+    if (chance < 1) chance = 1;
+
+    chanceNumber.textContent = chance + "%";
+}
+
+/* ===========================================
+   ЛОГИКА НАЖАТИЙ НА ХХ И ПРОЦЕНТЫ
+=========================================== */
+
+document.querySelectorAll(".mult-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        // снять активность
+        document.querySelectorAll(".mult-btn").forEach(x => x.classList.remove("active"));
+        btn.classList.add("active");
+
+        // сброс режимов
+        multiplierMode = null;
+        percentMode = null;
+
+        if (btn.dataset.m) multiplierMode = Number(btn.dataset.m);
+        if (btn.dataset.p) percentMode = Number(btn.dataset.p);
+
+        updateChance();
+    });
 });
 
-/* ==============================
-      ИНИЦИАЛИЗАЦИЯ СТРАНИЦЫ
-============================== */
+
+/* ===========================================
+   КНОПКА АПГРЕЙДА — ПОКА БЕЗ АНИМАЦИЙ
+=========================================== */
+
+document.querySelector(".upgrade-btn").addEventListener("click", () => {
+
+    if (!selectedItem) {
+        alert("Сначала выбери предмет!");
+        return;
+    }
+
+    alert("Пока что апгрейд не реализован — механика готова, осталось RNG 🎰🔥");
+});
+
+
+/* ===========================================
+   ИНИЦИАЛИЗАЦИЯ
+=========================================== */
 
 window.onload = () => {
-    loadProfileUser();     // из auth.js
-    loadUpgradeInventory(); // подгружаем предметы
+    loadInventoryUpgrade();
+    updateChance();
 };
