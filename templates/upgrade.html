@@ -6,70 +6,82 @@
 
     <title>Upgrade | Gifts Battle</title>
 
-    <!-- Шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <!-- ГЛАВНЫЙ СТИЛЕВОЙ ФАЙЛ (ОБЯЗАТЕЛЬНО ПЕРВЫЙ!) -->
+    <link rel="stylesheet" href="/static/styles.css">
 
-    <!-- Стили -->
+    <!-- СТИЛИ СТРАНИЦЫ АПГРЕЙДА -->
     <link rel="stylesheet" href="/static/upgrade.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- ======= TOP NAVBAR ======= -->
+<!-- ========================== -->
+<!--      НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+<!-- ========================== -->
+
 <header class="top-nav">
     <div class="nav-left">
-        <img src="/static/assets/logo.png" alt="Logo" class="logo">
-        <span class="logo-text">GIFTS BATTLE</span>
+      <img src="/static/assets/logo.png" alt="Logo" class="logo">
+      <span class="logo-text">GIFTS BATTLE</span>
     </div>
 
     <nav class="nav-center">
-        <a href="/" class="nav-link">CASES</a>
-        <a href="/upgrade" class="nav-link active">UPGRADE</a>
-        <a href="#">CONTESTS</a>
-        <a href="#">FRIENDS</a>
-        <a href="#">PROFILE</a>
+      <a href="/" class="nav-link">CASES</a>
+      <a href="/upgrade" class="nav-link active">UPGRADE</a>
+      <a href="#">CONTESTS</a>
+      <a href="#">FRIENDS</a>
+      <a href="#">PROFILE</a>
     </nav>
 
     <!-- Авторизация -->
     <div class="nav-right" id="nav-auth">
-        <button class="auth-btn" id="login-btn">LOGIN</button>
-        <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
+      <button class="auth-btn" id="login-btn">LOGIN</button>
+      <button class="auth-btn primary" id="signup-btn">SIGN UP</button>
     </div>
 
-    <!-- Аккаунт -->
+    <!-- Профиль -->
     <div class="nav-right hidden" id="nav-profile">
-        <div class="profile-box">
-            <img src="/static/assets/icons/profile.png" class="profile-avatar">
-            <span id="profile-username"></span>
+      <div class="profile-box">
+        <img src="/static/assets/icons/profile.png" class="profile-avatar">
+        <span id="profile-username"></span>
 
-            <div class="profile-balance">
-                <img src="/static/assets/icons/star.png" class="profile-star">
-                <span id="profile-balance"></span>
-            </div>
-
-            <button class="logout-btn" id="logout-btn">LOGOUT</button>
+        <div class="profile-balance">
+          <img src="/static/assets/icons/star.png" class="profile-star">
+          <span id="profile-balance"></span>
         </div>
+
+        <button class="logout-btn" id="logout-btn">LOGOUT</button>
+      </div>
     </div>
 </header>
 
-<!-- ======= MAIN UPGRADE WRAPPER ======= -->
+
+<!-- ========================== -->
+<!--      ОСНОВНОЙ КОНТЕНТ     -->
+<!-- ========================== -->
+
 <div class="upgrade-wrapper">
 
-    <!-- ЛЕВАЯ ПАНЕЛЬ -->
-    <div class="upgrade-block left">
+    <!--  ЛЕВАЯ ПАНЕЛЬ  -->
+    <div class="upgrade-block">
+
         <h2>Выберите подарок для апгрейда</h2>
 
         <div class="upgrade-slot" id="left-slot">
             <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">
         </div>
 
+        <h3 class="inventory-title">Ваши предметы:</h3>
 
-        <h3 class="inv-title">Ваши предметы:</h3>
-
+        <!-- ВАЖНО: ЭТО ИНВЕНТАРЬ -->
         <div id="inventory-grid" class="inventory-grid"></div>
+
     </div>
 
-    <!-- ЦЕНТР -->
+
+    <!--  ЦЕНТРАЛЬНЫЙ МЕХАНИЗМ  -->
     <div class="upgrade-center">
 
         <div class="circle-wrapper">
@@ -81,30 +93,36 @@
         <button class="upgrade-btn">АПГРЕЙДНУТЬ</button>
 
         <div class="mult-buttons">
-            <button class="mult-btn">x2</button>
-            <button class="mult-btn">x5</button>
-            <button class="mult-btn">x10</button>
-            <button class="mult-btn">30%</button>
-            <button class="mult-btn">50%</button>
-            <button class="mult-btn">75%</button>
+            <button class="mult-btn" data-m="2">x2</button>
+            <button class="mult-btn" data-m="5">x5</button>
+            <button class="mult-btn" data-m="10">x10</button>
+            <button class="mult-btn" data-p="30">30%</button>
+            <button class="mult-btn" data-p="50">50%</button>
+            <button class="mult-btn" data-p="75">75%</button>
         </div>
-
     </div>
 
-    <!-- ПРАВАЯ ПАНЕЛЬ -->
-    <div class="upgrade-block right">
+
+    <!--  ПРАВАЯ ПАНЕЛЬ  -->
+    <div class="upgrade-block">
         <h2>Выберите подарок, который хотите получить</h2>
 
-        <div class="upgrade-slot right-slot">
+        <div class="upgrade-slot" id="right-slot">
             <img src="/static/assets/icons/upgrade-placeholder.png" class="slot-image">
         </div>
     </div>
 
 </div>
 
-<!-- ======= JS ======= -->
+
+<!-- ========================== -->
+<!--            JS             -->
+<!-- ========================== -->
+
+<!-- Логика авторизации (нужна всегда) -->
 <script src="/static/auth.js"></script>
-<script src="/static/profile.js"></script>
+
+<!-- Логика апгрейда -->
 <script src="/static/upgrade.js"></script>
 
 </body>
