@@ -1,4 +1,4 @@
 window.onload = () => {
-    loadProfileUser();
-    loadInventory();
+    loadProfileUser();   // загружаем логин, баланс, аватар
+    loadInventory();     // подгружаем предметы
 };
