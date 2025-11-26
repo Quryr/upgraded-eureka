@@ -1,229 +1,215 @@
-/* === ОСНОВНОЙ ТЁМНЫЙ ФОН (как на главной) === */
-body {
-    background: radial-gradient(circle at 25% 20%, #03040f 0%, #02030c 40%, #010209 100%);
-    background-attachment: fixed;
-    font-family: 'Rajdhani', sans-serif;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-}
-
-/* ============================= */
-/*       ОБЩАЯ ВЕРСТКА          */
-/* ============================= */
+/* ============================
+   ОСНОВНАЯ ВЕРСТКА UPGRADE
+============================ */
 
 .upgrade-wrapper {
-    margin-top: 120px;
+    margin-top: 110px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    gap: 60px;
-    width: 100%;
+    gap: 55px;
+    padding-bottom: 120px;
 }
 
-/* ============================= */
-/*        БЛОКИ ПАНЕЛЕЙ         */
-/* ============================= */
-
-.upgrade-block {
-    background: rgba(5, 8, 20, 0.55);
-    border-radius: 20px;
-    border: 1px solid rgba(0, 255, 255, 0.14);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.12);
-    padding: 25px 30px;
-    width: 360px;
-    text-align: center;
-}
-
-/* СЛОТЫ С ПОДАРКАМИ */
-
-.upgrade-slot {
-    margin-top: 15px;
-    width: 100%;
-    height: 280px;
-    background: rgba(0, 20, 40, 0.45);
-    border: 1px solid rgba(0, 255, 255, 0.1);
-    border-radius: 16px;
-
+/* Левая колонка: панель + инвентарь */
+.upgrade-left-area {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-.slot-image {
-    width: 120px;
-    opacity: 0.55;
-    user-select: none;
+/* Панели (левая + правая) */
+.upgrade-block {
+    width: 370px;
+    background: rgba(5, 10, 25, 0.45);
+    border-radius: 18px;
+    padding: 22px;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.08);
+    text-align: center;
 }
 
-/* ========================== */
-/*      ЦЕНТРАЛЬНЫЙ КРУГ      */
-/* ========================== */
+.upgrade-block h2 {
+    color: white;
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+/* Слот под предмет */
+.upgrade-slot {
+    width: 100%;
+    height: 260px;
+    background: rgba(0, 15, 30, 0.55);
+    border-radius: 14px;
+    border: 1px solid rgba(0, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slot-image {
+    width: 140px;
+    opacity: 0.55;
+}
+
+/* ============================
+      ЦЕНТРАЛЬНЫЙ МЕХАНИЗМ
+============================ */
 
 .upgrade-center {
-    width: 450px;
+    width: 420px;
     text-align: center;
 }
 
 .circle-wrapper {
     position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto 25px auto;
+    width: 290px;
+    height: 290px;
+    margin: 0 auto 25px;
 }
 
 .circle {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 6px solid rgba(0,255,255,0.25);
-    box-shadow: 0 0 30px rgba(0,255,255,0.25);
+    border: 8px solid rgba(0, 255, 255, 0.18);
+    box-shadow: 0 0 35px rgba(0, 255, 255, 0.25);
 }
 
 .circle-inner {
     position: absolute;
-    top: 40px;
-    left: 40px;
-    width: 220px;
-    height: 220px;
+    top: 45px;
+    left: 45px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    border: 5px solid rgba(0,255,255,0.5);
-    box-shadow: 0 0 20px rgba(0,255,255,0.5);
+    border: 6px solid rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 22px rgba(0, 200, 255, 0.5);
 }
 
 .chance-number {
     position: absolute;
     top: 115px;
+    left: 0;
     width: 100%;
     text-align: center;
-    font-size: 42px;
+    font-size: 44px;
     font-weight: 700;
     color: #00eaff;
+    text-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
 }
 
-/* КНОПКА АПГРЕЙДА */
-
+/* Кнопка "апгрейднуть" */
 .upgrade-btn {
     width: 100%;
-    padding: 15px 0;
-    margin-bottom: 20px;
-    background: linear-gradient(90deg, #00eaff, #0080ff);
+    padding: 16px 0;
+    background: linear-gradient(90deg, #00eaff, #007bff);
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     color: white;
+    font-size: 21px;
     font-weight: 700;
-    font-size: 20px;
     cursor: pointer;
-    transition: .25s;
+    transition: 0.25s;
 }
 
 .upgrade-btn:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 22px rgba(0, 255, 255, 0.5);
 }
 
-/* КНОПКИ MULT */
-
+/* Кнопки мультипликаторов */
 .mult-buttons {
     display: flex;
     justify-content: center;
     gap: 12px;
+    margin-top: 22px;
 }
 
-.mult-btn {
-    padding: 7px 16px;
+.mult-buttons .mult-btn {
+    padding: 8px 20px;
+    background: rgba(0, 40, 60, 0.55);
     border-radius: 10px;
-    background: rgba(0,40,60,0.55);
-    border: 1px solid rgba(0,255,255,0.3);
-    font-size: 16px;
+    border: 1px solid rgba(0, 255, 255, 0.25);
+    color: #eaffff;
     font-weight: 700;
-    color: #cfefff;
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s;
 }
 
-.mult-btn:hover {
-    background: rgba(0,255,255,0.3);
+.mult-buttons .mult-btn:hover {
+    background: rgba(0, 255, 255, 0.3);
     transform: scale(1.1);
 }
 
-/* ============================= */
-/*        ИНВЕНТАРЬ             */
-/* ============================= */
+/* Активная кнопка */
+.mult-btn.active {
+    background: linear-gradient(90deg, #00eaff, #006eff);
+    color: white;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.45);
+}
+
+/* ============================
+           ИНВЕНТАРЬ
+============================ */
 
 .inventory-title {
-    margin-top: 60px;
-    text-align: center;
-    font-size: 26px;
-    font-weight: 700;
-    text-shadow: 0 0 12px rgba(0,255,255,0.5);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 20px;
+    text-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
 }
 
+/* Сетка предметов */
 .inventory-grid {
-    width: 100%;
-    max-width: 1300px;
-    margin: 25px auto 80px auto;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 35px;
-
-    padding: 0 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    width: 370px;
+    padding-bottom: 40px;
 }
 
-/* КАРТОЧКА ПРЕДМЕТА */
-
+/* Карточка предмета */
 .inventory-item {
-    background: linear-gradient(160deg, rgba(20,20,40,0.9), rgba(12,12,25,0.95));
-    border: 1px solid rgba(0,255,255,0.18);
-    border-radius: 18px;
-
+    width: 160px;
+    background: rgba(10, 20, 35, 0.55);
+    border-radius: 14px;
+    padding: 12px;
     text-align: center;
-    padding: 15px;
-    box-shadow: 0 0 18px rgba(0,255,255,0.12);
-
-    transition: .25s;
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    transition: 0.2s ease;
     cursor: pointer;
 }
 
 .inventory-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(0,255,255,0.45);
+    transform: translateY(-6px);
+    border-color: rgba(0, 255, 255, 0.45);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.35);
 }
 
 .inventory-item img {
     width: 100%;
-    max-width: 170px;
-    margin: 0 auto 10px auto;
-    display: block;
-    border-radius: 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
 }
-
-/* НАЗВАНИЕ */
 
 .inventory-item-name {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #dff6ff;
+    font-size: 15px;
+    color: #d8e4ff;
+    margin-top: 6px;
 }
-
-/* ЦЕНА */
 
 .inventory-item-price {
-    font-size: 22px;
-    margin-top: 6px;
+    color: white;
+    margin-top: 4px;
+    font-size: 18px;
     font-weight: 900;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
 }
 
-/* Звезда */
-.inventory-item-price img {
-    width: 22px;
-    height: 22px;
-}
-
-/* УБИРАЕМ ПРОКРУТКУ НАВСЕГДА */
-.inventory-grid::-webkit-scrollbar {
-    display: none;
+/* Пометка выбранного предмета */
+.inventory-item.selected {
+    border: 2px solid #00eaff;
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.6);
 }
